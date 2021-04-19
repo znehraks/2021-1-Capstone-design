@@ -12,7 +12,6 @@ const Wrapper = styled.div``;
 const App = () => {
   return (
     <ThemeProvider theme={Theme}>
-      <>
         <GlobalStyles />
         <Router>
           <Wrapper>
@@ -21,7 +20,6 @@ const App = () => {
             <Footer />
           </Wrapper>
         </Router>
-      </>
     </ThemeProvider>
   );
 };

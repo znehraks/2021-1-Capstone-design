@@ -1,8 +1,24 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, keyframes } from "styled-components";
 import reset from "styled-reset";
+import Jalnan from "./fonts/Jalnan.ttf";
 
+const initialAnimation = keyframes`
+0%{
+  transform: translateY(20%)
+}
+100%{
+  transform: translateY(0)
+}
+`;
 export default createGlobalStyle`
     ${reset};
+
+    @font-face {
+        font-family: "Jalnan"; 
+        src: url(${Jalnan}) format('truetype');
+        font-style: normal;
+        font-display: auto;
+    }
     *{
         box-sizing: border-box;
         -webkit-overflow-scrolling: touch;
@@ -15,10 +31,10 @@ export default createGlobalStyle`
         };
     }
     body{
-        background-color: ${(props) => props.theme.bgColor};
+        background: #eee;
         color: black;
         font-size: 14px;
-        font-family: 'Julius Sans One'
+        font-family: 'Jalnan'
         ;
         ::-webkit-scrollbar{
             display: none;
@@ -28,7 +44,7 @@ export default createGlobalStyle`
         
     }
     a{
-        color: ${(props) => props.theme.lightGreyColor};
+        color: #000;
         text-decoration: none;
         :focus{
             outline: none;
@@ -40,4 +56,6 @@ export default createGlobalStyle`
     button:focus{
         outline: none;
     }
+    span,a{
+        animation: ${initialAnimation} 0.3s ease-in-out;}
 `;
