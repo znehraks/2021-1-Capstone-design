@@ -70,7 +70,7 @@ const Header = () => {
         <MenuSpan to="/AboutUs">프로젝트 및 팀 소개</MenuSpan>
       </MenuContainer>
       <MenuContainer>
-        <MenuSpan to="/Recommendation">자취방 추천 받기</MenuSpan>
+        <MenuSpan to="/RecommendationIntro">자취방 추천 받기</MenuSpan>
       </MenuContainer>
       <MenuContainer>
         <MenuSpan to="/Login">추천 이력 조회</MenuSpan>

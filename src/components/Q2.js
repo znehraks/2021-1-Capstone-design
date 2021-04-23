@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Q1 from "../../components/Q1";
-import Q2 from "../../components/Q2";
-import Q3 from "../../components/Q3";
-import Q4 from "../../components/Q4";
-import Q5 from "../../components/Q5";
-import QList from "../../components/QList";
+
 const Wrapper = styled.div`
   width: 100vw;
   min-height: 100vh;
@@ -157,109 +152,61 @@ const ItemTitle = styled.span`
 const ItemDetail = styled.span`
   font-size: 0.9vw;
 `;
-const Recommendation = () => {
-  const [QNumber, setQNumber] = useState(1);
-  const [Q1Answer, setQ1Answer] = useState();
-  const [Q2Answer, setQ2Answer] = useState();
-  const [Q3Answer, setQ3Answer] = useState();
-  const [Q4Answer, setQ4Answer] = useState();
-  const [Q5Answer, setQ5Answer] = useState();
-  const [Q1Name, setQ1Name] = useState();
-  const [Q2Name, setQ2Name] = useState();
-  const [Q3Name, setQ3Name] = useState();
-  const [Q4Name, setQ4Name] = useState();
-  const [Q5Name, setQ5Name] = useState();
-  console.log(Q1Answer);
-  console.log(Q2Answer);
-  console.log(Q3Answer);
-  console.log(Q4Answer);
-  console.log(Q5Answer);
+
+const CurrentSelectedDiv = styled.div`
+  position: absolute;
+  top: 12vw;
+  right: 0;
+  width: 10vw;
+  height: 30vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const CurrentSelectedList = styled.div`
+  width: 100%;
+  height: 30%;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const CurrentSelectedSpan = styled.span`
+  font-size: 1.5vw;
+  margin-bottom: 2vw;
+`;
+const Q2 = ({
+  Q1Name,
+  Q2Name,
+  Q1Answer,
+  setQNumber,
+  Q2Answer,
+  setQ2Answer,
+}) => {
   return (
     <>
-      {QNumber === 1 && (
-        <Q1
-          Q1Name={Q1Name}
-          setQ1Name={setQ1Name}
-          QList={QList}
-          QNumber={QNumber}
-          setQNumber={setQNumber}
-          Q1Answer={Q1Answer}
-          setQ1Answer={setQ1Answer}
-        />
-      )}
-      {QNumber === 2 && (
-        <Q2
-          Q1Name={Q1Name}
-          Q2Name={Q2Name}
-          setQ2Name={setQ2Name}
-          QList={QList}
-          Q1Answer={Q1Answer}
-          Q2Answer={Q2Answer}
-          QNumber={QNumber}
-          setQNumber={setQNumber}
-          Q2Answer={Q2Answer}
-          setQ2Answer={setQ2Answer}
-        />
-      )}
-      {QNumber === 3 && (
-        <Q3
-          Q1Name={Q1Name}
-          Q2Name={Q2Name}
-          Q3Name={Q3Name}
-          setQ3Name={setQ3Name}
-          Q1Answer={Q1Answer}
-          Q2Answer={Q2Answer}
-          Q3Answer={Q3Answer}
-          QNumber={QNumber}
-          setQNumber={setQNumber}
-          Q3Answer={Q3Answer}
-          setQ3Answer={setQ3Answer}
-          QList={QList}
-        />
-      )}
-      {QNumber === 4 && (
-        <Q4
-          Q1Name={Q1Name}
-          Q2Name={Q2Name}
-          Q3Name={Q3Name}
-          Q4Name={Q4Name}
-          setQ4Name={setQ4Name}
-          Q1Answer={Q1Answer}
-          Q2Answer={Q2Answer}
-          Q3Answer={Q3Answer}
-          Q4Answer={Q4Answer}
-          Q3Answer={Q3Answer}
-          QNumber={QNumber}
-          setQNumber={setQNumber}
-          Q4Answer={Q4Answer}
-          setQ4Answer={setQ4Answer}
-          QList={QList}
-        />
-      )}
-      {QNumber === 5 && (
-        <Q5
-          Q1Name={Q1Name}
-          Q2Name={Q2Name}
-          Q3Name={Q3Name}
-          Q4Name={Q4Name}
-          Q5Name={Q5Name}
-          setQ5Name={setQ5Name}
-          Q1Answer={Q1Answer}
-          Q2Answer={Q2Answer}
-          Q3Answer={Q3Answer}
-          Q4Answer={Q4Answer}
-          Q5Answer={Q5Answer}
-          Q3Answer={Q3Answer}
-          Q4Answer={Q4Answer}
-          QNumber={QNumber}
-          setQNumber={setQNumber}
-          Q5Answer={Q5Answer}
-          setQ5Answer={setQ5Answer}
-          QList={QList}
-        />
-      )}
+      <CurrentSelectedDiv>
+        <CurrentSelectedList>
+          <CurrentSelectedSpan>명지대학교</CurrentSelectedSpan>
+          <CurrentSelectedSpan>+</CurrentSelectedSpan>
+        </CurrentSelectedList>
+      </CurrentSelectedDiv>
+      <Wrapper>
+        <TitleSpan>#2.원하는 거리를 선택해 주세요.</TitleSpan>
+        <SubTitleSpan>선호하는 곳에 원을 그려 표시해주세요.</SubTitleSpan>
+        <Article>
+          <TitleSpan>카카오API 원그리기로 연동</TitleSpan>
+          <TitleSpan>안되면 버튼으로 대체</TitleSpan>
+        </Article>
+        <ButtonContainer>
+          <Prev onClick={() => setQNumber(1)}>이전</Prev>
+          <Next onClick={() => setQNumber(3)}>다음</Next>
+        </ButtonContainer>
+      </Wrapper>
     </>
   );
 };
 
-export default Recommendation;
+export default Q2;

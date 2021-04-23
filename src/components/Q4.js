@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Q1 from "../../components/Q1";
-import Q2 from "../../components/Q2";
-import Q3 from "../../components/Q3";
-import Q4 from "../../components/Q4";
-import Q5 from "../../components/Q5";
-import QList from "../../components/QList";
+import QButton from "./QButton";
+
 const Wrapper = styled.div`
   width: 100vw;
   min-height: 100vh;
@@ -24,6 +20,10 @@ const TitleSpan = styled.span`
 `;
 const SubTitleSpan = styled.span`
   font-size: 1vw;
+  margin-top: 1vw;
+`;
+const OptionSpan = styled.span`
+  font-size: 0.8vw;
   margin-top: 1vw;
   margin-bottom: 6vw;
 `;
@@ -157,109 +157,95 @@ const ItemTitle = styled.span`
 const ItemDetail = styled.span`
   font-size: 0.9vw;
 `;
-const Recommendation = () => {
-  const [QNumber, setQNumber] = useState(1);
-  const [Q1Answer, setQ1Answer] = useState();
-  const [Q2Answer, setQ2Answer] = useState();
-  const [Q3Answer, setQ3Answer] = useState();
-  const [Q4Answer, setQ4Answer] = useState();
-  const [Q5Answer, setQ5Answer] = useState();
-  const [Q1Name, setQ1Name] = useState();
-  const [Q2Name, setQ2Name] = useState();
-  const [Q3Name, setQ3Name] = useState();
-  const [Q4Name, setQ4Name] = useState();
-  const [Q5Name, setQ5Name] = useState();
-  console.log(Q1Answer);
-  console.log(Q2Answer);
-  console.log(Q3Answer);
-  console.log(Q4Answer);
-  console.log(Q5Answer);
+const CurrentSelectedDiv = styled.div`
+  position: absolute;
+  top: 12vw;
+  right: 0;
+  width: 10vw;
+  height: 30vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const CurrentSelectedList = styled.div`
+  width: 100%;
+  height: 30%;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const CurrentSelectedSpan = styled.span`
+  font-size: 1.5vw;
+  margin-bottom: 2vw;
+`;
+const Q4 = ({
+  Q1Name,
+  Q2Name,
+  Q3Name,
+  Q4Name,
+  setQ4Name,
+  Q3Answer,
+  QNumber,
+  QList,
+  setQNumber,
+  Q4Answer,
+  setQ4Answer,
+}) => {
   return (
     <>
-      {QNumber === 1 && (
-        <Q1
-          Q1Name={Q1Name}
-          setQ1Name={setQ1Name}
-          QList={QList}
-          QNumber={QNumber}
-          setQNumber={setQNumber}
-          Q1Answer={Q1Answer}
-          setQ1Answer={setQ1Answer}
-        />
-      )}
-      {QNumber === 2 && (
-        <Q2
-          Q1Name={Q1Name}
-          Q2Name={Q2Name}
-          setQ2Name={setQ2Name}
-          QList={QList}
-          Q1Answer={Q1Answer}
-          Q2Answer={Q2Answer}
-          QNumber={QNumber}
-          setQNumber={setQNumber}
-          Q2Answer={Q2Answer}
-          setQ2Answer={setQ2Answer}
-        />
-      )}
-      {QNumber === 3 && (
-        <Q3
-          Q1Name={Q1Name}
-          Q2Name={Q2Name}
-          Q3Name={Q3Name}
-          setQ3Name={setQ3Name}
-          Q1Answer={Q1Answer}
-          Q2Answer={Q2Answer}
-          Q3Answer={Q3Answer}
-          QNumber={QNumber}
-          setQNumber={setQNumber}
-          Q3Answer={Q3Answer}
-          setQ3Answer={setQ3Answer}
-          QList={QList}
-        />
-      )}
-      {QNumber === 4 && (
-        <Q4
-          Q1Name={Q1Name}
-          Q2Name={Q2Name}
-          Q3Name={Q3Name}
-          Q4Name={Q4Name}
-          setQ4Name={setQ4Name}
-          Q1Answer={Q1Answer}
-          Q2Answer={Q2Answer}
-          Q3Answer={Q3Answer}
-          Q4Answer={Q4Answer}
-          Q3Answer={Q3Answer}
-          QNumber={QNumber}
-          setQNumber={setQNumber}
-          Q4Answer={Q4Answer}
-          setQ4Answer={setQ4Answer}
-          QList={QList}
-        />
-      )}
-      {QNumber === 5 && (
-        <Q5
-          Q1Name={Q1Name}
-          Q2Name={Q2Name}
-          Q3Name={Q3Name}
-          Q4Name={Q4Name}
-          Q5Name={Q5Name}
-          setQ5Name={setQ5Name}
-          Q1Answer={Q1Answer}
-          Q2Answer={Q2Answer}
-          Q3Answer={Q3Answer}
-          Q4Answer={Q4Answer}
-          Q5Answer={Q5Answer}
-          Q3Answer={Q3Answer}
-          Q4Answer={Q4Answer}
-          QNumber={QNumber}
-          setQNumber={setQNumber}
-          Q5Answer={Q5Answer}
-          setQ5Answer={setQ5Answer}
-          QList={QList}
-        />
-      )}
+      <CurrentSelectedDiv>
+        <CurrentSelectedList>
+          <CurrentSelectedSpan>명지대학교</CurrentSelectedSpan>
+          <CurrentSelectedSpan>+</CurrentSelectedSpan>
+        </CurrentSelectedList>
+        <CurrentSelectedList>
+          <CurrentSelectedSpan>500m이내</CurrentSelectedSpan>
+          <CurrentSelectedSpan>+</CurrentSelectedSpan>
+        </CurrentSelectedList>
+        <CurrentSelectedList>
+          <CurrentSelectedSpan>{Q3Name && `1. ${Q3Name}`}</CurrentSelectedSpan>
+          <CurrentSelectedSpan>+</CurrentSelectedSpan>
+        </CurrentSelectedList>
+        <CurrentSelectedList>
+          <CurrentSelectedSpan>{Q4Name && `2. ${Q4Name}`}</CurrentSelectedSpan>
+        </CurrentSelectedList>
+      </CurrentSelectedDiv>
+      <Wrapper>
+        <TitleSpan>#4.두 번째로 선호하는 타입을 선택해 주세요.</TitleSpan>
+        <SubTitleSpan>
+          두 번째로 가장 많이 고려하는 항목을 1개 골라주세요.
+        </SubTitleSpan>
+        <OptionSpan>
+          항목을 클릭하면 선택되며, 선택된 항목을 한 번 더 클릭하면 해제됩니다.
+        </OptionSpan>
+        <Article>
+          <ItemList>
+            {QList.map((QItem) => {
+              if (QItem.code !== Q3Answer) {
+                return (
+                  <QButton
+                    setQ4Name={setQ4Name}
+                    key={QItem.code}
+                    QNumber={QNumber}
+                    QItem={QItem}
+                    Q4Answer={Q4Answer}
+                    setQ4Answer={setQ4Answer}
+                  />
+                );
+              }
+            })}
+          </ItemList>
+        </Article>
+        <ButtonContainer>
+          <Prev onClick={() => setQNumber(3)}>이전</Prev>
+          <Next onClick={() => setQNumber(5)}>다음</Next>
+        </ButtonContainer>
+      </Wrapper>
     </>
   );
 };
 
-export default Recommendation;
+export default Q4;
