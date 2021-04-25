@@ -73,7 +73,7 @@ const Header = () => {
         <MenuSpan to="/RecommendationIntro">자취방 추천 받기</MenuSpan>
       </MenuContainer>
       <MenuContainer>
-        <MenuSpan to="/Login">추천 이력 조회</MenuSpan>
+        <MenuSpan to="/ResultHistory">추천 이력 조회</MenuSpan>
       </MenuContainer>
       <HamburgerContainer>
         <BurgerComponent open={open} setOpen={setOpen} />

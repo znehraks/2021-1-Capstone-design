@@ -159,9 +159,10 @@ const ItemDetail = styled.span`
 `;
 const CurrentSelectedDiv = styled.div`
   position: absolute;
-  top: 12vw;
+  top: 14vw;
   right: 0;
-  width: 10vw;
+  width: auto;
+  max-width: 15vw;
   height: 30vw;
   display: flex;
   flex-direction: column;
@@ -170,7 +171,8 @@ const CurrentSelectedDiv = styled.div`
 `;
 const CurrentSelectedList = styled.div`
   width: 100%;
-  height: 30%;
+  height: 20%;
+  max-height: 6vw;
   background: transparent;
   display: flex;
   flex-direction: column;
@@ -178,12 +180,13 @@ const CurrentSelectedList = styled.div`
   align-items: center;
 `;
 const CurrentSelectedSpan = styled.span`
-  font-size: 1.5vw;
+  font-size: 1vw;
   margin-bottom: 2vw;
 `;
 const Q5 = ({
+  Q1Answer,
+  Q2Answer,
   Q1Name,
-  Q2Name,
   Q3Name,
   Q4Name,
   Q5Name,
@@ -195,12 +198,13 @@ const Q5 = ({
   setQNumber,
   Q5Answer,
   setQ5Answer,
+  finalWeight,
 }) => {
   return (
     <>
       <CurrentSelectedDiv>
         <CurrentSelectedList>
-          <CurrentSelectedSpan>명지대학교</CurrentSelectedSpan>
+          <CurrentSelectedSpan>{Q1Name}</CurrentSelectedSpan>
           <CurrentSelectedSpan>+</CurrentSelectedSpan>
         </CurrentSelectedList>
         <CurrentSelectedList>
@@ -217,6 +221,7 @@ const Q5 = ({
         </CurrentSelectedList>
         <CurrentSelectedList>
           <CurrentSelectedSpan>{Q5Name && `3. ${Q5Name}`}</CurrentSelectedSpan>
+          <CurrentSelectedSpan></CurrentSelectedSpan>
         </CurrentSelectedList>
       </CurrentSelectedDiv>
       <Wrapper>
@@ -246,8 +251,22 @@ const Q5 = ({
           </ItemList>
         </Article>
         <ButtonContainer>
-          <Prev onClick={() => setQNumber(4)}>이전</Prev>
-          <Submit to="/RecommendationResult">완료</Submit>
+          <Prev
+            onClick={() => {
+              setQ5Name();
+              setQ5Answer();
+              setQNumber(4);
+            }}
+          >
+            이전
+          </Prev>
+          <Submit
+            to={{
+              pathname: `/RecommendationResult/${Q1Answer}/${Q2Answer}/${finalWeight}`,
+            }}
+          >
+            완료
+          </Submit>
         </ButtonContainer>
       </Wrapper>
     </>

@@ -54,7 +54,13 @@ const QButton = ({
   setQ4Name,
   setQ5Name,
 }) => {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(
+    ((QNumber === 3) & (QItem.code === Q3Answer)) |
+      ((QNumber === 4) & (QItem.code === Q4Answer)) |
+      ((QNumber === 5) & (QItem.code === Q5Answer))
+      ? true
+      : false
+  );
   return (
     <Item
       checked={checked}

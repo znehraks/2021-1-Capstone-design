@@ -21,7 +21,7 @@ const Routes = () => {
       <Route exact path="/Recommendation" component={Recommendation}></Route>
       <Route
         exact
-        path="/RecommendationResult"
+        path="/RecommendationResult/:Q1Answer/:Q2Answer/:weightcode"
         component={RecommendationResult}
       ></Route>
       <Route exact path="/Result" component={Result}></Route>

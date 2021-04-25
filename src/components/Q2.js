@@ -155,9 +155,10 @@ const ItemDetail = styled.span`
 
 const CurrentSelectedDiv = styled.div`
   position: absolute;
-  top: 12vw;
-  right: 0;
-  width: 10vw;
+  top: 14vw;
+  right: 0.5vw;
+  width: auto;
+  max-width: 15vw;
   height: 30vw;
   display: flex;
   flex-direction: column;
@@ -166,7 +167,7 @@ const CurrentSelectedDiv = styled.div`
 `;
 const CurrentSelectedList = styled.div`
   width: 100%;
-  height: 30%;
+  height: 20%;
   background: transparent;
   display: flex;
   flex-direction: column;
@@ -174,7 +175,7 @@ const CurrentSelectedList = styled.div`
   align-items: center;
 `;
 const CurrentSelectedSpan = styled.span`
-  font-size: 1.5vw;
+  font-size: 1vw;
   margin-bottom: 2vw;
 `;
 const Q2 = ({
@@ -185,11 +186,12 @@ const Q2 = ({
   Q2Answer,
   setQ2Answer,
 }) => {
+  setQ2Answer(500);
   return (
     <>
       <CurrentSelectedDiv>
         <CurrentSelectedList>
-          <CurrentSelectedSpan>명지대학교</CurrentSelectedSpan>
+          <CurrentSelectedSpan>{Q1Name}</CurrentSelectedSpan>
           <CurrentSelectedSpan>+</CurrentSelectedSpan>
         </CurrentSelectedList>
       </CurrentSelectedDiv>
@@ -201,8 +203,26 @@ const Q2 = ({
           <TitleSpan>안되면 버튼으로 대체</TitleSpan>
         </Article>
         <ButtonContainer>
-          <Prev onClick={() => setQNumber(1)}>이전</Prev>
-          <Next onClick={() => setQNumber(3)}>다음</Next>
+          <Prev
+            onClick={() => {
+              setQ2Answer();
+              setQNumber(1);
+            }}
+          >
+            이전
+          </Prev>
+          <Next
+            onClick={() => {
+              if (!Q2Answer) {
+                alert("거리는 필수 항목입니다.");
+                return;
+              }
+              setQ2Answer(500);
+              setQNumber(3);
+            }}
+          >
+            다음
+          </Next>
         </ButtonContainer>
       </Wrapper>
     </>

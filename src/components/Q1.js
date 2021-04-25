@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import useInput from "../Hooks/useInput";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -11,6 +12,7 @@ const Wrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   background: red;
+  -ms-overflow-style: none;
 `;
 const TitleSpan = styled.span`
   font-size: 2.5vw;
@@ -40,12 +42,34 @@ const InputBox = styled.input`
 `;
 const HiddenList = styled.div`
   width: 50%;
-  height: auto;
+  height: 10vw;
   font-size: 1.5vw;
+  display: ${(props) => (props.name !== "" ? `flex` : `none`)};
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  -ms-overflow-style: none;
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 0;
+    background-color: #cc0000; /* or add it to the track */
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: black; /* or add it to the track */
+  }
+  overflow: scroll;
   /* display: {props=>props.} */
 `;
 const HiddenListItem = styled.span`
-  font-size: 2vw;
+  margin-top: 0.8vw;
+  padding-bottom: 0.5vw;
+  font-size: 1.5vw;
+  border-bottom: 3px solid black;
+  cursor: pointer;
+  :hover {
+    color: white;
+    font-weight: 800;
+  }
 `;
 const ButtonContainer = styled.div`
   width: 50%;
@@ -72,7 +96,28 @@ const Next = styled.span`
     font-weight: 800;
   }
 `;
-const Q1 = ({ Q1Name, setQNumber, Q1Answer, setQ1Answer }) => {
+const Q1 = ({ Q1Name, setQ1Name, setQNumber, Q1Answer, setQ1Answer }) => {
+  const name = useInput("");
+  const list = [
+    "명지대학교 인문캠퍼스",
+    "명지대학교 자연캠퍼스",
+    "명지대학교 자연캠퍼스",
+    "명지대학교 자연캠퍼스",
+    "명지대학교 자연캠퍼스",
+    "명지대학교 자연캠퍼스",
+    "명지대학교 자연캠퍼스",
+    "명지대학교 자연캠퍼스",
+    "명지대학교 자연캠퍼스",
+    "명지대학교 자연캠퍼스",
+    "명지대학교 자연캠퍼스",
+    "명지대학교 자연캠퍼스",
+    "명지대학교 자연캠퍼스",
+    "명지대학교 자연캠퍼스",
+    "명지대학교 자연캠퍼스",
+    "명지대학교 자연캠퍼스",
+    "명지대학교 자연캠퍼스",
+    "명지대학교 자연캠퍼스",
+  ];
   return (
     <Wrapper>
       <TitleSpan>#1.자신의 학교 이름을 입력해 주세요.</TitleSpan>
@@ -81,15 +126,47 @@ const Q1 = ({ Q1Name, setQNumber, Q1Answer, setQ1Answer }) => {
         주세요.
       </SubTitleSpan>
       <Article>
-        <InputBox placeholder={"ex.명지대학교"}></InputBox>
-        <HiddenList>
-          {/*
-                Array.map() 사용
-                <HiddenListItem></HiddenListItem> */}
-        </HiddenList>
+        <InputBox
+          placeholder={"ex.명지대학교"}
+          {...name}
+          type="text"
+          onClick={() => {
+            name.setValue("");
+            setQ1Answer();
+          }}
+        ></InputBox>
+        {Q1Answer === undefined && (
+          <HiddenList name={name.value}>
+            {list.map((item, index) => {
+              //name.value에 의해 filtering
+              return (
+                <HiddenListItem
+                  key={index}
+                  onClick={() => {
+                    name.setValue(item);
+                    setQ1Answer(item);
+                  }}
+                >
+                  {item}
+                </HiddenListItem>
+              );
+            })}
+          </HiddenList>
+        )}
       </Article>
       <ButtonContainer>
-        <Next onClick={() => setQNumber(2)}>다음</Next>
+        <Next
+          onClick={() => {
+            if (name.value.length === 0) {
+              alert("학교이름은 필수 항목 입니다.");
+              return;
+            }
+            setQ1Name(Q1Answer);
+            setQNumber(2);
+          }}
+        >
+          다음
+        </Next>
       </ButtonContainer>
     </Wrapper>
   );

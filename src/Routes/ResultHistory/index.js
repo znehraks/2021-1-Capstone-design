@@ -50,10 +50,7 @@ const ResultHistory = () => {
   return (
     <Wrapper>
       <Article>
-        <StartButton>
-          <StartTitleSpan>오직 나를 위한 자취지역</StartTitleSpan>
-          <StartContentSpan>지금 찾으러 가기!</StartContentSpan>
-        </StartButton>
+        <StartTitleSpan>아직 안했습니다~</StartTitleSpan>
       </Article>
     </Wrapper>
   );

@@ -159,9 +159,10 @@ const ItemDetail = styled.span`
 `;
 const CurrentSelectedDiv = styled.div`
   position: absolute;
-  top: 12vw;
+  top: 14vw;
   right: 0;
-  width: 10vw;
+  width: auto;
+  max-width: 15vw;
   height: 30vw;
   display: flex;
   flex-direction: column;
@@ -170,7 +171,7 @@ const CurrentSelectedDiv = styled.div`
 `;
 const CurrentSelectedList = styled.div`
   width: 100%;
-  height: 30%;
+  height: 20%;
   background: transparent;
   display: flex;
   flex-direction: column;
@@ -178,7 +179,7 @@ const CurrentSelectedList = styled.div`
   align-items: center;
 `;
 const CurrentSelectedSpan = styled.span`
-  font-size: 1.5vw;
+  font-size: 1vw;
   margin-bottom: 2vw;
 `;
 const Q4 = ({
@@ -198,7 +199,7 @@ const Q4 = ({
     <>
       <CurrentSelectedDiv>
         <CurrentSelectedList>
-          <CurrentSelectedSpan>명지대학교</CurrentSelectedSpan>
+          <CurrentSelectedSpan>{Q1Name}</CurrentSelectedSpan>
           <CurrentSelectedSpan>+</CurrentSelectedSpan>
         </CurrentSelectedList>
         <CurrentSelectedList>
@@ -211,6 +212,7 @@ const Q4 = ({
         </CurrentSelectedList>
         <CurrentSelectedList>
           <CurrentSelectedSpan>{Q4Name && `2. ${Q4Name}`}</CurrentSelectedSpan>
+          <CurrentSelectedSpan></CurrentSelectedSpan>
         </CurrentSelectedList>
       </CurrentSelectedDiv>
       <Wrapper>
@@ -240,8 +242,26 @@ const Q4 = ({
           </ItemList>
         </Article>
         <ButtonContainer>
-          <Prev onClick={() => setQNumber(3)}>이전</Prev>
-          <Next onClick={() => setQNumber(5)}>다음</Next>
+          <Prev
+            onClick={() => {
+              setQ4Name();
+              setQ4Answer();
+              setQNumber(3);
+            }}
+          >
+            이전
+          </Prev>
+          <Next
+            onClick={() => {
+              if (!Q4Answer) {
+                alert("선호 타입은 필수 항목입니다.");
+                return;
+              }
+              setQNumber(5);
+            }}
+          >
+            다음
+          </Next>
         </ButtonContainer>
       </Wrapper>
     </>
