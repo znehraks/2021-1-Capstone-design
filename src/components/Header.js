@@ -75,6 +75,9 @@ const Header = () => {
       <MenuContainer>
         <MenuSpan to="/ResultHistory">추천 이력 조회</MenuSpan>
       </MenuContainer>
+      <MenuContainer>
+        <MenuSpan to="/Auth">로그인</MenuSpan>
+      </MenuContainer>
       <HamburgerContainer>
         <BurgerComponent open={open} setOpen={setOpen} />
         <MenuComponent open={open} setOpen={setOpen} />

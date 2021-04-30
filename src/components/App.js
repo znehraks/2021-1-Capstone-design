@@ -8,18 +8,17 @@ import GlobalStyles from "./Styles/GlobalStyles";
 import Theme from "./Styles/Theme";
 
 const Wrapper = styled.div``;
-
 const App = () => {
   return (
     <ThemeProvider theme={Theme}>
-        <GlobalStyles />
-        <Router>
-          <Wrapper>
-            <Header />
-            <Routes />
-            <Footer />
-          </Wrapper>
-        </Router>
+      <GlobalStyles />
+      <Router>
+        <Wrapper>
+          <Header />
+          <Routes />
+          <Footer />
+        </Wrapper>
+      </Router>
     </ThemeProvider>
   );
 };

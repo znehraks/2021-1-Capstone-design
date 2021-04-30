@@ -199,6 +199,11 @@ const Q5 = ({
   Q5Answer,
   setQ5Answer,
   finalWeight,
+  w1,
+  w2,
+  w3,
+  w4,
+  w5,
 }) => {
   return (
     <>
@@ -262,7 +267,7 @@ const Q5 = ({
           </Prev>
           <Submit
             to={{
-              pathname: `/RecommendationResult/${Q1Answer}/${Q2Answer}/${finalWeight}`,
+              pathname: `/RecommendationResult/${Q1Answer}/${Q2Answer}/${w1}/${w2}/${w3}/${w4}/${w5}`,
             }}
           >
             완료

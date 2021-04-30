@@ -220,6 +220,11 @@ const Recommendation = () => {
       }
     }
     setFinalWeight([w1, w2, w3, w4, w5]);
+    setW1(w1);
+    setW2(w2);
+    setW3(w3);
+    setW4(w4);
+    setW5(w5);
   };
   useEffect(() => {
     calFinalWeight(Q3Weight, Q4Weight, Q5Weight);
@@ -314,6 +319,11 @@ const Recommendation = () => {
           setQ5Answer={setQ5Answer}
           QList={QList}
           finalWeight={finalWeight}
+          w1={w1}
+          w2={w2}
+          w3={w3}
+          w4={w4}
+          w5={w5}
         />
       )}
     </>
