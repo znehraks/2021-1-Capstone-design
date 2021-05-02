@@ -217,7 +217,7 @@ const Q2 = ({
                 alert("거리는 필수 항목입니다.");
                 return;
               }
-              setQ2Answer(500);
+              setQ2Answer(1000);
               setQNumber(3);
             }}
           >

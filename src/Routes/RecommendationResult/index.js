@@ -108,7 +108,7 @@ const RecommendationResult = withRouter(
               <Line />
             </Article>
             <Article>
-              <Map />
+              <Map data={data} />
             </Article>
           </>
         )}
