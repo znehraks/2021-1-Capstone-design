@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Map from "../../components/Kakao/Map";
 import homeEx from "../../components/Styles/images/homeEx.jpg";
 import homeEx2 from "../../components/Styles/images/homeEx2.jpg";
 
@@ -114,11 +115,11 @@ const Home = () => {
               <ContentImage src={homeEx2} />
             </Container>
             <Container>
-              <RightTopContainer to="/Recommendation">
+              <RightTopContainer to="/RecommendationIntro">
                 <ContentSpan>당신이 원하는 자취지역?</ContentSpan>
                 <ContentSpan>모두 이곳에 있다.</ContentSpan>
               </RightTopContainer>
-              <RightBottomContainer to="/Recommendation">
+              <RightBottomContainer to="/RecommendationIntro">
                 <ContentSpan>바로 찾으러 가기</ContentSpan>
               </RightBottomContainer>
             </Container>
@@ -132,11 +133,11 @@ const Home = () => {
           </TitleContainer>
           <ContentContainer>
             <Container>
-              <RightTopContainer to="/Recommendation">
+              <RightTopContainer to="/Aboutus">
                 <ContentSpan>저희 팀이 궁금하시다면?</ContentSpan>
                 <ContentSpan>모두 이곳에 있다.</ContentSpan>
               </RightTopContainer>
-              <RightBottomContainer to="/Recommendation">
+              <RightBottomContainer to="/Auth">
                 <ContentSpan>회원이 되고 싶으시다면?</ContentSpan>
               </RightBottomContainer>
             </Container>

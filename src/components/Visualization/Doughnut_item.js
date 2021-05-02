@@ -1,11 +1,5 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
-import styled from "styled-components";
-
-const TitleSpan = styled.span`
-  font-size: 1.2vw;
-  color: black;
-`;
 
 const App = ({ w1, w2, w3, w4, w5 }) => {
   const data = {
@@ -27,7 +21,7 @@ const App = ({ w1, w2, w3, w4, w5 }) => {
   };
   return (
     <div>
-      <TitleSpan>매물의 주된 비중은?</TitleSpan>
+      <h2>매물의 주된 비중은?</h2>
       <Doughnut data={data} />
     </div>
   );

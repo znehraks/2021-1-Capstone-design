@@ -97,17 +97,89 @@ const Next = styled.span`
   }
 `;
 const Q1 = ({ Q1Name, setQ1Name, setQNumber, Q1Answer, setQ1Answer }) => {
+  const [results, setResults] = useState();
   const name = useInput("");
+  //학교이름 DB에서 가져오기. 이름 한글자라도 틀리면 백엔드에서 에러생김
   const list = [
-    "명지대학교 인문캠퍼스",
-    "성균관대학교 대학로캠퍼스",
-    "국민대학교",
-    "동국대학교 서울캠퍼스",
-    "서울대학교 관악캠퍼스",
+    "서울시립대학교",
+    "서울여자간호대학교",
+    "서울여자대학교",
+    "서일대학교",
+    "성공회대학교",
+    "성균관대학교",
+    "성신여자대학교",
+    "세종대학교",
     "숙명여자대학교",
-    "서울대학교 연건캠퍼스",
-    "연세대학교 신촌캠퍼스",
+    "숭실대학교",
+    "숭의여자대학교",
+    "연세대학교",
+    "이화여자대학교",
+    "인덕대학교",
+    "장로회신학대학교",
+    "적십자간호대학",
+    "중앙대학교 서울캠퍼스",
+    "총신대학교",
+    "추계예술대학교",
+    "한국방송통신대학교",
+    "한국성서대학교",
+    "한국예술종합학교",
+    "한국외국어대학교",
+    "한국체육대학교",
+    "한국폴리텍 I 대학 서울강서캠퍼스",
+    "한국폴리텍Ⅰ대학 서울정수캠퍼스",
+    "한성대학교",
+    "한양대학교",
+    "한양여자대학교",
+    "한영신학대학교",
+    "홍익대학교",
+    "가톨릭대학교",
+    "가톨릭대학교",
+    "감리교신학대학교",
+    "건국대학교",
+    "경기대학교",
+    "경희대학교",
+    "고려대학교",
+    "광운대학교",
+    "국민대학교",
+    "국제예술대학",
+    "그리스도대학교",
+    "덕성여자대학교",
+    "동국대학교",
+    "동덕여자대학교",
+    "동양미래대학교",
+    "디지털서울문화예술대학교",
+    "명지대학교 인문캠퍼스",
+    "명지전문대학",
+    "배화여자대학교",
+    "백석예술대학교",
+    "사이버한국외국어대학교",
+    "삼육대학교",
+    "삼육보건대학교",
+    "상명대학교",
+    "서강대학교",
+    "서경대학교",
+    "서울과학기술대학교",
+    "서울과학기술대학교",
+    "서울교육대학교",
+    "서울기독대학교",
+    "서울대학교",
+    "서울디지털대학교",
+    "서울사이버대학교",
   ];
+  const filtered = (list) => {
+    list = list.filter((item) => item.indexOf(name.value) > -1);
+    return list.map((item, index) => (
+      <HiddenListItem
+        key={index}
+        onClick={() => {
+          name.setValue(item);
+          setQ1Answer(item);
+        }}
+      >
+        {item}
+      </HiddenListItem>
+    ));
+  };
   return (
     <Wrapper>
       <TitleSpan>#1.자신의 학교 이름을 입력해 주세요.</TitleSpan>
@@ -126,22 +198,7 @@ const Q1 = ({ Q1Name, setQ1Name, setQNumber, Q1Answer, setQ1Answer }) => {
           }}
         ></InputBox>
         {Q1Answer === undefined && (
-          <HiddenList name={name.value}>
-            {list.map((item, index) => {
-              //name.value에 의해 filtering
-              return (
-                <HiddenListItem
-                  key={index}
-                  onClick={() => {
-                    name.setValue(item);
-                    setQ1Answer(item);
-                  }}
-                >
-                  {item}
-                </HiddenListItem>
-              );
-            })}
-          </HiddenList>
+          <HiddenList name={name.value}>{filtered(list)}</HiddenList>
         )}
       </Article>
       <ButtonContainer>
