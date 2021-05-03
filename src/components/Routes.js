@@ -23,7 +23,7 @@ const Routes = () => {
       <Route exact path="/Recommendation" component={Recommendation}></Route>
       <Route
         exact
-        path="/RecommendationResult/:Q1Answer/:Q2Answer/:w1/:w2/:w3/:w4/:w5"
+        path="/RecommendationResult/:univ_name/:univ_lat/:univ_lon/:Q2Answer/:w1/:w2/:w3/:w4/:w5"
         component={RecommendationResult}
       ></Route>
       <Route exact path="/Result" component={Result}></Route>

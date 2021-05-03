@@ -184,7 +184,9 @@ const CurrentSelectedSpan = styled.span`
   margin-bottom: 2vw;
 `;
 const Q5 = ({
-  Q1Answer,
+  univ_name,
+  univ_lat,
+  univ_lon,
   Q2Answer,
   Q1Name,
   Q3Name,
@@ -213,7 +215,7 @@ const Q5 = ({
           <CurrentSelectedSpan>+</CurrentSelectedSpan>
         </CurrentSelectedList>
         <CurrentSelectedList>
-          <CurrentSelectedSpan>500m이내</CurrentSelectedSpan>
+          <CurrentSelectedSpan>{Q2Answer}m이내</CurrentSelectedSpan>
           <CurrentSelectedSpan>+</CurrentSelectedSpan>
         </CurrentSelectedList>
         <CurrentSelectedList>
@@ -267,7 +269,7 @@ const Q5 = ({
           </Prev>
           <Submit
             to={{
-              pathname: `/RecommendationResult/${Q1Answer}/${Q2Answer}/${w1}/${w2}/${w3}/${w4}/${w5}`,
+              pathname: `/RecommendationResult/${univ_name}/${univ_lat}/${univ_lon}/${Q2Answer}/${w1}/${w2}/${w3}/${w4}/${w5}`,
             }}
           >
             완료

@@ -184,7 +184,7 @@ const CurrentSelectedSpan = styled.span`
 `;
 const Q4 = ({
   Q1Name,
-  Q2Name,
+  Q2Answer,
   Q3Name,
   Q4Name,
   setQ4Name,
@@ -203,7 +203,7 @@ const Q4 = ({
           <CurrentSelectedSpan>+</CurrentSelectedSpan>
         </CurrentSelectedList>
         <CurrentSelectedList>
-          <CurrentSelectedSpan>500m이내</CurrentSelectedSpan>
+          <CurrentSelectedSpan>{Q2Answer}m이내</CurrentSelectedSpan>
           <CurrentSelectedSpan>+</CurrentSelectedSpan>
         </CurrentSelectedList>
         <CurrentSelectedList>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Q2Map from "./Kakao/Q2Map";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -20,16 +21,15 @@ const TitleSpan = styled.span`
 const SubTitleSpan = styled.span`
   font-size: 1vw;
   margin-top: 1vw;
-  margin-bottom: 6vw;
 `;
 const Article = styled.div`
-  width: 70%;
-  height: 15vw;
+  width: 80%;
+  height: 25vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 5vw;
+  margin: 2vw 0;
 `;
 const InputBox = styled.input`
   width: 50%;
@@ -181,12 +181,13 @@ const CurrentSelectedSpan = styled.span`
 const Q2 = ({
   Q1Name,
   Q2Name,
-  Q1Answer,
   setQNumber,
   Q2Answer,
   setQ2Answer,
+  univ_name,
+  univ_lat,
+  univ_lon,
 }) => {
-  setQ2Answer(500);
   return (
     <>
       <CurrentSelectedDiv>
@@ -197,10 +198,18 @@ const Q2 = ({
       </CurrentSelectedDiv>
       <Wrapper>
         <TitleSpan>#2.원하는 거리를 선택해 주세요.</TitleSpan>
-        <SubTitleSpan>선호하는 곳에 원을 그려 표시해주세요.</SubTitleSpan>
+        <SubTitleSpan>
+          지도를 마우스로 클릭하면 원 그리기가 시작되고
+        </SubTitleSpan>
+        <SubTitleSpan>
+          오른쪽 마우스를 클릭하면 원 그리기가 종료됩니다
+        </SubTitleSpan>
         <Article>
-          <TitleSpan>카카오API 원그리기로 연동</TitleSpan>
-          <TitleSpan>안되면 버튼으로 대체</TitleSpan>
+          <Q2Map
+            univ_lat={univ_lat}
+            univ_lon={univ_lon}
+            setQ2Answer={setQ2Answer}
+          />
         </Article>
         <ButtonContainer>
           <Prev
@@ -217,7 +226,6 @@ const Q2 = ({
                 alert("거리는 필수 항목입니다.");
                 return;
               }
-              setQ2Answer(1000);
               setQNumber(3);
             }}
           >

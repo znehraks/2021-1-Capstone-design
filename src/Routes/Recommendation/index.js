@@ -161,7 +161,9 @@ const ItemDetail = styled.span`
 const Recommendation = () => {
   //선택 문항 state hooks
   const [QNumber, setQNumber] = useState(1);
-  const [Q1Answer, setQ1Answer] = useState();
+  const [univ_name, setUniv_name] = useState();
+  const [univ_lat, setUniv_lat] = useState();
+  const [univ_lon, setUniv_lon] = useState();
   const [Q2Answer, setQ2Answer] = useState();
   const [Q3Answer, setQ3Answer] = useState();
   const [Q4Answer, setQ4Answer] = useState();
@@ -230,7 +232,9 @@ const Recommendation = () => {
     calFinalWeight(Q3Weight, Q4Weight, Q5Weight);
   }, [Q5Answer]);
 
-  console.log(Q1Answer);
+  console.log(univ_name);
+  console.log(univ_lat);
+  console.log(univ_lon);
   console.log(Q2Answer);
   console.log(Q3Answer);
   console.log(Q4Answer);
@@ -245,8 +249,12 @@ const Recommendation = () => {
           QList={QList}
           QNumber={QNumber}
           setQNumber={setQNumber}
-          Q1Answer={Q1Answer}
-          setQ1Answer={setQ1Answer}
+          univ_name={univ_name}
+          setUniv_name={setUniv_name}
+          univ_lat={univ_lat}
+          setUniv_lat={setUniv_lat}
+          univ_lon={univ_lon}
+          setUniv_lon={setUniv_lon}
         />
       )}
       {QNumber === 2 && (
@@ -255,12 +263,15 @@ const Recommendation = () => {
           Q2Name={Q2Name}
           setQ2Name={setQ2Name}
           QList={QList}
-          Q1Answer={Q1Answer}
+          univ_name={univ_name}
           Q2Answer={Q2Answer}
           QNumber={QNumber}
           setQNumber={setQNumber}
           Q2Answer={Q2Answer}
           setQ2Answer={setQ2Answer}
+          univ_name={univ_name}
+          univ_lat={univ_lat}
+          univ_lon={univ_lon}
         />
       )}
       {QNumber === 3 && (
@@ -269,7 +280,7 @@ const Recommendation = () => {
           Q2Name={Q2Name}
           Q3Name={Q3Name}
           setQ3Name={setQ3Name}
-          Q1Answer={Q1Answer}
+          univ_name={univ_name}
           Q2Answer={Q2Answer}
           Q3Answer={Q3Answer}
           QNumber={QNumber}
@@ -286,7 +297,7 @@ const Recommendation = () => {
           Q3Name={Q3Name}
           Q4Name={Q4Name}
           setQ4Name={setQ4Name}
-          Q1Answer={Q1Answer}
+          univ_name={univ_name}
           Q2Answer={Q2Answer}
           Q3Answer={Q3Answer}
           Q4Answer={Q4Answer}
@@ -306,7 +317,9 @@ const Recommendation = () => {
           Q4Name={Q4Name}
           Q5Name={Q5Name}
           setQ5Name={setQ5Name}
-          Q1Answer={Q1Answer}
+          univ_name={univ_name}
+          univ_lat={univ_lat}
+          univ_lon={univ_lon}
           Q2Answer={Q2Answer}
           Q3Answer={Q3Answer}
           Q4Answer={Q4Answer}

@@ -37,18 +37,26 @@ const TitleSpan = styled.span`
 const RecommendationResult = withRouter(
   ({
     match: {
-      params: { Q1Answer, Q2Answer, w1, w2, w3, w4, w5 },
+      params: { univ_name, univ_lat, univ_lon, Q2Answer, w1, w2, w3, w4, w5 },
     },
   }) => {
     const [data, setData] = useState();
 
     useEffect(() => {
-      Api.getResidence(Q1Answer, Number(Q2Answer), w1, w2, w3, w4, w5).then(
-        (response) => {
-          setData(response.data);
-          console.log(response.data);
-        }
-      );
+      Api.getResidence(
+        univ_name,
+        univ_lat,
+        univ_lon,
+        Q2Answer,
+        w1,
+        w2,
+        w3,
+        w4,
+        w5
+      ).then((response) => {
+        setData(response.data);
+        console.log(response.data);
+      });
     }, []);
     //weightcode 바탕으로
     console.log(w1);
@@ -70,11 +78,11 @@ const RecommendationResult = withRouter(
         {data && (
           <>
             <Article>
-              <TitleSpan>"{Q1Answer}"의 선택된 반영률</TitleSpan>
+              <TitleSpan>"{univ_name}"의 선택된 반영률</TitleSpan>
               <Doughnut w1={w1} w2={w2} w3={w3} w4={w4} w5={w5} />
             </Article>
             <Article>
-              <TitleSpan>"{Q1Answer}"의 추천 1위 매물의 가중치 비율</TitleSpan>
+              <TitleSpan>"{univ_name}"의 추천 1위 매물의 가중치 비율</TitleSpan>
               <Doughnut
                 w1={data[0].T1}
                 w2={data[0].T2}
@@ -84,7 +92,7 @@ const RecommendationResult = withRouter(
               />
             </Article>
             <Article>
-              <TitleSpan>"{Q1Answer}"의 추천 2위 매물의 가중치 비율</TitleSpan>
+              <TitleSpan>"{univ_name}"의 추천 2위 매물의 가중치 비율</TitleSpan>
               <Doughnut
                 w1={data[1].T1}
                 w2={data[1].T2}
@@ -94,7 +102,7 @@ const RecommendationResult = withRouter(
               />
             </Article>
             <Article>
-              <TitleSpan>"{Q1Answer}"의 추천 3위 매물의 가중치 비율</TitleSpan>
+              <TitleSpan>"{univ_name}"의 추천 3위 매물의 가중치 비율</TitleSpan>
               <Doughnut
                 w1={data[2].T1}
                 w2={data[2].T2}
@@ -104,11 +112,11 @@ const RecommendationResult = withRouter(
               />
             </Article>
             <Article>
-              <TitleSpan>"{Q1Answer}"의</TitleSpan>
+              <TitleSpan>"{univ_name}"의</TitleSpan>
               <Line />
             </Article>
             <Article>
-              <Map data={data} />
+              <Map data={data} univ_lat={univ_lat} univ_lon={univ_lon} />
             </Article>
           </>
         )}
