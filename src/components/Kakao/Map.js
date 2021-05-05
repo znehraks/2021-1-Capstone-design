@@ -46,7 +46,7 @@ const MapContainer = ({ data, univ_lat, univ_lon }) => {
         new kakao.maps.Marker({
           map: map,
           position: residencePositions[i],
-          //   image: markerImage,
+          // image: markerImage,
         });
       }
     };
