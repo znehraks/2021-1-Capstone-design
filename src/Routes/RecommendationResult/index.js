@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { Api } from "../../api";
-import Bar from "../../components/Visualization/Bar";
+import StarChart from "../../components/Visualization/StarChart";
+import StarChartData from "../../components/Visualization/StarChartData";
 import Line from "../../components/Visualization/Line";
 import Doughnut from "../../components/Visualization/Doughnut";
 import Loader from "../../components/Loader";
@@ -77,6 +78,9 @@ const RecommendationResult = withRouter(
       <Wrapper>
         {data && (
           <>
+            <Article>
+              <StarChart data={data} />
+            </Article>
             <Article>
               <TitleSpan>"{univ_name}"의 선택된 반영률</TitleSpan>
               <Doughnut w1={w1} w2={w2} w3={w3} w4={w4} w5={w5} />

@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Map2 from "../../components/Kakao/Map2";
 import homeEx from "../../components/Styles/images/homeEx.jpg";
 import homeEx2 from "../../components/Styles/images/homeEx2.jpg";
+import StarChart from "../../components/Visualization/StarChart";
+import StarChartData from "../../components/Visualization/StarChartData";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -146,9 +147,6 @@ const Home = () => {
             </Container>
           </ContentContainer>
         </OuterBox>
-      </Article>
-      <Article>
-        <Map2 />
       </Article>
     </Wrapper>
   );
