@@ -7,6 +7,7 @@ import homeEx4 from "../../components/Styles/images/homeEx4.jpg";
 import homeEx5 from "../../components/Styles/images/homeEx5.jpg";
 import homeEx6 from "../../components/Styles/images/homeEx6.jpg";
 import SliderComponent from "../../components/Slider";
+import Arrow from "../../components/Arrow";
 
 const Animation01 = keyframes`
     0% {
@@ -70,6 +71,12 @@ const BlackSquare02 = styled.div`
   background: transparent;
   border: 2px solid black;
 `;
+
+const ArrowDiv = styled(Arrow)`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+`;
 const Article = styled.div`
   width: 100vw;
   height: 45vw;
@@ -124,6 +131,16 @@ const ContentContainer = styled.div`
 `;
 
 const Container = styled.div`
+  width: 80%;
+  height: 40%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2vw 0.5px;
+  animation: ${Animation02} 1s linear;
+`;
+const ColumnContainer = styled.div`
   width: 50%;
   height: 40%;
   display: flex;
@@ -134,13 +151,14 @@ const Container = styled.div`
   animation: ${Animation02} 1s linear;
 `;
 const RightTopContainer = styled(Link)`
-  width: 80%;
-  height: 50%;
+  width: 20vw;
+  height: 20vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border: 2px solid rgba(0, 0, 0, 0.5);
+  border-radius: 2vw;
   margin-bottom: 2vw;
   transition-duration: 0.5s;
   :hover {
@@ -171,6 +189,23 @@ const ContentImage = styled.img`
 const ContentSpan = styled.span`
   font-size: 2vw;
 `;
+const ContentSmallSpan = styled.span`
+  margin-top: 1vw;
+  font-size: 0.9vw;
+`;
+
+const RightFloatingContianer = styled.div`
+  width: 20vw;
+  height: 60vw;
+  background: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+`;
 
 const Home = () => {
   return (
@@ -185,20 +220,7 @@ const Home = () => {
             <BlackSquare01 />
             <BlackSquare02 />
           </SquareDiv>
-        </ContentContainer>
-      </Article>
-      <Article bgColor={"red"}>
-        <ContentContainer>
-          <TitleSpan>개인 맞춤형 자취지역 찾기</TitleSpan>
-          <Container>
-            <Slider imgs={[homeEx, homeEx3, homeEx4]} />
-          </Container>
-          <Container>
-            <TitleSpan>개인 맞춤형 자취지역 찾기</TitleSpan>
-            <TitleSpan>개인 맞춤형 자취지역 찾기</TitleSpan>
-            <TitleSpan>개인 맞춤형 자취지역 찾기</TitleSpan>
-            <TitleSpan>개인 맞춤형 자취지역 찾기</TitleSpan>
-          </Container>
+          <ArrowDiv />
         </ContentContainer>
       </Article>
       <Article bgColor={"red"}>
@@ -206,12 +228,50 @@ const Home = () => {
           <TitleSpan>테마별로 자취지역 찾기</TitleSpan>
           <Container>
             <RightTopContainer to="/RecommendationIntro">
+              <ContentSpan>DIY 방식</ContentSpan>
+              <ContentSmallSpan>
+                이용자가 직접 고려요소를 입력하여
+              </ContentSmallSpan>
+              <ContentSmallSpan>추천을 받는 방식입니다.</ContentSmallSpan>
+            </RightTopContainer>
+            <RightTopContainer to="/RecommendationIntro">
+              <ContentSpan>학우들의 선택</ContentSpan>
+              <ContentSmallSpan>학우들이 추천한 자취지역을</ContentSmallSpan>
+              <ContentSmallSpan>추천 받는 방식입니다.</ContentSmallSpan>
+            </RightTopContainer>
+            <RightTopContainer to="/RecommendationIntro">
+              <ContentSpan>제작자's pick</ContentSpan>
+              <ContentSmallSpan>제작자가 선별한 자취지역을</ContentSmallSpan>
+              <ContentSmallSpan>추천 받는 방식입니다.</ContentSmallSpan>
+            </RightTopContainer>
+          </Container>
+        </ContentContainer>
+      </Article>
+      <Article bgColor={"red"}>
+        <ContentContainer>
+          <TitleSpan>개인 맞춤형 자취지역 찾기</TitleSpan>
+          <ColumnContainer>
+            <Slider imgs={[homeEx, homeEx3, homeEx4]} />
+          </ColumnContainer>
+          <ColumnContainer>
+            <TitleSpan></TitleSpan>
+            <TitleSpan>개인 맞춤형 자취지역 찾기</TitleSpan>
+            <TitleSpan>개인 맞춤형 자취지역 찾기</TitleSpan>
+            <TitleSpan>개인 맞춤형 자취지역 찾기</TitleSpan>
+          </ColumnContainer>
+        </ContentContainer>
+      </Article>
+      <Article bgColor={"red"}>
+        <ContentContainer>
+          <TitleSpan>이용자들의 생생 후기</TitleSpan>
+          {/* <Container>
+            <RightTopContainer to="/RecommendationIntro">
               <ContentSpan>내가 직접 자취지역 찾으러 가기</ContentSpan>
             </RightTopContainer>
             <RightBottomContainer to="/RecommendationIntro">
               <ContentSpan>학우들이 추천하는 자취지역 찾으러 가기</ContentSpan>
             </RightBottomContainer>
-          </Container>
+          </Container> */}
         </ContentContainer>
       </Article>
     </Wrapper>

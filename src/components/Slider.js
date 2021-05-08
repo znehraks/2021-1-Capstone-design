@@ -17,7 +17,7 @@ const Img = styled.img`
 `;
 
 export default ({ imgs }) => (
-  <ImageSlider arrows={false} autoplay={true} autoplaySpeed={4000}>
+  <ImageSlider arrows={false} autoplay={true} autoplaySpeed={3000}>
     <Container>
       <Img src={imgs[0]} />
     </Container>
