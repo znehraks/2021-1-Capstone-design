@@ -18,7 +18,7 @@ export const StyledBurger = styled.button`
     z-index: 20;
     width: 32px;
     height: 5px;
-    background: ${({ open }) => (open ? "red" : "red")};
+    background: ${({ open }) => (open ? "#fff" : "#fff")};
     transition: all 0.3s linear;
     position: relative;
     transform-origin: 1px;

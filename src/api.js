@@ -1,6 +1,8 @@
 import axios from "axios";
 const api = axios.create({
-  baseURL: "https://resi-reco-backend-byawj.run.goorm.io/",
+  baseURL: "https://capstone-backend.run.goorm.io/",
+  // baseURL: "http://localhost:5000",
+  // baseURL: "https://resi-reco-backend.herokuapp.com/",
 });
 
 //api 모아두기

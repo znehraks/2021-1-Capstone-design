@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { Burger, Menu } from "./HamburgerMenu";
-import logo from "./Styles/images/logo.PNG";
+import logo from "./Styles/images/logo_white.png";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -11,11 +11,12 @@ const Wrapper = styled.div`
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  background: #fff;
+  background: ${(props) => props.theme.headerBgColor};
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 2;
 `;
 
 const LogoContainer = styled(Link)`
@@ -27,7 +28,7 @@ const LogoContainer = styled(Link)`
 `;
 
 const LogoImage = styled.img`
-  width: 10vw;
+  width: 6vw;
   height: auto;
 `;
 
@@ -48,7 +49,8 @@ const HamburgerContainer = styled.div`
 `;
 
 const MenuSpan = styled(Link)`
-  font-size: 1.1vw;
+  font-size: 1vw;
+  color: ${(props) => (props.selected ? `red` : `white`)};
   :hover {
     color: red;
   }
@@ -57,26 +59,42 @@ const MenuSpan = styled(Link)`
 const BurgerComponent = styled(Burger)``;
 
 const MenuComponent = styled(Menu)``;
-const Header = () => {
+const Header = withRouter(({ location }) => {
   const [open, setOpen] = useState(false);
-
-  // useOnClickOutside(node, () => setOpen(false));
   return (
     <Wrapper>
       <LogoContainer to="/">
         <LogoImage src={logo}></LogoImage>
       </LogoContainer>
       <MenuContainer>
-        <MenuSpan to="/AboutUs">프로젝트 및 팀 소개</MenuSpan>
+        <MenuSpan to="/AboutUs" selected={location.pathname === "/AboutUs"}>
+          프로젝트 및 팀 소개
+        </MenuSpan>
       </MenuContainer>
       <MenuContainer>
-        <MenuSpan to="/RecommendationIntro">자취방 추천 받기</MenuSpan>
+        <MenuSpan
+          to="/RecommendationIntro"
+          selected={
+            location.pathname === "/RecommendationIntro" ||
+            location.pathname === "/Recommendation" ||
+            location.pathname === "/RecommendationResult"
+          }
+        >
+          자취방 추천 받기
+        </MenuSpan>
       </MenuContainer>
       <MenuContainer>
-        <MenuSpan to="/ResultHistory">추천 이력 조회</MenuSpan>
+        <MenuSpan
+          to="/ResultHistory"
+          selected={location.pathname === "/ResultHistory"}
+        >
+          추천 이력 조회
+        </MenuSpan>
       </MenuContainer>
       <MenuContainer>
-        <MenuSpan to="/Auth">로그인</MenuSpan>
+        <MenuSpan to="/Auth" selected={location.pathname === "/Auth"}>
+          로그인
+        </MenuSpan>
       </MenuContainer>
       <HamburgerContainer>
         <BurgerComponent open={open} setOpen={setOpen} />
@@ -84,6 +102,6 @@ const Header = () => {
       </HamburgerContainer>
     </Wrapper>
   );
-};
+});
 
 export default Header;

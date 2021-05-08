@@ -30,6 +30,16 @@ const Article = styled.div`
   background: red;
 `;
 
+const RadarArticle = styled.div`
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: red;
+`;
+
 const TitleSpan = styled.span`
   font-size: 2.5vw;
   margin-top: 5vw;
@@ -42,6 +52,7 @@ const RecommendationResult = withRouter(
     },
   }) => {
     const [data, setData] = useState();
+    
 
     useEffect(() => {
       Api.getResidence(
@@ -78,9 +89,9 @@ const RecommendationResult = withRouter(
       <Wrapper>
         {data && (
           <>
-            <Article>
+            <RadarArticle>
               <StarChart data={data} />
-            </Article>
+            </RadarArticle>
             <Article>
               <TitleSpan>"{univ_name}"의 선택된 반영률</TitleSpan>
               <Doughnut w1={w1} w2={w2} w3={w3} w4={w4} w5={w5} />
