@@ -33,7 +33,11 @@ const Img = styled.img`
 `;
 
 export default () => (
-  <Loader onClick={() => window.scrollTo(800, 800)}>
+  <Loader
+    onClick={() => {
+      window.scrollTo(window.innerHeight, window.innerHeight);
+    }}
+  >
     <Img src={Arrow} />
   </Loader>
 );

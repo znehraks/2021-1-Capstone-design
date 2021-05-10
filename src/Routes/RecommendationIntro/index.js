@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: transparent;
+  background: ${(props) => props.theme.bgColor};
 `;
 
 const Article = styled.div`
@@ -21,7 +21,6 @@ const Article = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background: red;
 `;
 
 const StartButton = styled(Link)`
@@ -32,10 +31,11 @@ const StartButton = styled(Link)`
   justify-content: space-around;
   align-items: center;
   padding: 5vw 0;
-  border: 1vw solid rgba(0, 0, 0, 0.4);
+  border: 1vw solid black;
+  transition-duration: 0.4s;
   :hover {
-    color: #fff;
-    border: 1vw solid rgba(0, 0, 0, 0.4);
+    color: ${(props) => props.theme.headerBgColor};
+    border: 1vw solid ${(props) => props.theme.headerBgColor};
   }
 `;
 
@@ -54,7 +54,6 @@ const Article02 = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: red;
 `;
 
 const SpanBox = styled.div`

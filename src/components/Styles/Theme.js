@@ -1,6 +1,6 @@
 const Theme = {
-  headerBgColor: "#000",
-  bgColor: "red",
+  headerBgColor: "#F7323F",
+  bgColor: "#fff",
   spanColor: "#fff",
 };
 export default Theme;

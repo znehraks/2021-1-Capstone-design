@@ -12,7 +12,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background: red;
   -ms-overflow-style: none;
 `;
 const TitleSpan = styled.span`
@@ -53,10 +52,11 @@ const HiddenList = styled.div`
   ::-webkit-scrollbar {
     width: 5px;
     height: 0;
-    background-color: #cc0000; /* or add it to the track */
+    background-color: black; /* or add it to the track */
   }
   ::-webkit-scrollbar-thumb {
-    background-color: black; /* or add it to the track */
+    background-color: ${(props) =>
+      props.theme.headerBgColor}; /* or add it to the track */
   }
   overflow: scroll;
   /* display: {props=>props.} */

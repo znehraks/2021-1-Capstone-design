@@ -50,9 +50,9 @@ const HamburgerContainer = styled.div`
 
 const MenuSpan = styled(Link)`
   font-size: 1vw;
-  color: ${(props) => (props.selected ? `red` : `white`)};
+  color: ${(props) => (props.selected ? `black` : `white`)};
   :hover {
-    color: red;
+    color: black;
   }
 `;
 

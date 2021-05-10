@@ -12,7 +12,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background: red;
 `;
 const TitleSpan = styled.span`
   font-size: 2.5vw;

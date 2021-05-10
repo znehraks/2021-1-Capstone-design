@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import homeEx from "./Styles/images/homeEx.jpg";
+import distance from "./Styles/images/distance.png";
+import subway from "./Styles/images/subway.png";
+import cost from "./Styles/images/cost.png";
+import safety from "./Styles/images/safety.png";
+import house from "./Styles/images/house.png";
 import QList from "./QList";
 const Item = styled.div`
   width: 13.5vw;
@@ -12,19 +16,21 @@ const Item = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  color: ${(props) => (props.checked ? `white` : `black`)};
+  color: ${(props) =>
+    props.checked ? ` ${props.theme.headerBgColor}` : `black`};
   box-shadow: ${(props) =>
-    props.checked ? `4px 4px #440000` : `4px 4px #dd0000`};
-  border: ${(props) => (props.checked ? `4px solid #220000` : `none`)};
+    props.checked ? `4px 4px ${props.theme.headerBgColor}` : `4px 4px black`};
+  border: ${(props) =>
+    props.checked ? `4px solid ${props.theme.headerBgColor}` : `none`};
   :hover {
-    color: white;
-    box-shadow: 4px 4px #440000;
+    color: ${(props) => props.theme.headerBgColor};
+    box-shadow: 4px 4px ${(props) => props.theme.headerBgColor};
     transition-duration: 0.5s;
   }
 `;
 const ItemImage = styled.img`
-  width: 90%;
-  height: auto;
+  width: auto;
+  height: 50%;
 `;
 const ItemSpanContainer = styled.div`
   width: 90%;
@@ -110,7 +116,19 @@ const QButton = ({
         }
       }}
     >
-      <ItemImage src={homeEx}></ItemImage>
+      <ItemImage
+        src={
+          QItem.code === "T1"
+            ? `${distance}`
+            : QItem.code === "T2"
+            ? `${subway}`
+            : QItem.code === "T3"
+            ? `${cost}`
+            : QItem.code === "T4"
+            ? `${safety}`
+            : `${house}`
+        }
+      ></ItemImage>
       <ItemSpanContainer>
         <ItemTitle>{QItem.name}</ItemTitle>
         <ItemDetail>{QItem.detail}</ItemDetail>

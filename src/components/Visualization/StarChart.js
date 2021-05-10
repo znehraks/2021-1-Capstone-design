@@ -6,14 +6,14 @@ import { ResponsiveRadar } from "@nivo/radar";
 // no chart will be rendered.
 // website examples showcase many properties,
 // you'll often use just a few of them.
-const MyResponsiveRadar = ({ data /* see data tab */ }) => {
+const MyResponsiveRadar = ({ data, isClicked /* see data tab */ }) => {
   return (
     <ResponsiveRadar
       data={data}
-      keys={["T1", "T2", "T3", "T4", "T5"]}
-      indexBy="rank"
-      maxValue="auto"
-      margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
+      keys={[`${isClicked.rank_kr}`, "평균"]}
+      indexBy="weight"
+      maxValue={35}
+      margin={{ top: 100, right: 100, bottom: 40, left: 100 }}
       curve="linearClosed"
       borderWidth={2}
       borderColor={{ from: "color" }}
@@ -21,7 +21,7 @@ const MyResponsiveRadar = ({ data /* see data tab */ }) => {
       gridShape="linear"
       gridLabelOffset={36}
       enableDots={true}
-      dotSize={10}
+      dotSize={4}
       dotColor={{ theme: "background" }}
       dotBorderWidth={2}
       dotBorderColor={{ from: "color" }}
@@ -30,12 +30,12 @@ const MyResponsiveRadar = ({ data /* see data tab */ }) => {
       dotLabelYOffset={-12}
       colors={{ scheme: "accent" }}
       fillOpacity={0.25}
-      blendMode="multiply"
+      blendMode="darken"
       animate={true}
       motionConfig="wobbly"
       isInteractive={true}
       theme={{
-        fontSize: 25,
+        fontSize: 20,
         fontWeight: 800,
       }}
       legends={[

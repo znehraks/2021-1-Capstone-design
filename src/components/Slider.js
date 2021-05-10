@@ -4,16 +4,16 @@ import styled from "styled-components";
 import "./Slider.css";
 
 const ImageSlider = styled(Slider)`
-  width: 100%;
+  width: 60%;
   background: ${(props) => props.theme.bgColor};
-  height: 20vw;
+  height: 15vw;
 `;
 
 const Container = styled.div``;
 
 const Img = styled.img`
   width: 100%;
-  height: 20vw;
+  height: 15vw;
 `;
 
 export default ({ imgs }) => (

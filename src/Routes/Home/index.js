@@ -36,7 +36,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: ${(props) => props.theme.bgColor};
+  background: #fff;
   padding-top: 6vw;
 `;
 const SquareDiv = styled.div`
@@ -60,7 +60,7 @@ const BlackSquare01 = styled.div`
   width: 95%;
   height: 90%;
   background: transparent;
-  border: 2px solid black;
+  border: 4px solid black;
 `;
 const BlackSquare02 = styled.div`
   position: absolute;
@@ -69,7 +69,7 @@ const BlackSquare02 = styled.div`
   width: 95%;
   height: 90%;
   background: transparent;
-  border: 2px solid black;
+  border: 4px solid black;
 `;
 
 const ArrowDiv = styled(Arrow)`
@@ -82,9 +82,9 @@ const Article = styled.div`
   height: 45vw;
   display: flex;
   flex-direction: row;
-  justify-content: ${(props) => (props.theme.jc ? `flex-start` : `center`)};
+  justify-content: ${(props) => (props.justify ? `flex-start` : `center`)};
   align-items: center;
-  background: ${(props) => (props.bgColor ? `${props.bgColor}` : ``)};
+  background: ${(props) => (props.bgColor ? `${props.bgColor}` : `#fafafa`)};
 `;
 
 const Slider = styled(SliderComponent)`
@@ -93,14 +93,6 @@ const Slider = styled(SliderComponent)`
   justify-content: center;
   align-items: center;
   height: 20vw;
-`;
-const OuterBox = styled.div`
-  width: 80%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
 `;
 const TitleContainer = styled.div`
   width: 100%;
@@ -114,6 +106,9 @@ const TitleSpan = styled.span`
   font-size: 3vw;
   margin-bottom: 2vw;
   animation: ${Animation01} 0.5s linear;
+`;
+const MediumSpan = styled.span`
+  font-size: 1.2vw;
 `;
 const SlowTitleSpan = styled.span`
   font-size: 3vw;
@@ -145,7 +140,7 @@ const ColumnContainer = styled.div`
   height: 40%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: ${(props) => (props.justify ? `flex-start` : `center`)};
   align-items: center;
   margin: 2vw 0.5px;
   animation: ${Animation02} 1s linear;
@@ -160,32 +155,12 @@ const RightTopContainer = styled(Link)`
   border: 2px solid rgba(0, 0, 0, 0.5);
   border-radius: 2vw;
   margin-bottom: 2vw;
-  transition-duration: 0.5s;
+  transition-duration: 0.3s;
   :hover {
-    color: #fff;
-    border: 4px solid rgba(0, 0, 0, 1);
+    color: ${(props) => props.theme.headerBgColor};
+    border: 3px solid ${(props) => props.theme.headerBgColor};
   }
 `;
-const RightBottomContainer = styled(Link)`
-  width: 80%;
-  height: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition-duration: 0.5s;
-  border: 2px solid rgba(0, 0, 0, 0.5);
-  :hover {
-    color: #fff;
-    border: 4px solid rgba(0, 0, 0, 1);
-  }
-`;
-
-const ContentImage = styled.img`
-  width: auto;
-  height: 100%;
-`;
-
 const ContentSpan = styled.span`
   font-size: 2vw;
 `;
@@ -193,24 +168,75 @@ const ContentSmallSpan = styled.span`
   margin-top: 1vw;
   font-size: 0.9vw;
 `;
-
-const RightFloatingContianer = styled.div`
-  width: 20vw;
-  height: 60vw;
-  background: black;
+const VerticalLine = styled.div`
+  position: absolute;
+  top: 52vw;
+  left: 20vw;
+  width: 15vw;
+  height: 48vw;
+  padding: 1vw;
+  background: ${(props) => props.theme.headerBgColor};
+`;
+const LeftContainer = styled.div`
+  width: 40vw;
+  height: 45vw;
+`;
+const ImgContainer = styled.div`
+  width: 50%;
+  height: 90%;
+`;
+const Img = styled.img`
+  width: 100%;
+  height: auto;
+`;
+const RightContainer = styled.div`
+  width: 60vw;
+  height: 45vw;
+  padding: 15vw 5vw;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  right: 0;
+  justify-content: flex-start;
+  align-items: flex-start;
+`;
+const HorizontalLine = styled.div`
+  width: 25vw;
+  height: 5px;
+  margin: 1vw 0;
+  background: ${(props) => props.theme.headerBgColor};
+`;
+const TitleSpan02 = styled.span`
+  font-size: 2.4vw;
+`;
+const SubTitleSpan02 = styled.span`
+  font-size: 1.5vw;
+  margin-bottom: 1vw;
+`;
+const ContentSpan02 = styled.span`
+  font-size: 1.2vw;
+  margin-bottom: 0.6vw;
+`;
+const Blank = styled.div`
+  margin: 1vw 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+`;
+const MoreSpan = styled(Link)`
+  font-size: 1.2vw;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  padding: 0.6vw 0.8vw;
+  cursor: pointer;
+  :hover {
+    color: white;
+    background: black;
+  }
 `;
 
 const Home = () => {
   return (
     <Wrapper>
-      <Article bgColor={"red"}>
+      <Article>
         <ContentContainer>
           <SquareDiv>
             <TitleContainer>
@@ -223,7 +249,41 @@ const Home = () => {
           <ArrowDiv />
         </ContentContainer>
       </Article>
-      <Article bgColor={"red"}>
+      <Article justify={"flex-start"}>
+        <VerticalLine></VerticalLine>
+        <LeftContainer>
+          <ImgContainer>
+            <Img></Img>
+          </ImgContainer>
+        </LeftContainer>
+        <RightContainer>
+          <Blank>
+            <TitleSpan02>What's Our service?</TitleSpan02>
+            <HorizontalLine />
+          </Blank>
+          <Blank>
+            <SubTitleSpan02>
+              "저기어때."는 나를 위한 맞춤형 자취지역을 찾아 해매던
+            </SubTitleSpan02>
+            <SubTitleSpan02>
+              대학생들이 직접 만든 자취지역 추천 시스템입니다.
+            </SubTitleSpan02>
+          </Blank>
+          <Blank>
+            <ContentSpan02>
+              대학생들이 피부로 느낀, 자취지역의 핵심요소를 고려하여
+            </ContentSpan02>
+            <ContentSpan02>나의, 나를 위한, 오직 나에 의한,</ContentSpan02>
+            <ContentSpan02>
+              자취지역을 A.I알고리즘으로 추천해 드립니다.
+            </ContentSpan02>
+          </Blank>
+          <Blank>
+            <MoreSpan to={`/Aboutus`}>더보기</MoreSpan>
+          </Blank>
+        </RightContainer>
+      </Article>
+      <Article>
         <ContentContainer>
           <TitleSpan>테마별로 자취지역 찾기</TitleSpan>
           <Container>
@@ -247,31 +307,17 @@ const Home = () => {
           </Container>
         </ContentContainer>
       </Article>
-      <Article bgColor={"red"}>
+      <Article>
         <ContentContainer>
-          <TitleSpan>개인 맞춤형 자취지역 찾기</TitleSpan>
+          <TitleSpan>저기어때.의 이용후기</TitleSpan>
           <ColumnContainer>
             <Slider imgs={[homeEx, homeEx3, homeEx4]} />
           </ColumnContainer>
-          <ColumnContainer>
-            <TitleSpan></TitleSpan>
-            <TitleSpan>개인 맞춤형 자취지역 찾기</TitleSpan>
-            <TitleSpan>개인 맞춤형 자취지역 찾기</TitleSpan>
-            <TitleSpan>개인 맞춤형 자취지역 찾기</TitleSpan>
+          <ColumnContainer justify={"flex-start"}>
+            <MediumSpan></MediumSpan>
+            <MediumSpan></MediumSpan>
+            <MediumSpan></MediumSpan>
           </ColumnContainer>
-        </ContentContainer>
-      </Article>
-      <Article bgColor={"red"}>
-        <ContentContainer>
-          <TitleSpan>이용자들의 생생 후기</TitleSpan>
-          {/* <Container>
-            <RightTopContainer to="/RecommendationIntro">
-              <ContentSpan>내가 직접 자취지역 찾으러 가기</ContentSpan>
-            </RightTopContainer>
-            <RightBottomContainer to="/RecommendationIntro">
-              <ContentSpan>학우들이 추천하는 자취지역 찾으러 가기</ContentSpan>
-            </RightBottomContainer>
-          </Container> */}
         </ContentContainer>
       </Article>
     </Wrapper>
