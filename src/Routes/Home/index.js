@@ -8,6 +8,7 @@ import homeEx5 from "../../components/Styles/images/homeEx5.jpg";
 import homeEx6 from "../../components/Styles/images/homeEx6.jpg";
 import SliderComponent from "../../components/Slider";
 import Arrow from "../../components/Arrow";
+import { Helmet } from "react-helmet";
 
 const Animation01 = keyframes`
     0% {
@@ -235,92 +236,97 @@ const MoreSpan = styled(Link)`
 
 const Home = () => {
   return (
-    <Wrapper>
-      <Article>
-        <ContentContainer>
-          <SquareDiv>
-            <TitleContainer>
-              <TitleSpan>오직 나를 위한 맞춤형 자취지역.</TitleSpan>
-              <SlowTitleSpan>저기어때.</SlowTitleSpan>
-            </TitleContainer>
-            <BlackSquare01 />
-            <BlackSquare02 />
-          </SquareDiv>
-          <ArrowDiv />
-        </ContentContainer>
-      </Article>
-      <Article justify={"flex-start"}>
-        <VerticalLine></VerticalLine>
-        <LeftContainer>
-          <ImgContainer>
-            <Img></Img>
-          </ImgContainer>
-        </LeftContainer>
-        <RightContainer>
-          <Blank>
-            <TitleSpan02>What's Our service?</TitleSpan02>
-            <HorizontalLine />
-          </Blank>
-          <Blank>
-            <SubTitleSpan02>
-              "저기어때."는 나를 위한 맞춤형 자취지역을 찾아 해매던
-            </SubTitleSpan02>
-            <SubTitleSpan02>
-              대학생들이 직접 만든 자취지역 추천 시스템입니다.
-            </SubTitleSpan02>
-          </Blank>
-          <Blank>
-            <ContentSpan02>
-              대학생들이 피부로 느낀, 자취지역의 핵심요소를 고려하여
-            </ContentSpan02>
-            <ContentSpan02>나의, 나를 위한, 오직 나에 의한,</ContentSpan02>
-            <ContentSpan02>
-              자취지역을 A.I알고리즘으로 추천해 드립니다.
-            </ContentSpan02>
-          </Blank>
-          <Blank>
-            <MoreSpan to={`/Aboutus`}>더보기</MoreSpan>
-          </Blank>
-        </RightContainer>
-      </Article>
-      <Article>
-        <ContentContainer>
-          <TitleSpan>테마별로 자취지역 찾기</TitleSpan>
-          <Container>
-            <RightTopContainer to="/RecommendationIntro">
-              <ContentSpan>DIY 방식</ContentSpan>
-              <ContentSmallSpan>
-                이용자가 직접 고려요소를 입력하여
-              </ContentSmallSpan>
-              <ContentSmallSpan>추천을 받는 방식입니다.</ContentSmallSpan>
-            </RightTopContainer>
-            <RightTopContainer to="/RecommendationIntro">
-              <ContentSpan>학우들의 선택</ContentSpan>
-              <ContentSmallSpan>학우들이 추천한 자취지역을</ContentSmallSpan>
-              <ContentSmallSpan>추천 받는 방식입니다.</ContentSmallSpan>
-            </RightTopContainer>
-            <RightTopContainer to="/RecommendationIntro">
-              <ContentSpan>제작자's pick</ContentSpan>
-              <ContentSmallSpan>제작자가 선별한 자취지역을</ContentSmallSpan>
-              <ContentSmallSpan>추천 받는 방식입니다.</ContentSmallSpan>
-            </RightTopContainer>
-          </Container>
-        </ContentContainer>
-      </Article>
-      <Article>
-        <ContentContainer>
-          <TitleSpan>저기어때.의 이용후기</TitleSpan>
-          <ColumnContainer>
-            <Slider imgs={[homeEx, homeEx3, homeEx4]} />
-          </ColumnContainer>
-          <ColumnContainer justify={"flex-start"}>
-            <MediumSpan></MediumSpan>
-            <MediumSpan></MediumSpan>
-            <MediumSpan></MediumSpan>
-          </ColumnContainer>
-        </ContentContainer>
-      </Article>
-    </Wrapper>
+    <>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
+      <Wrapper>
+        <Article>
+          <ContentContainer>
+            <SquareDiv>
+              <TitleContainer>
+                <TitleSpan>오직 나를 위한 맞춤형 자취지역.</TitleSpan>
+                <SlowTitleSpan>저기어때.</SlowTitleSpan>
+              </TitleContainer>
+              <BlackSquare01 />
+              <BlackSquare02 />
+            </SquareDiv>
+            <ArrowDiv />
+          </ContentContainer>
+        </Article>
+        <Article justify={"flex-start"}>
+          <VerticalLine></VerticalLine>
+          <LeftContainer>
+            <ImgContainer>
+              <Img></Img>
+            </ImgContainer>
+          </LeftContainer>
+          <RightContainer>
+            <Blank>
+              <TitleSpan02>What's Our service?</TitleSpan02>
+              <HorizontalLine />
+            </Blank>
+            <Blank>
+              <SubTitleSpan02>
+                "저기어때."는 나를 위한 맞춤형 자취지역을 찾아 해매던
+              </SubTitleSpan02>
+              <SubTitleSpan02>
+                대학생들이 직접 만든 자취지역 추천 시스템입니다.
+              </SubTitleSpan02>
+            </Blank>
+            <Blank>
+              <ContentSpan02>
+                대학생들이 피부로 느낀, 자취지역의 핵심요소를 고려하여
+              </ContentSpan02>
+              <ContentSpan02>나의, 나를 위한, 오직 나에 의한,</ContentSpan02>
+              <ContentSpan02>
+                자취지역을 A.I알고리즘으로 추천해 드립니다.
+              </ContentSpan02>
+            </Blank>
+            <Blank>
+              <MoreSpan to={`/Aboutus`}>더보기</MoreSpan>
+            </Blank>
+          </RightContainer>
+        </Article>
+        <Article>
+          <ContentContainer>
+            <TitleSpan>테마별로 자취지역 찾기</TitleSpan>
+            <Container>
+              <RightTopContainer to="/RecommendationIntro">
+                <ContentSpan>DIY 방식</ContentSpan>
+                <ContentSmallSpan>
+                  이용자가 직접 고려요소를 입력하여
+                </ContentSmallSpan>
+                <ContentSmallSpan>추천을 받는 방식입니다.</ContentSmallSpan>
+              </RightTopContainer>
+              <RightTopContainer to="/RecommendationIntro">
+                <ContentSpan>학우들의 선택</ContentSpan>
+                <ContentSmallSpan>학우들이 추천한 자취지역을</ContentSmallSpan>
+                <ContentSmallSpan>추천 받는 방식입니다.</ContentSmallSpan>
+              </RightTopContainer>
+              <RightTopContainer to="/RecommendationIntro">
+                <ContentSpan>제작자's pick</ContentSpan>
+                <ContentSmallSpan>제작자가 선별한 자취지역을</ContentSmallSpan>
+                <ContentSmallSpan>추천 받는 방식입니다.</ContentSmallSpan>
+              </RightTopContainer>
+            </Container>
+          </ContentContainer>
+        </Article>
+        <Article>
+          <ContentContainer>
+            <TitleSpan>저기어때.의 이용후기</TitleSpan>
+            <ColumnContainer>
+              <Slider imgs={[homeEx, homeEx3, homeEx4]} />
+            </ColumnContainer>
+            <ColumnContainer justify={"flex-start"}>
+              <MediumSpan></MediumSpan>
+              <MediumSpan></MediumSpan>
+              <MediumSpan></MediumSpan>
+            </ColumnContainer>
+          </ContentContainer>
+        </Article>
+      </Wrapper>
+    </>
   );
 };
 

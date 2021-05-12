@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -96,42 +97,47 @@ const Button = styled(Link)`
 const RecommendationIntro = () => {
   const [mode, setMode] = useState("intro");
   return (
-    <Wrapper>
-      {mode === "intro" && (
-        <Article>
-          <StartButton
-            onClick={() => {
-              setMode("desc");
-            }}
-          >
-            <StartTitleSpan>오직 나를 위한 자취지역</StartTitleSpan>
-            <StartContentSpan>지금 찾으러 가기!</StartContentSpan>
-          </StartButton>
-        </Article>
-      )}
-      {mode === "desc" && (
-        <Article02>
-          <SpanBox>
-            <TitleSpan>이용 방법 안내입니다.</TitleSpan>
-            <ContentSpan>1. 나의 학교 이름을 입력해 주세요. </ContentSpan>
-            <ContentSpan>2. 원하는 최대 거리를 선택해 주세요.</ContentSpan>
-            <ContentSpan>
-              3. 가장 많이 고려하는 요소를 1개 골라주세요.
-            </ContentSpan>
-            <ContentSpan>
-              4. 두 번째로 많이 고려하는 요소를 1개 골라주세요.
-            </ContentSpan>
-            <ContentSpan>
-              5. 세 번째로 많이 고려하는 요소를 1개 골라주세요.
-            </ContentSpan>
-            <ContentSpan>6. 조금만 기다리면 끝.</ContentSpan>
-          </SpanBox>
-          <ButtonBox>
-            <Button to="/Recommendation">시작하기</Button>
-          </ButtonBox>
-        </Article02>
-      )}
-    </Wrapper>
+    <>
+      <Helmet>
+        <title>Intro</title>
+      </Helmet>
+      <Wrapper>
+        {mode === "intro" && (
+          <Article>
+            <StartButton
+              onClick={() => {
+                setMode("desc");
+              }}
+            >
+              <StartTitleSpan>오직 나를 위한 자취지역</StartTitleSpan>
+              <StartContentSpan>지금 찾으러 가기!</StartContentSpan>
+            </StartButton>
+          </Article>
+        )}
+        {mode === "desc" && (
+          <Article02>
+            <SpanBox>
+              <TitleSpan>이용 방법 안내입니다.</TitleSpan>
+              <ContentSpan>1. 나의 학교 이름을 입력해 주세요. </ContentSpan>
+              <ContentSpan>2. 원하는 최대 거리를 선택해 주세요.</ContentSpan>
+              <ContentSpan>
+                3. 가장 많이 고려하는 요소를 1개 골라주세요.
+              </ContentSpan>
+              <ContentSpan>
+                4. 두 번째로 많이 고려하는 요소를 1개 골라주세요.
+              </ContentSpan>
+              <ContentSpan>
+                5. 세 번째로 많이 고려하는 요소를 1개 골라주세요.
+              </ContentSpan>
+              <ContentSpan>6. 조금만 기다리면 끝.</ContentSpan>
+            </SpanBox>
+            <ButtonBox>
+              <Button to="/Recommendation">시작하기</Button>
+            </ButtonBox>
+          </Article02>
+        )}
+      </Wrapper>
+    </>
   );
 };
 

@@ -7,7 +7,6 @@ import Recommendation from "../Routes/Recommendation";
 import RecommendationIntro from "../Routes/RecommendationIntro";
 import RecommendationResult from "../Routes/RecommendationResult";
 import RecommendationResultTest from "../Routes/RecommendationResultTest";
-import Result from "../Routes/Result";
 import ResultHistory from "../Routes/ResultHistory";
 import Admin from "../Routes/Admin";
 
@@ -28,7 +27,6 @@ const Routes = () => {
         component={RecommendationResult}
       ></Route>
       <Route exact path="/Test" component={RecommendationResultTest}></Route>
-      <Route exact path="/Result" component={Result}></Route>
       <Route exact path="/ResultHistory" component={ResultHistory}></Route>
       <Route exact path="/Auth" component={Auth}></Route>
       <Route exact path="/12284!232842A244" component={Admin}></Route>

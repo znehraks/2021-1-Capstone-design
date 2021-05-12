@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Q1 from "../../components/Q1";
@@ -242,6 +243,9 @@ const Recommendation = () => {
   console.log(finalWeight);
   return (
     <>
+      <Helmet>
+        <title>Recommendation</title>
+      </Helmet>
       {QNumber === 1 && (
         <Q1
           Q1Name={Q1Name}

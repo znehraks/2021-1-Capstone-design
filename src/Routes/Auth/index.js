@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import homeEx from "../../components/Styles/images/homeEx.jpg";
@@ -91,58 +92,63 @@ const Auth = () => {
   const email = useInput("");
 
   return (
-    <Wrapper>
-      {mode === "login" && (
-        <Article>
-          <InputContainer>
-            <TitleSpan>로그인</TitleSpan>
-            <InputItemContainer>
-              <InputDesc>아이디: </InputDesc>
-              <InputBox placeholder={""} {...id}></InputBox>
-            </InputItemContainer>
-            <InputItemContainer>
-              <InputDesc>비밀번호:</InputDesc>
-              <InputBox placeholder={""} {...pwd}></InputBox>
-            </InputItemContainer>
-            <Button>확인</Button>
-            <SmallSpan
-              onClick={() => {
-                setMode("registration");
-              }}
-            >
-              아직 회원이 아니신가요?
-            </SmallSpan>
-          </InputContainer>
-        </Article>
-      )}
-      {mode === "registration" && (
-        <Article>
-          <InputContainer>
-            <TitleSpan>회원가입</TitleSpan>
-            <InputItemContainer>
-              <InputDesc>아이디: </InputDesc>
-              <InputBox placeholder={""} {...id}></InputBox>
-            </InputItemContainer>
-            <InputItemContainer>
-              <InputDesc>비밀번호:</InputDesc>
-              <InputBox placeholder={""} {...pwd}></InputBox>
-            </InputItemContainer>
-            <InputItemContainer>
-              <InputDesc>이메일:</InputDesc>
-              <InputBox placeholder={""} {...email}></InputBox>
-            </InputItemContainer>
-            <Button>가입하기</Button>
-            <SmallSpan
-              onClick={() => {
-                setMode("login");
-              }}
-            >
-              이미 회원이신가요?
-            </SmallSpan>
-          </InputContainer>
-        </Article>
-      )}
-    </Wrapper>
+    <>
+      <Helmet>
+        <title>Auth</title>
+      </Helmet>
+      <Wrapper>
+        {mode === "login" && (
+          <Article>
+            <InputContainer>
+              <TitleSpan>로그인</TitleSpan>
+              <InputItemContainer>
+                <InputDesc>아이디: </InputDesc>
+                <InputBox placeholder={""} {...id}></InputBox>
+              </InputItemContainer>
+              <InputItemContainer>
+                <InputDesc>비밀번호:</InputDesc>
+                <InputBox placeholder={""} {...pwd}></InputBox>
+              </InputItemContainer>
+              <Button>확인</Button>
+              <SmallSpan
+                onClick={() => {
+                  setMode("registration");
+                }}
+              >
+                아직 회원이 아니신가요?
+              </SmallSpan>
+            </InputContainer>
+          </Article>
+        )}
+        {mode === "registration" && (
+          <Article>
+            <InputContainer>
+              <TitleSpan>회원가입</TitleSpan>
+              <InputItemContainer>
+                <InputDesc>아이디: </InputDesc>
+                <InputBox placeholder={""} {...id}></InputBox>
+              </InputItemContainer>
+              <InputItemContainer>
+                <InputDesc>비밀번호:</InputDesc>
+                <InputBox placeholder={""} {...pwd}></InputBox>
+              </InputItemContainer>
+              <InputItemContainer>
+                <InputDesc>이메일:</InputDesc>
+                <InputBox placeholder={""} {...email}></InputBox>
+              </InputItemContainer>
+              <Button>가입하기</Button>
+              <SmallSpan
+                onClick={() => {
+                  setMode("login");
+                }}
+              >
+                이미 회원이신가요?
+              </SmallSpan>
+            </InputContainer>
+          </Article>
+        )}
+      </Wrapper>
+    </>
   );
 };
 

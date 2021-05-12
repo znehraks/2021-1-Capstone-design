@@ -12,6 +12,7 @@ import Map from "../../components/Kakao/Map";
 import Arrow from "../../components/Arrow";
 import Back from "../../components/Styles/images/back.png";
 import Magnify from "../../components/Styles/images/magnify.png";
+import { Helmet } from "react-helmet";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -215,86 +216,91 @@ const RecommendationResult = withRouter(
 
     //초반에 성별이나 나이도 받아도 될듯(선택)
     return (
-      <Wrapper>
-        {data && (
-          <>
-            <RightFloatingDiv isClicked={isClicked}>
-              <BackArrow>
-                <img onClick={() => setIsClicked(false)} src={Back}></img>
-                <OptionSpan>뒤로가기</OptionSpan>
-              </BackArrow>
-              {/* <MagnifyDiv>
+      <>
+        <Helmet>
+          <title>Result</title>
+        </Helmet>
+        <Wrapper>
+          {data && (
+            <>
+              <RightFloatingDiv isClicked={isClicked}>
+                <BackArrow>
+                  <img onClick={() => setIsClicked(false)} src={Back}></img>
+                  <OptionSpan>뒤로가기</OptionSpan>
+                </BackArrow>
+                {/* <MagnifyDiv>
               <img src={Magnify}></img>
               <OptionSpan>알고리즘</OptionSpan>
             </MagnifyDiv> */}
-            </RightFloatingDiv>
-            {isClicked ? (
-              <>
-                <RadarArticle>
-                  <TitleSpan>내가 선택한 지역과 평균과의 비교</TitleSpan>
-                  <SubTitleSpan>
-                    차트를 누르면 이전 지도로 돌아갑니다.
-                  </SubTitleSpan>
-                  <TitleSpan></TitleSpan>
-                  <StarChart data={newData} isClicked={isClicked} />
-                  <Arrow />
-                </RadarArticle>
-                <DetailArticle>
-                  <TitleSpan>내가 선택한 1,2,3위 지역 심층 분석</TitleSpan>
-                  <DetailItemContainer>
-                    <DetailItem>
-                      <DetailTitleSpan>1위 지역</DetailTitleSpan>
-                      <Pie input={data} number={0} />
-                    </DetailItem>
-                    <DetailItem>
-                      <DetailTitleSpan>2위 지역</DetailTitleSpan>
-                      <Pie input={data} number={1} />
-                    </DetailItem>
-                    <DetailItem>
-                      <DetailTitleSpan>3위 지역</DetailTitleSpan>
-                      <Pie input={data} number={2} />
-                    </DetailItem>
-                  </DetailItemContainer>
-                </DetailArticle>
-              </>
-            ) : (
-              <>
-                <DetailArticle height={"32vw"}>
-                  <TitleSpan>추천받은 상위 5개 지역의 총점</TitleSpan>
-                  <DetailItemContainer>
-                    <DetailItem>
-                      <DetailTitleSpan>1위 지역</DetailTitleSpan>
-                      <Bar input={data} />
-                      <Arrow />
-                    </DetailItem>
-                  </DetailItemContainer>
-                </DetailArticle>
-                <Article>
-                  <TitleSpan>나의 추천 자취지역 Top5</TitleSpan>
-                  <SubTitleSpan>
-                    마커를 누르시면 해당 지역의 상세정보를 볼 수 있습니다.
-                  </SubTitleSpan>
-                  <Map
-                    setIsClicked={setIsClicked}
-                    data={data}
-                    univ_lat={univ_lat}
-                    univ_lon={univ_lon}
-                  />
-                </Article>{" "}
-              </>
-            )}
+              </RightFloatingDiv>
+              {isClicked ? (
+                <>
+                  <RadarArticle>
+                    <TitleSpan>내가 선택한 지역과 평균과의 비교</TitleSpan>
+                    <SubTitleSpan>
+                      차트를 누르면 이전 지도로 돌아갑니다.
+                    </SubTitleSpan>
+                    <TitleSpan></TitleSpan>
+                    <StarChart data={newData} isClicked={isClicked} />
+                    <Arrow />
+                  </RadarArticle>
+                  <DetailArticle>
+                    <TitleSpan>내가 선택한 1,2,3위 지역 심층 분석</TitleSpan>
+                    <DetailItemContainer>
+                      <DetailItem>
+                        <DetailTitleSpan>1위 지역</DetailTitleSpan>
+                        <Pie input={data} number={0} />
+                      </DetailItem>
+                      <DetailItem>
+                        <DetailTitleSpan>2위 지역</DetailTitleSpan>
+                        <Pie input={data} number={1} />
+                      </DetailItem>
+                      <DetailItem>
+                        <DetailTitleSpan>3위 지역</DetailTitleSpan>
+                        <Pie input={data} number={2} />
+                      </DetailItem>
+                    </DetailItemContainer>
+                  </DetailArticle>
+                </>
+              ) : (
+                <>
+                  <DetailArticle height={"32vw"}>
+                    <TitleSpan>추천받은 상위 5개 지역의 총점</TitleSpan>
+                    <DetailItemContainer>
+                      <DetailItem>
+                        <DetailTitleSpan>1위 지역</DetailTitleSpan>
+                        <Bar input={data} />
+                        <Arrow />
+                      </DetailItem>
+                    </DetailItemContainer>
+                  </DetailArticle>
+                  <Article>
+                    <TitleSpan>나의 추천 자취지역 Top5</TitleSpan>
+                    <SubTitleSpan>
+                      마커를 누르시면 해당 지역의 상세정보를 볼 수 있습니다.
+                    </SubTitleSpan>
+                    <Map
+                      setIsClicked={setIsClicked}
+                      data={data}
+                      univ_lat={univ_lat}
+                      univ_lon={univ_lon}
+                    />
+                  </Article>{" "}
+                </>
+              )}
+              <Article>
+                <TitleSpan>"{univ_name}"의</TitleSpan>
+                <Line />
+              </Article>
+            </>
+          )}
+          {!data && (
             <Article>
-              <TitleSpan>"{univ_name}"의</TitleSpan>
-              <Line />
+              <Loader />
             </Article>
-          </>
-        )}
-        {!data && (
-          <Article>
-            <Loader />
-          </Article>
-        )}
-      </Wrapper>
+          )}
+        </Wrapper>
+      </>
     );
   }
 );
