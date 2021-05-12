@@ -132,6 +132,7 @@ const RecommendationResult = withRouter(
     const [newData, setNewData] = useState();
     const [isClicked, setIsClicked] = useState(false);
 
+    window.scrollTo(0, 0);
     useEffect(() => {
       if (data) {
         const temp = [
