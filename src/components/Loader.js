@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import logo from "./Styles/images/logo_white.png";
+import logo from "./Styles/images/logo_black.png";
 
 const Animation = keyframes`
     0% {
