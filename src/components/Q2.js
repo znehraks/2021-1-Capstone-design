@@ -5,7 +5,7 @@ import Q2Map from "./Kakao/Q2Map";
 
 const Wrapper = styled.div`
   width: 100vw;
-  min-height: 100vh;
+  min-height: 45vw;
   margin-top: 6vw;
   height: auto;
   display: flex;
@@ -15,15 +15,15 @@ const Wrapper = styled.div`
 `;
 const TitleSpan = styled.span`
   font-size: 2.5vw;
-  margin-top: 5vw;
+  margin-top: 3vw;
 `;
 const SubTitleSpan = styled.span`
   font-size: 1vw;
-  margin-top: 1vw;
+  margin-top: 0.5vw;
 `;
 const Article = styled.div`
   width: 80%;
-  height: 25vw;
+  height: 40vw;
   display: flex;
   flex-direction: column;
   justify-content: center;

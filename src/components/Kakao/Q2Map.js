@@ -9,7 +9,7 @@ const MapContainer = ({ univ_lat, univ_lon, setQ2Answer }) => {
     // 지도에 들어가는 옵션
     const options = {
       center: new kakao.maps.LatLng(univ_lat, univ_lon),
-      level: 6,
+      level: 5,
       draggable: false,
       scrollwheel: false,
     };
@@ -268,8 +268,8 @@ const MapContainer = ({ univ_lat, univ_lon, setQ2Answer }) => {
     <div
       id="myMap"
       style={{
-        width: "30vw",
-        height: "30vw",
+        width: "50vw",
+        height: "45vw",
       }}
     ></div>
   );

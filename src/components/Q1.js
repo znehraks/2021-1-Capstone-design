@@ -68,7 +68,7 @@ const HiddenListItem = styled.span`
   border-bottom: 3px solid black;
   cursor: pointer;
   :hover {
-    color: white;
+    color: ${(props) => props.theme.headerBgColor};
     font-weight: 800;
   }
 `;
@@ -110,7 +110,7 @@ const Q1 = ({
 }) => {
   const name = useInput("");
   //학교이름 DB에서 가져오기. 이름 한글자라도 틀리면 백엔드에서 에러생김
-
+  const [isClicked, setIsClicked] = useState(false);
   const filtered = (list) => {
     list = list.filter((item) => item.name.indexOf(name.value) > -1);
     return list.map((item, index) => (
@@ -131,8 +131,8 @@ const Q1 = ({
     <Wrapper>
       <TitleSpan>#1.자신의 학교 이름을 입력해 주세요.</TitleSpan>
       <SubTitleSpan>
-        ex."명지대학교" 검색을 원하는 경우 "명지" 혹은 "명지대학교"를 입력해
-        주세요.
+        ex."명지대학교" 검색을 원하는 경우 "명지" 혹은 "명지대학교"를 입력 후
+        리스트에서 선택해 주세요.
       </SubTitleSpan>
       <Article>
         <InputBox
@@ -147,13 +147,15 @@ const Q1 = ({
           }}
         ></InputBox>
         {univ_name === undefined && (
-          <HiddenList name={name.value}>{filtered(UniversityList)}</HiddenList>
+          <HiddenList name={name.value} onClick={() => setIsClicked(true)}>
+            {filtered(UniversityList)}
+          </HiddenList>
         )}
       </Article>
       <ButtonContainer>
         <Next
           onClick={() => {
-            if (name.value.length === 0) {
+            if ((name.value.length === 0) | !isClicked) {
               alert("학교이름은 필수 항목 입니다.");
               return;
             }

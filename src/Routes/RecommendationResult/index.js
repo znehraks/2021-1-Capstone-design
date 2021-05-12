@@ -142,7 +142,7 @@ const RecommendationResult = withRouter(
             "3위": data[2].T1,
             "4위": data[3].T1,
             "5위": data[4].T1,
-            평균: data[0].T1_avg,
+            평균: Math.round(data[0].T1_avg),
           },
           {
             weight: "역세권",
@@ -151,7 +151,7 @@ const RecommendationResult = withRouter(
             "3위": data[2].T2,
             "4위": data[3].T2,
             "5위": data[4].T2,
-            평균: data[0].T2_avg,
+            평균: Math.round(data[0].T2_avg),
           },
           {
             weight: "가성비",
@@ -160,7 +160,7 @@ const RecommendationResult = withRouter(
             "3위": data[2].T3,
             "4위": data[3].T3,
             "5위": data[4].T3,
-            평균: data[0].T3_avg,
+            평균: Math.round(data[0].T3_avg),
           },
           {
             weight: "안전",
@@ -169,7 +169,7 @@ const RecommendationResult = withRouter(
             "3위": data[2].T4,
             "4위": data[3].T4,
             "5위": data[4].T4,
-            평균: data[0].T4_avg,
+            평균: Math.round(data[0].T4_avg),
           },
           {
             weight: "매물",
@@ -178,7 +178,7 @@ const RecommendationResult = withRouter(
             "3위": data[2].T5,
             "4위": data[3].T5,
             "5위": data[4].T5,
-            평균: data[0].T5_avg,
+            평균: Math.round(data[0].T5_avg),
           },
         ];
         setNewData(temp);

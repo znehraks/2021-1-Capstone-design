@@ -69,7 +69,7 @@ const UniversityList = [
     address_lat: 37.5675717,
     address_lon: 126.9621585,
   },
-  { name: "건국대학교", address_lat: 37.5465421, address_lon: 127.0713152 },
+  { name: "건국대학교", address_lat: 37.5408421, address_lon: 127.0793152 },
   { name: "경기대학교", address_lat: 37.5649767, address_lon: 126.9623605 },
   { name: "경희대학교", address_lat: 37.5964494, address_lon: 127.0525009 },
   { name: "고려대학교", address_lat: 37.5899102, address_lon: 127.0318121 },
