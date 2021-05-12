@@ -133,8 +133,8 @@ const MapContainer = ({ data, setIsClicked, univ_lat, univ_lon }) => {
     <div
       id="myMap"
       style={{
-        width: "30vw",
-        height: "30vw",
+        width: "50vw",
+        height: "45vw",
       }}
     ></div>
   );
