@@ -32,10 +32,13 @@ const Img = styled.img`
   left: -3;
 `;
 
-export default () => (
+export default ({ height }) => (
   <Loader
     onClick={() => {
-      window.scrollTo(window.innerHeight, window.innerHeight);
+      window.scrollTo(
+        height ? `${height}` : `window.innerHeight`,
+        height ? `${height}` : `window.innerHeight`
+      );
     }}
   >
     <Img src={Arrow} />

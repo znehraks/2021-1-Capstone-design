@@ -268,8 +268,8 @@ const MapContainer = ({ univ_lat, univ_lon, setQ2Answer }) => {
     <div
       id="myMap"
       style={{
-        width: "50vw",
-        height: "45vw",
+        width: "40vw",
+        height: "40vw",
       }}
     ></div>
   );

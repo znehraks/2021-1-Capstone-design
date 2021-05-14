@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { Api } from "../../api";
 import StarChart from "../../components/Visualization/StarChart";
+import StarChart02 from "../../components/Visualization/StarChart02";
 import Pie from "../../components/Visualization/Pie";
 import Bar from "../../components/Visualization/Bar";
 import Line from "../../components/Visualization/Line";
@@ -27,18 +28,40 @@ const Wrapper = styled.div`
 `;
 
 const Article = styled.div`
-  margin: 6vw 0;
   width: 100%;
-  height: 45vw;
+  height: 37vw;
+  margin-top: 2vw;
+`;
+
+const ArticleContentContainer = styled.div`
+  width: 90%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 `;
 
-const RadarArticle = styled.div`
-  margin: 6vw 0;
+const LeftContainer = styled.div`
   width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+const RightContainer = styled.div`
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+`;
+
+const RadarArticle = styled.div`
+  width: 80%;
   height: 30vw;
   display: flex;
   flex-direction: column;
@@ -47,12 +70,11 @@ const RadarArticle = styled.div`
 `;
 
 const DetailArticle = styled.div`
-  margin: 6vw 0;
   width: 100%;
   height: ${(props) => (props.height ? `${props.height}` : `45vw`)};
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
 `;
 
@@ -72,7 +94,7 @@ const DetailItem = styled.div`
 `;
 
 const DetailTitleSpan = styled.span`
-  font-size: 2vw;
+  font-size: 1.5vw;
 `;
 const DetailContentSpan = styled.span`
   font-size: 1.2vw;
@@ -93,8 +115,8 @@ const RightFloatingDiv02 = styled.div`
   width: 5vw;
   height: 5vw;
   position: absolute;
-  top: 14vw;
-  right: 25vw;
+  top: 8vw;
+  right: 15vw;
   cursor: pointer;
   display: ${(props) => (props.isClicked ? `none` : `flex`)};
   flex-direction: row;
@@ -129,11 +151,13 @@ const OptionSpan = styled.span`
 `;
 
 const TitleSpan = styled.span`
-  font-size: 2.5vw;
+  font-size: 2vw;
+  margin-top: 2vw;
+  margin-bottom: 1vw;
 `;
 const SubTitleSpan = styled.span`
-  font-size: 1vw;
-  margin: 1vw 0;
+  font-size: 0.9vw;
+  margin-top: 0.3vw;
 `;
 
 const RecommendationResult = ({ setDetail }) => {
@@ -249,6 +273,7 @@ const RecommendationResult = ({ setDetail }) => {
   //초반에 성별이나 나이도 받아도 될듯(선택)
   const [newData, setNewData] = useState();
   const [isClicked, setIsClicked] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   useEffect(() => {
     if (data) {
       const temp = [
@@ -305,7 +330,7 @@ const RecommendationResult = ({ setDetail }) => {
   return (
     <>
       <Helmet>
-        <title>Test</title>
+        <title>History</title>
       </Helmet>
       <Wrapper>
         {data && (
@@ -356,39 +381,68 @@ const RecommendationResult = ({ setDetail }) => {
                     <img onClick={() => setDetail(false)} src={Back}></img>
                     <OptionSpan>뒤로가기</OptionSpan>
                   </BackArrow>
-                  {/* <MagnifyDiv>
-                <img src={Magnify}></img>
-                <OptionSpan>알고리즘</OptionSpan>
-              </MagnifyDiv> */}
                 </RightFloatingDiv02>
-                <DetailArticle height={"32vw"}>
-                  <TitleSpan>추천받은 상위 5개 지역의 총점</TitleSpan>
+                <TitleSpan>나의 추천 자취지역 Top5</TitleSpan>
+                <SubTitleSpan>
+                  마커에 마우스를 올리시면 해당 지역과 평균을 비교할 수
+                  있습니다.
+                </SubTitleSpan>
+                <SubTitleSpan>
+                  마커를 클릭하면 해당 지역의 상세정보를 확인할 수 있습니다.
+                </SubTitleSpan>
+                <Article>
+                  <ArticleContentContainer>
+                    <LeftContainer>
+                      <Map
+                        setIsHovered={setIsHovered}
+                        setIsClicked={setIsClicked}
+                        data={data}
+                        univ_lat={univ_lat}
+                        univ_lon={univ_lon}
+                      />
+                    </LeftContainer>
+
+                    <RightContainer>
+                      <RadarArticle>
+                        {isHovered ? (
+                          <>
+                            <StarChart02
+                              data={newData}
+                              isClicked={isClicked}
+                              isHovered={isHovered}
+                            />
+                            <Arrow height={window.innerHeight} />
+                          </>
+                        ) : (
+                          <>
+                            <TitleSpan>마커를 선택해주세요.</TitleSpan>
+                          </>
+                        )}
+                      </RadarArticle>
+                    </RightContainer>
+                  </ArticleContentContainer>
+                </Article>{" "}
+                <DetailArticle>
+                  <TitleSpan>
+                    추천받은 상위 5개 지역의 총점(매물이나 마커 500m 이내에
+                    맥날, 스벅이 몇개나 있군요. 새 지도에 표시
+                  </TitleSpan>
                   <DetailItemContainer>
                     <DetailItem>
                       <DetailTitleSpan>1위 지역</DetailTitleSpan>
                       <Bar input={data} />
-                      <Arrow />
+                      <Arrow height={window.innerHeight + window.innerHeight} />
                     </DetailItem>
                   </DetailItemContainer>
                 </DetailArticle>
-                <Article>
-                  <TitleSpan>나의 추천 자취지역 Top5</TitleSpan>
-                  <SubTitleSpan>
-                    마커를 누르시면 해당 지역의 상세정보를 볼 수 있습니다.
-                  </SubTitleSpan>
-                  <Map
-                    setIsClicked={setIsClicked}
-                    data={data}
-                    univ_lat={univ_lat}
-                    univ_lon={univ_lon}
-                  />
-                </Article>{" "}
               </>
             )}
-            <Article>
-              <TitleSpan>"{univ_name}"의</TitleSpan>
+            <DetailArticle>
+              <TitleSpan>
+                매물정보 표시 request로 미리 백에서 가져와서 저장해두기
+              </TitleSpan>
               <Line />
-            </Article>
+            </DetailArticle>
           </>
         )}
         {!data && (

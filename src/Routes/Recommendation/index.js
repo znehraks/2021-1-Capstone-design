@@ -234,8 +234,8 @@ const Recommendation = () => {
   }, [Q5Answer]);
 
   console.log(univ_name);
-  console.log(univ_lat);
-  console.log(univ_lon);
+  console.log("univ_lat: 37..", univ_lat);
+  console.log("univ_lon: 127..", univ_lon);
   console.log(Q2Answer);
   console.log(Q3Answer);
   console.log(Q4Answer);

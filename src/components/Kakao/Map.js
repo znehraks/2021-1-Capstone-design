@@ -2,7 +2,13 @@ import React, { useEffect } from "react";
 import clickedMarker from "../Styles/images/selectedMarker.png";
 const { kakao } = window;
 
-const MapContainer = ({ data, setIsClicked, univ_lat, univ_lon }) => {
+const MapContainer = ({
+  data,
+  setIsClicked,
+  setIsHovered,
+  univ_lat,
+  univ_lon,
+}) => {
   useEffect(() => {
     //지도 넣을 컨테이너
     const container = document.getElementById("myMap");
@@ -68,6 +74,7 @@ const MapContainer = ({ data, setIsClicked, univ_lat, univ_lon }) => {
         // 마커의 이미지를 오버 이미지로 변경합니다
         if (!selectedMarker || selectedMarker !== marker) {
           marker.setImage(overImage);
+          setIsHovered(data[i]);
         }
       });
 
@@ -92,8 +99,8 @@ const MapContainer = ({ data, setIsClicked, univ_lat, univ_lon }) => {
 
           // 현재 클릭된 마커의 이미지는 클릭 이미지로 변경합니다
           marker.setImage(overImage);
-          setIsClicked(data[i]);
-          window.scrollTo(0, 0);
+          // setIsClicked(data[i]);
+          window.scrollTo(window.innerHeight, window.innerHeight);
         }
 
         // 클릭된 마커를 현재 클릭된 마커 객체로 설정합니다
@@ -133,8 +140,8 @@ const MapContainer = ({ data, setIsClicked, univ_lat, univ_lon }) => {
     <div
       id="myMap"
       style={{
-        width: "50vw",
-        height: "45vw",
+        width: "40vw",
+        height: "40vw",
       }}
     ></div>
   );
