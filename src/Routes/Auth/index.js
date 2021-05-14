@@ -25,7 +25,6 @@ const Article = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: red;
 `;
 const TitleSpan = styled.span`
   font-size: 3vw;
@@ -61,8 +60,9 @@ const InputBox = styled.input`
   border: none;
   border-bottom: 2px solid black;
   font-size: 2vw;
+  text-decoration: none;
   :focus {
-    border-bottom: 2px solid white;
+    border-bottom: 3px solid ${(props) => props.theme.headerBgColor};
     transition-duration: 0.5s;
   }
 `;
@@ -90,7 +90,8 @@ const Auth = () => {
   const id = useInput("");
   const pwd = useInput("");
   const email = useInput("");
-
+  //로그인 성공 시 LocalStorage에 isLoggedIn 이랑
+  //webtoken 저장.
   return (
     <>
       <Helmet>
@@ -107,7 +108,11 @@ const Auth = () => {
               </InputItemContainer>
               <InputItemContainer>
                 <InputDesc>비밀번호:</InputDesc>
-                <InputBox placeholder={""} {...pwd}></InputBox>
+                <InputBox
+                  placeholder={""}
+                  type={"password"}
+                  {...pwd}
+                ></InputBox>
               </InputItemContainer>
               <Button>확인</Button>
               <SmallSpan
@@ -134,7 +139,7 @@ const Auth = () => {
               </InputItemContainer>
               <InputItemContainer>
                 <InputDesc>이메일:</InputDesc>
-                <InputBox placeholder={""} {...email}></InputBox>
+                <InputBox placeholder={""} type={"email"} {...email}></InputBox>
               </InputItemContainer>
               <Button>가입하기</Button>
               <SmallSpan

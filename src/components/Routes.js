@@ -8,6 +8,9 @@ import RecommendationIntro from "../Routes/RecommendationIntro";
 import RecommendationResult from "../Routes/RecommendationResult";
 import RecommendationResultTest from "../Routes/RecommendationResultTest";
 import ResultHistory from "../Routes/ResultHistory";
+import DIY from "../Routes/ResultHistory/DIY";
+import Student from "../Routes/ResultHistory/Student";
+import Developer from "../Routes/ResultHistory/Developer";
 import Admin from "../Routes/Admin";
 
 const Routes = () => {
@@ -28,6 +31,9 @@ const Routes = () => {
       ></Route>
       <Route exact path="/Test" component={RecommendationResultTest}></Route>
       <Route exact path="/ResultHistory" component={ResultHistory}></Route>
+      <Route exact path="/DIYHistory" component={DIY}></Route>
+      <Route exact path="/StudentHistory" component={Student}></Route>
+      <Route exact path="/DeveloperHistory" component={Developer}></Route>
       <Route exact path="/Auth" component={Auth}></Route>
       <Route exact path="/12284!232842A244" component={Admin}></Route>
       <Redirect from="*" to="/" />
