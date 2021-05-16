@@ -328,11 +328,8 @@ const Recommendation = () => {
           Q3Answer={Q3Answer}
           Q4Answer={Q4Answer}
           Q5Answer={Q5Answer}
-          Q3Answer={Q3Answer}
-          Q4Answer={Q4Answer}
           QNumber={QNumber}
           setQNumber={setQNumber}
-          Q5Answer={Q5Answer}
           setQ5Answer={setQ5Answer}
           QList={QList}
           finalWeight={finalWeight}

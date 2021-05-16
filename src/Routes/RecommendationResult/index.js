@@ -14,6 +14,8 @@ import Arrow from "../../components/Arrow";
 import Back from "../../components/Styles/images/back.png";
 import Magnify from "../../components/Styles/images/magnify.png";
 import { Helmet } from "react-helmet";
+import RadarArticle from "../../components/Visualization/RadarArticle";
+import Wordcloud from "../../components/Visualization/Wordcloud";
 const Wrapper = styled.div`
   width: 100vw;
   min-height: 100vh;
@@ -57,15 +59,6 @@ const RightContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
-`;
-
-const RadarArticle = styled.div`
-  width: 80%;
-  height: 30vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;
 
 const DetailArticle = styled.div`
@@ -154,6 +147,16 @@ const TitleSpan = styled.span`
   margin-top: 2vw;
   margin-bottom: 1vw;
 `;
+const TitleSpan02 = styled.span`
+  font-size: 2vw;
+  margin-top: 6vw;
+  margin-bottom: 1vw;
+`;
+const TitleSpan03 = styled.span`
+  font-size: 2vw;
+  margin-top: 1vw;
+  margin-bottom: 4vw;
+`;
 const SubTitleSpan = styled.span`
   font-size: 0.9vw;
   margin-top: 0.3vw;
@@ -162,18 +165,39 @@ const SubTitleSpan = styled.span`
 const RecommendationResult = withRouter(
   ({
     match: {
-      params: { univ_name, univ_lat, univ_lon, Q2Answer, w1, w2, w3, w4, w5 },
+      params: {
+        univ_name,
+        univ_lat,
+        univ_lon,
+        Q2Answer,
+        Q3Answer,
+        Q4Answer,
+        Q5Answer,
+        w1,
+        w2,
+        w3,
+        w4,
+        w5,
+      },
     },
     setDetail,
   }) => {
     const [data, setData] = useState();
     const [newData, setNewData] = useState();
-    const [isClicked, setIsClicked] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
-
-    window.scrollTo(0, 0);
+    const [hashtags, setHashtags] = useState();
+    const [isClicked, setIsClicked] = useState("");
+    const [isHovered, setIsHovered] = useState("");
+    const [count, setCount] = useState(0);
+    console.log(newData);
     useEffect(() => {
-      if (data) {
+      if (count == 1) {
+        const hashtagsTemp = [];
+        for (let i = 0; i < data.length; i++) {
+          for (let j = 0; j < data[i].rooms_hash_tags.length; j++) {
+            hashtagsTemp.push(data[i].rooms_hash_tags[j]);
+          }
+        }
+        setHashtags(hashtagsTemp.sort());
         const temp = [
           {
             weight: "거리",
@@ -222,22 +246,29 @@ const RecommendationResult = withRouter(
           },
         ];
         setNewData(temp);
+        console.log(hashtags);
+        return;
       }
       Api.getResidence(
         univ_name,
-        univ_lat,
         univ_lon,
+        univ_lat,
         Q2Answer,
+        Q3Answer,
+        Q4Answer,
+        Q5Answer,
         w1,
         w2,
         w3,
         w4,
         w5
       ).then((response) => {
-        setData(response.data);
-        console.log(response.data);
+        const json = JSON.parse(response.data);
+        setData(json);
+        console.log(json);
+        setCount(count + 1);
       });
-    }, [isHovered]);
+    }, [count, isClicked, isHovered]);
     //weightcode 바탕으로
     console.log(w1);
     console.log(w2);
@@ -245,6 +276,8 @@ const RecommendationResult = withRouter(
     console.log(w4);
     console.log(w5);
 
+    console.log(isClicked);
+    console.log(data);
     if (!data) {
       console.log(data);
     }
@@ -261,111 +294,69 @@ const RecommendationResult = withRouter(
         <Wrapper>
           {data && (
             <>
-              <RightFloatingDiv isClicked={isClicked}>
-                <BackArrow>
-                  <img onClick={() => setIsClicked(false)} src={Back}></img>
-                  <OptionSpan>뒤로가기</OptionSpan>
-                </BackArrow>
-                {/* <MagnifyDiv>
-              <img src={Magnify}></img>
-              <OptionSpan>알고리즘</OptionSpan>
-            </MagnifyDiv> */}
-              </RightFloatingDiv>
-              {isClicked ? (
-                <>
-                  <RadarArticle>
-                    <TitleSpan>내가 선택한 지역과 평균과의 비교</TitleSpan>
-                    <SubTitleSpan>
-                      차트를 누르면 이전 지도로 돌아갑니다.
-                    </SubTitleSpan>
-                    <TitleSpan></TitleSpan>
-                    <StarChart data={newData} isClicked={isClicked} />
-                    <Arrow />
-                  </RadarArticle>
-                  <DetailArticle>
-                    <TitleSpan>내가 선택한 1,2,3위 지역 심층 분석</TitleSpan>
-                    <DetailItemContainer>
-                      <DetailItem>
-                        <DetailTitleSpan>1위 지역</DetailTitleSpan>
-                        <Pie input={data} number={0} />
-                      </DetailItem>
-                      <DetailItem>
-                        <DetailTitleSpan>2위 지역</DetailTitleSpan>
-                        <Pie input={data} number={1} />
-                      </DetailItem>
-                      <DetailItem>
-                        <DetailTitleSpan>3위 지역</DetailTitleSpan>
-                        <Pie input={data} number={2} />
-                      </DetailItem>
-                    </DetailItemContainer>
-                  </DetailArticle>
-                </>
-              ) : (
-                <>
-                  <RightFloatingDiv02 isClicked={isClicked}>
-                    <BackArrow>
-                      <img onClick={() => setDetail(false)} src={Back}></img>
-                      <OptionSpan>뒤로가기</OptionSpan>
-                    </BackArrow>
-                  </RightFloatingDiv02>
-                  <TitleSpan>나의 추천 자취지역 Top5</TitleSpan>
-                  <SubTitleSpan>
-                    마커에 마우스를 올리시면 해당 지역과 평균을 비교할 수
-                    있습니다.
-                  </SubTitleSpan>
-                  <SubTitleSpan>
-                    마커를 클릭하면 해당 지역의 상세정보를 확인할 수 있습니다.
-                  </SubTitleSpan>
-                  <Article>
-                    <ArticleContentContainer>
-                      <LeftContainer>
-                        <Map
-                          setIsHovered={setIsHovered}
-                          setIsClicked={setIsClicked}
-                          data={data}
-                          univ_lat={univ_lat}
-                          univ_lon={univ_lon}
-                        />
-                      </LeftContainer>
+              <>
+                <RightFloatingDiv02 isClicked={isClicked}>
+                  <BackArrow>
+                    <img onClick={() => setDetail(false)} src={Back}></img>
+                    <OptionSpan>뒤로가기</OptionSpan>
+                  </BackArrow>
+                </RightFloatingDiv02>
+                <TitleSpan>나의 "{univ_name}"주변 추천 자취지역 Top5</TitleSpan>
+                <SubTitleSpan>
+                  마커에 마우스를 올리시면 해당 지역과 평균을 비교할 수
+                  있습니다.
+                </SubTitleSpan>
+                <SubTitleSpan>
+                  마커를 클릭하면 해당 지역의 상세정보를 확인할 수 있습니다.
+                </SubTitleSpan>
+                <Article>
+                  <ArticleContentContainer>
+                    <LeftContainer>
+                      <Map
+                        setIsHovered={setIsHovered}
+                        setIsClicked={setIsClicked}
+                        data={data}
+                        univ_lat={univ_lat}
+                        univ_lon={univ_lon}
+                      />
+                    </LeftContainer>
 
-                      <RightContainer>
-                        <RadarArticle>
-                          {isHovered ? (
-                            <>
-                              <StarChart02
-                                data={newData}
-                                isClicked={isClicked}
-                                isHovered={isHovered}
-                              />
-                              <Arrow />
-                            </>
-                          ) : (
-                            <>
-                              <TitleSpan>마커를 선택해주세요.</TitleSpan>
-                            </>
-                          )}
-                        </RadarArticle>
-                      </RightContainer>
-                    </ArticleContentContainer>
-                  </Article>{" "}
-                  <DetailArticle>
-                    <TitleSpan>추천받은 상위 5개 지역의 총점</TitleSpan>
-                    <DetailItemContainer>
-                      <DetailItem>
-                        <DetailTitleSpan>1위 지역</DetailTitleSpan>
-                        <Bar input={data} />
-                        <Arrow
-                          height={window.innerHeight + window.innerHeight}
-                        />
-                      </DetailItem>
-                    </DetailItemContainer>
-                  </DetailArticle>
-                </>
+                    <RightContainer>
+                      <RadarArticle
+                        data={newData}
+                        isHovered={isHovered}
+                        isClicked={isClicked}
+                      />
+                    </RightContainer>
+                  </ArticleContentContainer>
+                </Article>{" "}
+                <DetailArticle>
+                  <TitleSpan02>추천받은 상위 5개 지역의 총점</TitleSpan02>
+                  <DetailItemContainer>
+                    <DetailItem>
+                      <DetailTitleSpan>1위 지역</DetailTitleSpan>
+                      <Bar input={data} />
+                      <Arrow
+                        height={window.innerHeight + window.innerHeight - 100}
+                      />
+                    </DetailItem>
+                  </DetailItemContainer>
+                </DetailArticle>
+              </>
+              {hashtags && (
+                <DetailArticle>
+                  <TitleSpan03>선택된 지역의 추천 매물정보</TitleSpan03>
+                  <SubTitleSpan>
+                    선택된 지역과 관련있는 키워드입니다.
+                  </SubTitleSpan>
+                  <DetailItemContainer>
+                    <DetailItem>
+                      <Wordcloud hashtags={hashtags} />
+                    </DetailItem>
+                    <DetailItem></DetailItem>
+                  </DetailItemContainer>
+                </DetailArticle>
               )}
-              <DetailArticle>
-                <TitleSpan>"{univ_name}"의</TitleSpan>
-                <Line />
-              </DetailArticle>
             </>
           )}
           {!data && (

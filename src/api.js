@@ -7,12 +7,28 @@ const api = axios.create({
 
 //api 모아두기
 export const Api = {
-  getResidence: (univ_name, univ_lat, univ_lon, Q2Answer, w1, w2, w3, w4, w5) =>
+  getResidence: (
+    univ_name,
+    univ_lon,
+    univ_lat,
+    Q2Answer,
+    Q3Answer,
+    Q4Answer,
+    Q5Answer,
+    w1,
+    w2,
+    w3,
+    w4,
+    w5
+  ) =>
     api.post(`/recommendation`, {
       univ_name,
       univ_lon,
       univ_lat,
       Q2Answer,
+      Q3Answer,
+      Q4Answer,
+      Q5Answer,
       w1,
       w2,
       w3,

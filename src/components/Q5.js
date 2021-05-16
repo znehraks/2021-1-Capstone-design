@@ -111,6 +111,23 @@ const Submit = styled(Link)`
     font-weight: 800;
   }
 `;
+const Submit02 = styled.span`
+  width: 6vw;
+  height: 3.5vw;
+  font-size: 1.5vw;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  padding: 1vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  :hover {
+    color: white;
+    background: black;
+    font-weight: 800;
+  }
+`;
 
 const ItemList = styled.div`
   width: 100%;
@@ -266,13 +283,23 @@ const Q5 = ({
           >
             이전
           </Prev>
-          <Submit
-            to={{
-              pathname: `/RecommendationResult/${univ_name}/${univ_lat}/${univ_lon}/${Q2Answer}/${w1}/${w2}/${w3}/${w4}/${w5}`,
-            }}
-          >
-            완료
-          </Submit>
+          {Q5Answer ? (
+            <Submit
+              to={{
+                pathname: `/RecommendationResult/${univ_name}/${univ_lat}/${univ_lon}/${Q2Answer}/${Q3Answer}/${Q4Answer}/${Q5Answer}/${w1}/${w2}/${w3}/${w4}/${w5}`,
+              }}
+            >
+              완료
+            </Submit>
+          ) : (
+            <Submit02
+              onClick={() => {
+                alert("타입을 선택해주세요.");
+              }}
+            >
+              완료
+            </Submit02>
+          )}
         </ButtonContainer>
       </Wrapper>
     </>

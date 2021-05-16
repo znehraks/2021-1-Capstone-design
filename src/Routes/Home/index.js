@@ -251,7 +251,7 @@ const Home = () => {
               <BlackSquare01 />
               <BlackSquare02 />
             </SquareDiv>
-            <ArrowDiv />
+            <ArrowDiv height={window.innerHeight} />
           </ContentContainer>
         </Article>
         <Article justify={"flex-start"}>

@@ -10,9 +10,9 @@ const MyResponsiveRadar = ({ data, isHovered /* see data tab */ }) => {
   return (
     <ResponsiveRadar
       data={data}
-      keys={[`${isHovered.rank_kr}`, "평균"]}
+      keys={[`${isHovered.rank}위`, "평균"]}
       indexBy="weight"
-      maxValue={35}
+      maxValue={30}
       margin={{ top: 100, right: 100, bottom: 40, left: 100 }}
       curve="linearClosed"
       borderWidth={2}
@@ -35,7 +35,7 @@ const MyResponsiveRadar = ({ data, isHovered /* see data tab */ }) => {
       motionConfig="wobbly"
       isInteractive={true}
       theme={{
-        fontSize: 20,
+        fontSize: 25,
         fontWeight: 800,
       }}
       legends={[
