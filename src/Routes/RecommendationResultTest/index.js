@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { withRouter } from "react-router-dom";
+
+import { Api } from "../../api";
+
 import styled from "styled-components";
 import PieRoom from "../../components/Visualization/PieRoom";
 import Bar from "../../components/Visualization/Bar";

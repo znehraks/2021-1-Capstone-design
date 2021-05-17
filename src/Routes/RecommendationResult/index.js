@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
-import styled from "styled-components";
 import { Api } from "../../api";
-import StarChart from "../../components/Visualization/StarChart";
-import StarChart02 from "../../components/Visualization/StarChart02";
-import Pie from "../../components/Visualization/Pie";
+import styled from "styled-components";
+import PieRoom from "../../components/Visualization/PieRoom";
 import Bar from "../../components/Visualization/Bar";
-import Line from "../../components/Visualization/Line";
-import Doughnut from "../../components/Visualization/Doughnut";
 import Loader from "../../components/Loader";
 import Map from "../../components/Kakao/Map";
 import Arrow from "../../components/Arrow";
 import Back from "../../components/Styles/images/back.png";
-import Magnify from "../../components/Styles/images/magnify.png";
+import BarDetailItem from "../../components/Visualization/Detail/BarDetailItem";
+import PieDetailItem from "../../components/Visualization/Detail/PieDetailItem";
+import WordcloudDetailItem from "../../components/Visualization/Detail/WordcloudDetailItem";
 import { Helmet } from "react-helmet";
 import RadarArticle from "../../components/Visualization/RadarArticle";
 import Wordcloud from "../../components/Visualization/Wordcloud";
+
 const Wrapper = styled.div`
   width: 100vw;
   min-height: 100vh;
@@ -72,6 +71,7 @@ const DetailArticle = styled.div`
 
 const DetailItemContainer = styled.div`
   width: 100%;
+  height: 66%;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -149,19 +149,46 @@ const TitleSpan = styled.span`
 `;
 const TitleSpan02 = styled.span`
   font-size: 2vw;
-  margin-top: 6vw;
+  margin-top: 4vw;
   margin-bottom: 1vw;
 `;
 const TitleSpan03 = styled.span`
   font-size: 2vw;
-  margin-top: 1vw;
-  margin-bottom: 4vw;
+  margin-bottom: 2vw;
 `;
 const SubTitleSpan = styled.span`
   font-size: 0.9vw;
-  margin-top: 0.3vw;
+`;
+const CheckSpan = styled.span`
+  font-size: 0.8vw;
+  color: ${(props) => (props.fontColor ? `${props.theme.headerBgColor}` : ``)};
+  margin-bottom: 0.5vw;
+  cursor: pointer;
 `;
 
+const BarChartTitleSpan = styled.span`
+  font-size: 1vw;
+  font-weight: bold;
+`;
+const BarChartYaxisSpan = styled.span`
+  position: relative;
+  top: 1vw;
+  left: -13.5vw;
+  font-size: 0.3vw;
+  font-weight: bold;
+`;
+
+const CheckSpanDiv = styled.div`
+  width: 7vw;
+  height: 5vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: relative;
+  top: 5vw;
+  left: 14vw;
+`;
 const RecommendationResult = withRouter(
   ({
     match: {
@@ -185,18 +212,85 @@ const RecommendationResult = withRouter(
     const [data, setData] = useState();
     const [newData, setNewData] = useState();
     const [hashtags, setHashtags] = useState();
+
+    const [isChecked, setIsChecked] = useState("monthReserv");
+    const [monthlyDeposit, setMonthlyDeposit] = useState();
+    const [monthlyPay, setMonthlyPay] = useState();
+    const [reservDeposit, setReservDeposit] = useState();
+    const [price, setPrice] = useState();
     const [isClicked, setIsClicked] = useState("");
     const [isHovered, setIsHovered] = useState("");
     const [count, setCount] = useState(0);
+    const [mode, setMode] = useState("main");
     console.log(newData);
     useEffect(() => {
       if (count == 1) {
+        //해시태그 모음
         const hashtagsTemp = [];
+
+        //월세보증금
+        const monthlyDepositTemp = [];
+
+        //월세
+        const monthlyPayTemp = [];
+
+        //전세
+        const reservDepositTemp = [];
+
+        //매매
+        const priceTemp = [];
+
         for (let i = 0; i < data.length; i++) {
-          for (let j = 0; j < data[i].rooms_hash_tags.length; j++) {
-            hashtagsTemp.push(data[i].rooms_hash_tags[j]);
-          }
+          try {
+            for (let j = 0; j < data[i].rooms_hash_tags.length; j++) {
+              hashtagsTemp.push(data[i].rooms_hash_tags[j]);
+            }
+
+            for (let j = 0; j < data[i].rooms_desc.length; j++) {
+              hashtagsTemp.push(data[i].rooms_desc[j].split("|")[0].trim());
+
+              hashtagsTemp.push(data[i].rooms_desc2[j].split(",")[0].trim());
+
+              if (data[i].rooms_selling_type[j] == 0) {
+                if (data[i].rooms_price_title[j].includes("억")) {
+                  monthlyDepositTemp.push(
+                    Number(data[i].rooms_price_title[j].split("억")[0]) * 10000
+                  );
+                  monthlyPayTemp.push(
+                    Number(data[i].rooms_price_title[j].split("억")[0]) * 10000
+                  );
+                } else {
+                  monthlyDepositTemp.push(
+                    Number(data[i].rooms_price_title[j].split("/")[0])
+                  );
+                  monthlyPayTemp.push(
+                    Number(data[i].rooms_price_title[j].split("/")[1])
+                  );
+                }
+              } else if (data[i].rooms_selling_type[j] == 1) {
+                if (data[i].rooms_price_title[j].includes("억")) {
+                  reservDepositTemp.push(
+                    Number(data[i].rooms_price_title[j].split("억")[0]) * 10000
+                  );
+                } else {
+                  reservDepositTemp.push(Number(data[i].rooms_price_title[j]));
+                }
+              } else {
+                if (data[i].rooms_price_title[j].includes("억")) {
+                  priceTemp.push(
+                    Number(data[i].rooms_price_title[j].split("억")[0]) * 10000
+                  );
+                } else {
+                  priceTemp.push(Number(data[i].rooms_price_title[j]));
+                }
+              }
+            }
+          } catch (e) {}
         }
+        setMonthlyDeposit(monthlyDepositTemp);
+        setMonthlyPay(monthlyPayTemp);
+        setReservDeposit(reservDepositTemp);
+        setPrice(priceTemp);
         setHashtags(hashtagsTemp.sort());
         const temp = [
           {
@@ -330,30 +424,64 @@ const RecommendationResult = withRouter(
                     </RightContainer>
                   </ArticleContentContainer>
                 </Article>{" "}
-                <DetailArticle>
-                  <TitleSpan02>추천받은 상위 5개 지역의 총점</TitleSpan02>
-                  <DetailItemContainer>
-                    <DetailItem>
-                      <DetailTitleSpan>1위 지역</DetailTitleSpan>
-                      <Bar input={data} />
+                {isClicked && monthlyDeposit && monthlyPay && reservDeposit && (
+                  <DetailArticle>
+                    <TitleSpan02>매물 관련 통계</TitleSpan02>
+                    {mode === "main" ? (
+                      <SubTitleSpan>
+                        차트를 클릭하면 자세한 정보를 볼 수 있습니다.
+                      </SubTitleSpan>
+                    ) : (
+                      <SubTitleSpan>
+                        차트를 클릭하면 이전 메뉴로 돌아갑니다.
+                      </SubTitleSpan>
+                    )}
+                    <DetailItemContainer>
+                      <BarDetailItem
+                        isChecked={isChecked}
+                        setIsChecked={setIsChecked}
+                        isClicked={isClicked}
+                        monthlyDeposit={monthlyDeposit}
+                        monthlyPay={monthlyPay}
+                        reservDeposit={reservDeposit}
+                        price={price}
+                        mode={mode}
+                        setMode={setMode}
+                      />
+                      <WordcloudDetailItem
+                        hashtags={hashtags}
+                        mode={mode}
+                        setMode={setMode}
+                      />
+                      <PieDetailItem
+                        isClicked={isClicked}
+                        mode={mode}
+                        setMode={setMode}
+                      />
                       <Arrow
+                        bottom={"-10vw"}
                         height={window.innerHeight + window.innerHeight - 100}
                       />
-                    </DetailItem>
-                  </DetailItemContainer>
-                </DetailArticle>
+                    </DetailItemContainer>
+                  </DetailArticle>
+                )}
               </>
-              {hashtags && (
+              {hashtags && isClicked && (
                 <DetailArticle>
-                  <TitleSpan03>선택된 지역의 추천 매물정보</TitleSpan03>
-                  <SubTitleSpan>
-                    선택된 지역과 관련있는 키워드입니다.
-                  </SubTitleSpan>
+                  <TitleSpan03>매물과 주변지역 상세 정보</TitleSpan03>
                   <DetailItemContainer>
                     <DetailItem>
+                      <SubTitleSpan>
+                        선택된 지역과 관련있는 키워드입니다.
+                      </SubTitleSpan>
                       <Wordcloud hashtags={hashtags} />
                     </DetailItem>
-                    <DetailItem></DetailItem>
+                    <DetailItem>
+                      <SubTitleSpan>
+                        선택된 지역의 매물 분포입니다.
+                      </SubTitleSpan>
+                      <PieRoom isClicked={isClicked} />
+                    </DetailItem>
                   </DetailItemContainer>
                 </DetailArticle>
               )}
