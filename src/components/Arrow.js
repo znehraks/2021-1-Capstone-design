@@ -26,14 +26,14 @@ const Loader = styled.div`
 `;
 
 const Img = styled.img`
-  bottom: -20vw;
+  bottom: ${(props) => (props.bottom ? `-15wv` : `-20vw`)};
   width: 8vw;
   position: absolute;
-  left: -3;
 `;
 
-export default ({ height }) => (
+export default ({ height, bottom }) => (
   <Loader
+    bottom={bottom}
     onClick={() => {
       window.scrollTo(
         height ? `${height}` : `window.innerHeight`,

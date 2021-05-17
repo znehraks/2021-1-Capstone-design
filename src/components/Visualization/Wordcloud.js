@@ -4,13 +4,6 @@ import styled from "styled-components";
 import { Resizable } from "re-resizable";
 
 const Wrapper = styled(Resizable)``;
-const resizeStyle = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  background: "transparent",
-};
 export default ({ hashtags }) => {
   const [hashtagsDict, setHashtagsDict] = useState([]);
   // const [words, setWords] = useState([]);
@@ -20,16 +13,16 @@ export default ({ hashtags }) => {
     for (let i = 0; i < hashtags.length; i++) {
       let dict = {};
       if (
-        i == 0 ||
+        i === 0 ||
         hashtags[i] !== hashtags[i - 1] ||
-        (i == hashtags.length - 1 && hashtags[i] === hashtags[i - 1])
+        (i === hashtags.length - 1 && hashtags[i] === hashtags[i - 1])
       ) {
         count++;
         dict["text"] = hashtags[i].trim();
         dict["value"] = count;
         temp.push(dict);
         count = 0;
-      } else if (i == hashtags.length - 1 && hashtags[i] !== hashtags[i - 1]) {
+      } else if (i === hashtags.length - 1 && hashtags[i] !== hashtags[i - 1]) {
         count++;
         dict["text"] = hashtags[i].trim();
         dict["value"] = count;
@@ -53,7 +46,7 @@ export default ({ hashtags }) => {
   };
   const minSize = [1200, 1000];
   return (
-    <Wrapper defaultSize={{ width: "30vw", height: "30vw" }}>
+    <Wrapper defaultSize={{ width: "30vw", height: "25vw" }}>
       <ReactWordCloud
         deterministic={true}
         fontWeight={"bold"}

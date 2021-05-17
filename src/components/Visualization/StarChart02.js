@@ -35,7 +35,7 @@ const MyResponsiveRadar = ({ data, isHovered /* see data tab */ }) => {
       motionConfig="wobbly"
       isInteractive={true}
       theme={{
-        fontSize: 25,
+        fontSize: 20,
         fontWeight: 800,
       }}
       legends={[

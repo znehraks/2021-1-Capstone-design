@@ -1,7 +1,7 @@
 import axios from "axios";
 const api = axios.create({
-  baseURL: "https://capstone-backend.run.goorm.io/",
-  // baseURL: "http://localhost:5000",
+  baseURL: "https://capstone.run.goorm.io/",
+  // baseURL: "http://localhost:5000/",
   // baseURL: "https://resi-reco-backend.herokuapp.com/",
 });
 
