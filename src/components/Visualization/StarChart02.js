@@ -12,7 +12,7 @@ const MyResponsiveRadar = ({ data, isHovered /* see data tab */ }) => {
       data={data}
       keys={[`${isHovered.rank}위`, "평균"]}
       indexBy="weight"
-      maxValue={30}
+      maxValue={35}
       margin={{ top: 100, right: 100, bottom: 40, left: 100 }}
       curve="linearClosed"
       borderWidth={2}

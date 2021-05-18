@@ -10,8 +10,8 @@ const MapContainer = ({ univ_lat, univ_lon, setQ2Answer }) => {
     const options = {
       center: new kakao.maps.LatLng(univ_lat, univ_lon),
       level: 5,
-      draggable: false,
-      scrollwheel: false,
+      draggable: true,
+      scrollwheel: true,
     };
 
     //지도 객체 생성
@@ -268,8 +268,8 @@ const MapContainer = ({ univ_lat, univ_lon, setQ2Answer }) => {
     <div
       id="myMap"
       style={{
-        width: "40vw",
-        height: "40vw",
+        width: "30vw",
+        height: "30vw",
       }}
     ></div>
   );

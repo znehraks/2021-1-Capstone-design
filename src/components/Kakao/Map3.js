@@ -2,12 +2,7 @@ import React, { useEffect } from "react";
 import clickedMarker from "../Styles/images/selectedMarker.png";
 const { kakao } = window;
 
-const MapContainer = ({
-  isClicked,
-  univ_lat,
-  univ_lon,
-  residencePositions,
-}) => {
+const MapContainer = ({ univ_lat, univ_lon, residencePositions }) => {
   useEffect(() => {
     console.log(univ_lat, univ_lon, residencePositions);
     //지도 넣을 컨테이너
@@ -17,8 +12,8 @@ const MapContainer = ({
     const options = {
       center: new kakao.maps.LatLng(univ_lat, univ_lon),
       level: 4,
-      draggable: true,
-      scrollwheel: true,
+      draggable: false,
+      scrollwheel: false,
     };
 
     //지도 객체 생성
@@ -134,7 +129,7 @@ const MapContainer = ({
     //   map: map,
     //   position: new kakao.maps.LatLng(data[2].lat, data[2].lon),
     // });
-  }, [isClicked, univ_lat, univ_lon, residencePositions]);
+  }, []);
 
   return (
     <div

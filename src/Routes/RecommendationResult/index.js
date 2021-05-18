@@ -224,7 +224,7 @@ const RecommendationResult = withRouter(
     const [mode, setMode] = useState("main");
     console.log(newData);
     useEffect(() => {
-      if (count == 1) {
+      if (count === 1) {
         //해시태그 모음
         const hashtagsTemp = [];
 
@@ -292,53 +292,208 @@ const RecommendationResult = withRouter(
         setReservDeposit(reservDepositTemp);
         setPrice(priceTemp);
         setHashtags(hashtagsTemp.sort());
-        const temp = [
-          {
-            weight: "거리",
-            "1위": data[0].T1,
-            "2위": data[1].T1,
-            "3위": data[2].T1,
-            "4위": data[3].T1,
-            "5위": data[4].T1,
-            평균: Math.round(data[0].T1_avg),
-          },
-          {
-            weight: "역세권",
-            "1위": data[0].T2,
-            "2위": data[1].T2,
-            "3위": data[2].T2,
-            "4위": data[3].T2,
-            "5위": data[4].T2,
-            평균: Math.round(data[0].T2_avg),
-          },
-          {
-            weight: "가성비",
-            "1위": data[0].T3,
-            "2위": data[1].T3,
-            "3위": data[2].T3,
-            "4위": data[3].T3,
-            "5위": data[4].T3,
-            평균: Math.round(data[0].T3_avg),
-          },
-          {
-            weight: "안전",
-            "1위": data[0].T4,
-            "2위": data[1].T4,
-            "3위": data[2].T4,
-            "4위": data[3].T4,
-            "5위": data[4].T4,
-            평균: Math.round(data[0].T4_avg),
-          },
-          {
-            weight: "매물",
-            "1위": data[0].T5,
-            "2위": data[1].T5,
-            "3위": data[2].T5,
-            "4위": data[3].T5,
-            "5위": data[4].T5,
-            평균: Math.round(data[0].T5_avg),
-          },
-        ];
+        let temp = [];
+        if (data.length === 5) {
+          temp = [
+            {
+              weight: "거리",
+              "1위": data[0].T1,
+              "2위": data[1].T1,
+              "3위": data[2].T1,
+              "4위": data[3].T1,
+              "5위": data[4].T1,
+              평균: Math.round(data[0].T1_avg),
+            },
+            {
+              weight: "역세권",
+              "1위": data[0].T2,
+              "2위": data[1].T2,
+              "3위": data[2].T2,
+              "4위": data[3].T2,
+              "5위": data[4].T2,
+              평균: Math.round(data[0].T2_avg),
+            },
+            {
+              weight: "가성비",
+              "1위": data[0].T3,
+              "2위": data[1].T3,
+              "3위": data[2].T3,
+              "4위": data[3].T3,
+              "5위": data[4].T3,
+              평균: Math.round(data[0].T3_avg),
+            },
+            {
+              weight: "안전",
+              "1위": data[0].T4,
+              "2위": data[1].T4,
+              "3위": data[2].T4,
+              "4위": data[3].T4,
+              "5위": data[4].T4,
+              평균: Math.round(data[0].T4_avg),
+            },
+            {
+              weight: "매물",
+              "1위": data[0].T5,
+              "2위": data[1].T5,
+              "3위": data[2].T5,
+              "4위": data[3].T5,
+              "5위": data[4].T5,
+              평균: Math.round(data[0].T5_avg),
+            },
+          ];
+        } else if (data.length === 4) {
+          temp = [
+            {
+              weight: "거리",
+              "1위": data[0].T1,
+              "2위": data[1].T1,
+              "3위": data[2].T1,
+              "4위": data[3].T1,
+              평균: Math.round(data[0].T1_avg),
+            },
+            {
+              weight: "역세권",
+              "1위": data[0].T2,
+              "2위": data[1].T2,
+              "3위": data[2].T2,
+              "4위": data[3].T2,
+              평균: Math.round(data[0].T2_avg),
+            },
+            {
+              weight: "가성비",
+              "1위": data[0].T3,
+              "2위": data[1].T3,
+              "3위": data[2].T3,
+              "4위": data[3].T3,
+              평균: Math.round(data[0].T3_avg),
+            },
+            {
+              weight: "안전",
+              "1위": data[0].T4,
+              "2위": data[1].T4,
+              "3위": data[2].T4,
+              "4위": data[3].T4,
+              평균: Math.round(data[0].T4_avg),
+            },
+            {
+              weight: "매물",
+              "1위": data[0].T5,
+              "2위": data[1].T5,
+              "3위": data[2].T5,
+              "4위": data[3].T5,
+              평균: Math.round(data[0].T5_avg),
+            },
+          ];
+          data.push(data[0]);
+        } else if (data.length === 3) {
+          temp = [
+            {
+              weight: "거리",
+              "1위": data[0].T1,
+              "2위": data[1].T1,
+              "3위": data[2].T1,
+              평균: Math.round(data[0].T1_avg),
+            },
+            {
+              weight: "역세권",
+              "1위": data[0].T2,
+              "2위": data[1].T2,
+              "3위": data[2].T2,
+              평균: Math.round(data[0].T2_avg),
+            },
+            {
+              weight: "가성비",
+              "1위": data[0].T3,
+              "2위": data[1].T3,
+              "3위": data[2].T3,
+              평균: Math.round(data[0].T3_avg),
+            },
+            {
+              weight: "안전",
+              "1위": data[0].T4,
+              "2위": data[1].T4,
+              "3위": data[2].T4,
+              평균: Math.round(data[0].T4_avg),
+            },
+            {
+              weight: "매물",
+              "1위": data[0].T5,
+              "2위": data[1].T5,
+              "3위": data[2].T5,
+              평균: Math.round(data[0].T5_avg),
+            },
+          ];
+          data.push(data[0]);
+          data.push(data[0]);
+        } else if (data.length === 2) {
+          temp = [
+            {
+              weight: "거리",
+              "1위": data[0].T1,
+              "2위": data[1].T1,
+              평균: Math.round(data[0].T1_avg),
+            },
+            {
+              weight: "역세권",
+              "1위": data[0].T2,
+              "2위": data[1].T2,
+              평균: Math.round(data[0].T2_avg),
+            },
+            {
+              weight: "가성비",
+              "1위": data[0].T3,
+              "2위": data[1].T3,
+              평균: Math.round(data[0].T3_avg),
+            },
+            {
+              weight: "안전",
+              "1위": data[0].T4,
+              "2위": data[1].T4,
+              평균: Math.round(data[0].T4_avg),
+            },
+            {
+              weight: "매물",
+              "1위": data[0].T5,
+              "2위": data[1].T5,
+              평균: Math.round(data[0].T5_avg),
+            },
+          ];
+          data.push(data[0]);
+          data.push(data[0]);
+          data.push(data[0]);
+        } else if (data.length === 1) {
+          temp = [
+            {
+              weight: "거리",
+              "1위": data[0].T1,
+              평균: Math.round(data[0].T1_avg),
+            },
+            {
+              weight: "역세권",
+              "1위": data[0].T2,
+              평균: Math.round(data[0].T2_avg),
+            },
+            {
+              weight: "가성비",
+              "1위": data[0].T3,
+              평균: Math.round(data[0].T3_avg),
+            },
+            {
+              weight: "안전",
+              "1위": data[0].T4,
+              평균: Math.round(data[0].T4_avg),
+            },
+            {
+              weight: "매물",
+              "1위": data[0].T5,
+              평균: Math.round(data[0].T5_avg),
+            },
+          ];
+          data.push(data[0]);
+          data.push(data[0]);
+          data.push(data[0]);
+          data.push(data[0]);
+        }
         setNewData(temp);
         console.log(hashtags);
         return;
@@ -357,10 +512,16 @@ const RecommendationResult = withRouter(
         w4,
         w5
       ).then((response) => {
-        const json = JSON.parse(response.data);
-        setData(json);
-        console.log(json);
-        setCount(count + 1);
+        let json;
+        try {
+          json = JSON.parse(response.data);
+          setData(json);
+          console.log(json);
+          setCount(count + 1);
+        } catch (e) {
+          setCount(0);
+        } finally {
+        }
       });
     }, [count, isClicked, isHovered]);
     //weightcode 바탕으로

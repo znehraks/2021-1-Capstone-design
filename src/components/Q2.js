@@ -23,7 +23,7 @@ const SubTitleSpan = styled.span`
 `;
 const Article = styled.div`
   width: 80%;
-  height: 40vw;
+  height: 30vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -202,6 +202,9 @@ const Q2 = ({
         </SubTitleSpan>
         <SubTitleSpan>
           오른쪽 마우스를 클릭하면 원 그리기가 종료됩니다
+        </SubTitleSpan>
+        <SubTitleSpan>
+          드래그와 휠을 통해 지도를 확대/축소/이동이 가능합니다
         </SubTitleSpan>
         <Article>
           <Q2Map

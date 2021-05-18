@@ -17,8 +17,8 @@ const MapContainer = ({
     const options = {
       center: new kakao.maps.LatLng(univ_lat, univ_lon),
       level: 5,
-      draggable: false,
-      scrollwheel: false,
+      draggable: true,
+      scrollwheel: true,
     };
 
     //지도 객체 생성
@@ -29,23 +29,69 @@ const MapContainer = ({
     const imageOption = { offset: new kakao.maps.Point(30, 60) };
 
     //마커 정보 담은 객체 생성
-    let residencePositions = [
-      {
-        latlng: new kakao.maps.LatLng(data[0].lat, data[0].lon),
-      },
-      {
-        latlng: new kakao.maps.LatLng(data[1].lat, data[1].lon),
-      },
-      {
-        latlng: new kakao.maps.LatLng(data[2].lat, data[2].lon),
-      },
-      {
-        latlng: new kakao.maps.LatLng(data[3].lat, data[3].lon),
-      },
-      {
-        latlng: new kakao.maps.LatLng(data[4].lat, data[4].lon),
-      },
-    ];
+    let residencePositions = [];
+    if (data.length === 5) {
+      residencePositions = [
+        {
+          latlng: new kakao.maps.LatLng(data[0].lat, data[0].lon),
+        },
+        {
+          latlng: new kakao.maps.LatLng(data[1].lat, data[1].lon),
+        },
+        {
+          latlng: new kakao.maps.LatLng(data[2].lat, data[2].lon),
+        },
+        {
+          latlng: new kakao.maps.LatLng(data[3].lat, data[3].lon),
+        },
+        {
+          latlng: new kakao.maps.LatLng(data[4].lat, data[4].lon),
+        },
+      ];
+    } else if (data.length === 4) {
+      residencePositions = [
+        {
+          latlng: new kakao.maps.LatLng(data[0].lat, data[0].lon),
+        },
+        {
+          latlng: new kakao.maps.LatLng(data[1].lat, data[1].lon),
+        },
+        {
+          latlng: new kakao.maps.LatLng(data[2].lat, data[2].lon),
+        },
+        {
+          latlng: new kakao.maps.LatLng(data[3].lat, data[3].lon),
+        },
+      ];
+    } else if (data.length === 3) {
+      residencePositions = [
+        {
+          latlng: new kakao.maps.LatLng(data[0].lat, data[0].lon),
+        },
+        {
+          latlng: new kakao.maps.LatLng(data[1].lat, data[1].lon),
+        },
+        {
+          latlng: new kakao.maps.LatLng(data[2].lat, data[2].lon),
+        },
+      ];
+    } else if (data.length === 2) {
+      residencePositions = [
+        {
+          latlng: new kakao.maps.LatLng(data[0].lat, data[0].lon),
+        },
+        {
+          latlng: new kakao.maps.LatLng(data[1].lat, data[1].lon),
+        },
+      ];
+    } else if (data.length === 1) {
+      residencePositions = [
+        {
+          latlng: new kakao.maps.LatLng(data[0].lat, data[0].lon),
+        },
+      ];
+    }
+
     let selectedMarker = null;
 
     // MakrerImage 객체를 생성하여 반환하는 함수입니다

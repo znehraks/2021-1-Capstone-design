@@ -77,24 +77,30 @@ const Detail = ({
     <>
       <DetailItem mode={mode}>
         <CheckSpanDiv>
-          <CheckSpan
-            fontColor={isChecked === "monthReserv" ? `${true}` : ``}
-            onClick={() => setIsChecked("monthReserv")}
-          >
-            월세(보증금)
-          </CheckSpan>
-          <CheckSpan
-            fontColor={isChecked === "monthPay" ? `${true}` : ``}
-            onClick={() => setIsChecked("monthPay")}
-          >
-            월세
-          </CheckSpan>
-          <CheckSpan
-            fontColor={isChecked === "reserv" ? `${true}` : ``}
-            onClick={() => setIsChecked("reserv")}
-          >
-            전세
-          </CheckSpan>
+          {detailData && detailData[15] > 0 && (
+            <CheckSpan
+              fontColor={isChecked === "monthReserv" ? `${true}` : ``}
+              onClick={() => setIsChecked("monthReserv")}
+            >
+              월세(보증금)
+            </CheckSpan>
+          )}
+          {detailData && detailData[16] > 0 && (
+            <CheckSpan
+              fontColor={isChecked === "monthPay" ? `${true}` : ``}
+              onClick={() => setIsChecked("monthPay")}
+            >
+              월세
+            </CheckSpan>
+          )}
+          {detailData && detailData[17] > 0 && (
+            <CheckSpan
+              fontColor={isChecked === "reserv" ? `${true}` : ``}
+              onClick={() => setIsChecked("reserv")}
+            >
+              전세
+            </CheckSpan>
+          )}
         </CheckSpanDiv>
         <SubTitleSpan>월/전세 가격 통계</SubTitleSpan>
         <BarChartYaxisSpan>단위 만 원</BarChartYaxisSpan>
@@ -121,78 +127,95 @@ const Detail = ({
             <GridColumn>최저가</GridColumn>
             <GridColumn>매물 수</GridColumn>
           </GridLine>
-          <GridLine>
-            <GridColumn>월세(보증금)</GridColumn>
-            <GridColumn>
-              {detailData[0] >= 10000
-                ? `${detailData[0] / 10000}억원 `
-                : `${detailData[0]}만원`}
-            </GridColumn>
-            <GridColumn>
-              {detailData[12] >= 10000
-                ? `${detailData[12] / 10000}억원 `
-                : `${detailData[12]}만원`}
-            </GridColumn>
-            <GridColumn>{`${detailData[15]}개`}</GridColumn>
-          </GridLine>
-          <GridLine>
-            <GridColumn>월세</GridColumn>
-            <GridColumn>
-              {detailData[1] >= 10000
-                ? `${detailData[1] / 10000}억원 `
-                : `${detailData[1]}만원`}
-            </GridColumn>
-            <GridColumn>
-              {detailData[13] >= 10000
-                ? `${detailData[13] / 10000}억원 `
-                : `${detailData[13]}만원`}
-            </GridColumn>
-            <GridColumn>{`${detailData[16]}개`}</GridColumn>
-          </GridLine>
-          <GridLine>
-            <GridColumn>전세</GridColumn>
-            <GridColumn>
-              {detailData[2] >= 10000
-                ? `${detailData[2] / 10000}억원 `
-                : `${detailData[2]}만원`}
-            </GridColumn>
-            <GridColumn>
-              {detailData[14] >= 10000
-                ? `${detailData[14] / 10000}억원 `
-                : `${detailData[14]}만원`}
-            </GridColumn>
-            <GridColumn>{`${detailData[17]}개`}</GridColumn>
-          </GridLine>
-          <SubTitleSpan>{`이 지역은 월세(보증금)가 전체 평균보다 약 ${
-            detailData[3] - detailData[9] >= 10000
-              ? `${
-                  detailData[3] - detailData[9] > 0
-                    ? `${Number(
-                        Math.abs(detailData[3] - detailData[9]) / 10000
-                      )}억원 비싸군요.`
-                    : `${Math.abs(
-                        Number(detailData[3] - detailData[9]) / 10000
-                      )}억원 싸군요.`
-                }`
-              : `${
-                  detailData[3] - detailData[9] > 0
-                    ? `${Math.abs(detailData[3] - detailData[9])}만원 비싸군요.`
-                    : `${Math.abs(detailData[3] - detailData[9])}만원 싸군요.`
-                }`
-          }`}</SubTitleSpan>
-          <SubTitleSpan>{`이 지역은 월세 가격이 전체 평균보다 약 ${
-            detailData[4] - detailData[10] > 0
-              ? `${Math.abs(detailData[4] - detailData[10])}만원 비싸군요.`
-              : `${Math.abs(detailData[4] - detailData[10])}만원 싸군요.`
-          }`}</SubTitleSpan>
-          <SubTitleSpan>{`이 지역은 전세 가격이 전체 평균보다 약 ${
-            detailData[5] - detailData[11] > 0
-              ? `${Math.abs(detailData[5] - detailData[11])}만원 비싸군요.`
-              : `${Math.abs(detailData[5] - detailData[11])}만원 싸군요.`
-          }`}</SubTitleSpan>
+          {detailData && detailData[15] > 0 && (
+            <>
+              <GridLine>
+                <GridColumn>월세(보증금)</GridColumn>
+                <GridColumn>
+                  {detailData[0] >= 10000
+                    ? `${detailData[0] / 10000}억원 `
+                    : `${detailData[0]}만원`}
+                </GridColumn>
+                <GridColumn>
+                  {detailData[12] >= 10000
+                    ? `${detailData[12] / 10000}억원 `
+                    : `${detailData[12]}만원`}
+                </GridColumn>
+                <GridColumn>{`${detailData[15]}개`}</GridColumn>
+              </GridLine>
+              <GridLine>
+                <GridColumn>월세</GridColumn>
+                <GridColumn>
+                  {detailData[1] >= 10000
+                    ? `${detailData[1] / 10000}억원 `
+                    : `${detailData[1]}만원`}
+                </GridColumn>
+                <GridColumn>
+                  {detailData[13] >= 10000
+                    ? `${detailData[13] / 10000}억원 `
+                    : `${detailData[13]}만원`}
+                </GridColumn>
+                <GridColumn>{``}</GridColumn>
+              </GridLine>
+            </>
+          )}
+          {detailData && detailData[17] > 0 && (
+            <GridLine>
+              <GridColumn>전세</GridColumn>
+              <GridColumn>
+                {detailData[2] >= 10000
+                  ? `${detailData[2] / 10000}억원 `
+                  : `${detailData[2]}만원`}
+              </GridColumn>
+              <GridColumn>
+                {detailData[14] >= 10000
+                  ? `${detailData[14] / 10000}억원 `
+                  : `${detailData[14]}만원`}
+              </GridColumn>
+              <GridColumn>{`${detailData[17]}개`}</GridColumn>
+            </GridLine>
+          )}
+
+          {detailData && detailData[15] > 0 && (
+            <>
+              <SubTitleSpan>{`이 지역은 월세(보증금)평균 가격이 인근 전체 평균보다 약 ${
+                detailData[3] - detailData[9] >= 10000
+                  ? `${
+                      detailData[3] - detailData[9] > 0
+                        ? `${Number(
+                            Math.abs(detailData[3] - detailData[9]) / 10000
+                          )}억원 비싸군요.`
+                        : `${Math.abs(
+                            Number(detailData[3] - detailData[9]) / 10000
+                          )}억원 싸군요.`
+                    }`
+                  : `${
+                      detailData[3] - detailData[9] > 0
+                        ? `${Math.abs(
+                            detailData[3] - detailData[9]
+                          )}만원 비싸군요.`
+                        : `${Math.abs(
+                            detailData[3] - detailData[9]
+                          )}만원 싸군요.`
+                    }`
+              }`}</SubTitleSpan>
+              <SubTitleSpan>{`이 지역은 월세 평균 가격이 인근 전체 평균보다 약 ${
+                detailData[4] - detailData[10] > 0
+                  ? `${Math.abs(detailData[4] - detailData[10])}만원 비싸군요.`
+                  : `${Math.abs(detailData[4] - detailData[10])}만원 싸군요.`
+              }`}</SubTitleSpan>
+            </>
+          )}
+
+          {detailData && detailData[17] > 0 && (
+            <SubTitleSpan>{`이 지역은 전세 평균 가격이 인근 전체 평균보다 약 ${
+              detailData[5] - detailData[11] > 0
+                ? `${Math.abs(detailData[5] - detailData[11])}만원 비싸군요.`
+                : `${Math.abs(detailData[5] - detailData[11])}만원 싸군요.`
+            }`}</SubTitleSpan>
+          )}
           <SubTitleSpan>
-            또한 총 {detailData[15] + detailData[16] + detailData[17]}개 이상의
-            매물이 있군요.
+            또한 총 {detailData[15] + detailData[17]}개 이상의 매물이 있군요.
           </SubTitleSpan>
         </DetailItem>
       )}

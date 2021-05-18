@@ -57,6 +57,7 @@ const Detail = ({ isClicked, mode, setMode }) => {
 
           {positions && (
             <Map2
+              isClicked={isClicked}
               univ_lat={isClicked.lat}
               univ_lon={isClicked.lon}
               residencePositions={positions}
