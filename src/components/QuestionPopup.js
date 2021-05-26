@@ -226,7 +226,11 @@ export default ({
           })}
         </QuestionItemInputContainer>
         <QuestionDivButtonContainer>
-          <QuestionDivButton onClick={() => setPopup(false)}>
+          <QuestionDivButton
+            onClick={() => {
+              setPopup(false);
+            }}
+          >
             취소
           </QuestionDivButton>
           <QuestionDivButton

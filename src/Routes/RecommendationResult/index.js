@@ -241,10 +241,60 @@ const RecommendationResult = withRouter(
     const [TotalWeightRank05, setTotalWeightRank05] = useState();
     console.log(newData);
     useEffect(() => {
+      if (count === 0) {
+        Api.addDIYRecoHistory(
+          9999,
+          50,
+          30,
+          20,
+          w1,
+          w2,
+          w3,
+          w4,
+          w5,
+          Number(w1) + Number(w2) + Number(w3) + Number(w4) + Number(w5),
+          univ_name,
+          Q2Answer,
+          Q3Answer,
+          Q4Answer,
+          Q5Answer,
+          univ_lat,
+          univ_lon,
+          "T" +
+            Q3Answer.split("T")[1] +
+            Q4Answer.split("T")[1] +
+            Q5Answer.split("T")[1]
+        ).then((response) => {
+          if (response.status === 200) {
+            console.log("DB저장 성공");
+            console.log(response.data);
+          }
+        });
+      }
       if (!popup & !qComplete) {
         setTimeout(() => {
           setPopup(true);
         }, 15000);
+      }
+      if (qComplete) {
+        Api.addEval(
+          1,
+          univ_name,
+          "T" +
+            Q3Answer.split("T")[1] +
+            Q4Answer.split("T")[1] +
+            Q5Answer.split("T")[1],
+          Question01.score,
+          Question02.score,
+          Question03.score,
+          Question04.score,
+          Question05.score
+        ).then((response) => {
+          if (response.status === 200) {
+            console.log("DB 설문 저장 성공");
+            console.log(response.data);
+          }
+        });
       }
       if (count === 1) {
         //해시태그 모음
@@ -551,7 +601,7 @@ const RecommendationResult = withRouter(
         } finally {
         }
       });
-    }, [count, isClicked, isHovered]);
+    }, [count, isClicked, isHovered, qComplete]);
     //weightcode 바탕으로
     console.log(w1);
     console.log(w2);

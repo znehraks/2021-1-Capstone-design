@@ -1,7 +1,7 @@
 import axios from "axios";
 const api = axios.create({
-  baseURL: "https://capstone.run.goorm.io/",
-  // baseURL: "http://localhost:5000/",
+  // baseURL: "https://capstone.run.goorm.io/",
+  baseURL: "http://localhost:5000/",
   // baseURL: "https://resi-reco-backend.herokuapp.com/",
 });
 
@@ -34,5 +34,77 @@ export const Api = {
       w3,
       w4,
       w5,
+    }),
+
+  addDIYRecoHistory: (
+    user_no,
+    w_1st,
+    w_2nd,
+    w_3rd,
+    w1,
+    w2,
+    w3,
+    w4,
+    w5,
+    total_w,
+    Q1,
+    Q2,
+    Q3,
+    Q4,
+    Q5,
+    univ_lat,
+    univ_lon,
+    T_set,
+    eval_01,
+    eval_02,
+    eval_03,
+    eval_04,
+    eval_05
+  ) =>
+    api.post(`/add_diy`, {
+      user_no,
+      w_1st,
+      w_2nd,
+      w_3rd,
+      w1,
+      w2,
+      w3,
+      w4,
+      w5,
+      total_w,
+      Q1,
+      Q2,
+      Q3,
+      Q4,
+      Q5,
+      univ_lat,
+      univ_lon,
+      T_set,
+      eval_01,
+      eval_02,
+      eval_03,
+      eval_04,
+      eval_05,
+    }),
+
+  addEval: (
+    evaluation_category_no,
+    univ_name,
+    T_set,
+    rank01_score,
+    rank02_score,
+    rank03_score,
+    rank04_score,
+    rank05_score
+  ) =>
+    api.post(`/add_eval`, {
+      evaluation_category_no,
+      univ_name,
+      T_set,
+      rank01_score,
+      rank02_score,
+      rank03_score,
+      rank04_score,
+      rank05_score,
     }),
 };
