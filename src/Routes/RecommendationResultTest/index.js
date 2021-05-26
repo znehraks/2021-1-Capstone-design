@@ -14,6 +14,8 @@ import WordcloudDetailItem from "../../components/Visualization/Detail/Wordcloud
 import { Helmet } from "react-helmet";
 import RadarArticle from "../../components/Visualization/RadarArticle";
 import Wordcloud from "../../components/Visualization/Wordcloud";
+import Popup from "reactjs-popup";
+import QuestionPopup from "../../components/QuestionPopup";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -189,6 +191,56 @@ const CheckSpanDiv = styled.div`
   top: 5vw;
   left: 14vw;
 `;
+
+const QuestionDiv = styled.div`
+  width: 100%;
+  height: 45vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid ${(props) => props.theme.headerBgColor};
+`;
+const QuestionTitleSpan = styled.span`
+  font-size: 1.5vw;
+`;
+const QuestionItemBigSpan = styled.span`
+  margin-top: 1vw;
+  font-size: 1vw;
+`;
+
+const QuestionItemSmallSpan = styled.span`
+  margin-top: 0.5vw;
+  font-size: 0.8vw;
+`;
+const QuestionItemInputContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 75%;
+  height: auto;
+  margin: 1vw 0;
+`;
+const QuestionItemCheckbox = styled.div`
+  text-align: center;
+  width: 80%;
+  height: 2vw;
+`;
+const QuestionDivButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+const QuestionDivButton = styled.span`
+  margin-top: 2vw;
+  font-size: 1.5vw;
+  text-align: center;
+  width: 6vw;
+  height: 3vw;
+`;
+
 const RecommendationResult = ({ setDetail }) => {
   // const [data, setData] = useState();
   const univ_name = "한국대학교";
@@ -224,7 +276,7 @@ const RecommendationResult = ({ setDetail }) => {
       T3_avg: 11.75,
       T4_avg: 2.75,
       T5_avg: 6.5,
-      total_weight_avg: 9.975,
+      total_weight_avg: 50.975,
       "평균 거리": 17.125,
       "평균 역세권": 11.75,
       "평균 가성비": 11.75,
@@ -1477,8 +1529,27 @@ const RecommendationResult = ({ setDetail }) => {
   const [isHovered, setIsHovered] = useState("");
   const [count, setCount] = useState(0);
   const [mode, setMode] = useState("main");
+  const [popup, setPopup] = useState(false);
+  const [qComplete, setQComplete] = useState(false);
 
+  const [QuestionNumber, setQuestionNumber] = useState();
+  const [Question01, setQuestion01] = useState();
+  const [Question02, setQuestion02] = useState();
+  const [Question03, setQuestion03] = useState();
+  const [Question04, setQuestion04] = useState();
+  const [Question05, setQuestion05] = useState();
+  const [TotalWeightAvg, setTotalWeightAvg] = useState();
+  const [TotalWeightRank01, setTotalWeightRank01] = useState();
+  const [TotalWeightRank02, setTotalWeightRank02] = useState();
+  const [TotalWeightRank03, setTotalWeightRank03] = useState();
+  const [TotalWeightRank04, setTotalWeightRank04] = useState();
+  const [TotalWeightRank05, setTotalWeightRank05] = useState();
   useEffect(() => {
+    if (!popup & !qComplete) {
+      setTimeout(() => {
+        setPopup(true);
+      }, 10000);
+    }
     if (count == 1) {
       //해시태그 모음
       const hashtagsTemp = [];
@@ -1494,6 +1565,8 @@ const RecommendationResult = ({ setDetail }) => {
 
       //매매
       const priceTemp = [];
+
+      //
 
       for (let i = 0; i < data.length; i++) {
         try {
@@ -1595,6 +1668,12 @@ const RecommendationResult = ({ setDetail }) => {
         },
       ];
       setNewData(temp);
+      setTotalWeightAvg(Math.round(data[0].total_weight_avg));
+      setTotalWeightRank01(Math.round(data[0].total_weight));
+      setTotalWeightRank02(Math.round(data[1].total_weight));
+      setTotalWeightRank03(Math.round(data[2].total_weight));
+      setTotalWeightRank04(Math.round(data[3].total_weight));
+      setTotalWeightRank05(Math.round(data[4].total_weight));
       console.log(hashtags);
       console.log(monthlyDeposit);
       console.log(monthlyPay);
@@ -1606,12 +1685,42 @@ const RecommendationResult = ({ setDetail }) => {
   }, [count, isClicked, isHovered]);
   console.log(isClicked);
   console.log(data);
+  console.log(Question01);
+  console.log(Question02);
+  console.log(Question03);
+  console.log(Question04);
+  console.log(Question05);
   return (
     <>
       <Helmet>
         <title>Result</title>
       </Helmet>
       <Wrapper>
+        {popup && (
+          <QuestionPopup
+            popup={popup}
+            setPopup={setPopup}
+            setQComplete={setQComplete}
+            QuestionNumber={QuestionNumber}
+            setQuestionNumber={setQuestionNumber}
+            Question01={Question01}
+            setQuestion01={setQuestion01}
+            Question02={Question02}
+            setQuestion02={setQuestion02}
+            Question03={Question03}
+            setQuestion03={setQuestion03}
+            Question04={Question04}
+            setQuestion04={setQuestion04}
+            Question05={Question05}
+            setQuestion05={setQuestion05}
+            TotalWeightAvg={TotalWeightAvg}
+            TotalWeightRank01={TotalWeightRank01}
+            TotalWeightRank02={TotalWeightRank02}
+            TotalWeightRank03={TotalWeightRank03}
+            TotalWeightRank04={TotalWeightRank04}
+            TotalWeightRank05={TotalWeightRank05}
+          />
+        )}
         {data && (
           <>
             <>
@@ -1632,6 +1741,7 @@ const RecommendationResult = ({ setDetail }) => {
                 <ArticleContentContainer>
                   <LeftContainer>
                     <Map
+                      isClicked={isClicked}
                       setIsHovered={setIsHovered}
                       setIsClicked={setIsClicked}
                       data={data}

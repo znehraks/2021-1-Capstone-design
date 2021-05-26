@@ -1,8 +1,18 @@
 import React, { useEffect } from "react";
-import clickedMarker from "../Styles/images/selectedMarker.png";
+import first from "../Styles/images/1st.png";
+import second from "../Styles/images/2nd.png";
+import third from "../Styles/images/3rd.png";
+import fourth from "../Styles/images/4th.png";
+import fifth from "../Styles/images/5th.png";
+import first_h from "../Styles/images/1st_hover.png";
+import second_h from "../Styles/images/2nd_hover.png";
+import third_h from "../Styles/images/3rd_hover.png";
+import fourth_h from "../Styles/images/4th_hover.png";
+import fifth_h from "../Styles/images/5th_hover.png";
 const { kakao } = window;
 
 const MapContainer = ({
+  isClicked,
   data,
   setIsClicked,
   setIsHovered,
@@ -25,7 +35,7 @@ const MapContainer = ({
     const map = new kakao.maps.Map(container, options);
 
     //마커 크기와 옵션
-    const imageSize = new kakao.maps.Size(64, 69);
+    const imageSize = new kakao.maps.Size(50, 60);
     const imageOption = { offset: new kakao.maps.Point(30, 60) };
 
     //마커 정보 담은 객체 생성
@@ -91,29 +101,43 @@ const MapContainer = ({
         },
       ];
     }
+    let selected;
+    if (isClicked) {
+      selected = isClicked.rank - 1;
+    }
+    var selectedMarker = null;
 
-    let selectedMarker = null;
-
+    let markers = [first, second, third, fourth, fifth];
+    let hoverMarkers = [first_h, second_h, third_h, fourth_h, fifth_h];
+    function createMarkerImage(i) {
+      // //마커 이미지 생성
+      const firstMarkerImage = new kakao.maps.MarkerImage(
+        markers[i],
+        imageSize,
+        imageOption
+      );
+      return firstMarkerImage;
+    }
     // MakrerImage 객체를 생성하여 반환하는 함수입니다
-    function createMarkerImage() {
+    function createMarkerOverImage(i) {
       // //마커 이미지 생성
       const markerImage = new kakao.maps.MarkerImage(
-        clickedMarker,
+        hoverMarkers[i],
         imageSize,
         imageOption
       );
 
       return markerImage;
     }
-    const addMarker = (position, i) => {
-      let normalImage;
-      let overImage = createMarkerImage();
+    const addMarker = (position, i, selected) => {
+      var normalImage = createMarkerImage(i);
+      var overImage = createMarkerOverImage(i);
 
-      let marker = new kakao.maps.Marker({
+      var marker = new kakao.maps.Marker({
         map: map, // 마커를 표시할 지도
         position: position.latlng, //마커의 위치
+        image: normalImage,
       });
-      marker.image = normalImage;
       // 마커에 mouseover 이벤트를 등록합니다
       kakao.maps.event.addListener(marker, "mouseover", function () {
         // 클릭된 마커가 없고, mouseover된 마커가 클릭된 마커가 아니면
@@ -180,7 +204,7 @@ const MapContainer = ({
     //   map: map,
     //   position: new kakao.maps.LatLng(data[2].lat, data[2].lon),
     // });
-  }, []);
+  }, [isClicked]);
 
   return (
     <div

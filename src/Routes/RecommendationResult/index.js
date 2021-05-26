@@ -14,6 +14,7 @@ import WordcloudDetailItem from "../../components/Visualization/Detail/Wordcloud
 import { Helmet } from "react-helmet";
 import RadarArticle from "../../components/Visualization/RadarArticle";
 import Wordcloud from "../../components/Visualization/Wordcloud";
+import QuestionPopup from "../../components/QuestionPopup";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -222,7 +223,28 @@ const RecommendationResult = withRouter(
     const [isHovered, setIsHovered] = useState("");
     const [count, setCount] = useState(0);
     const [mode, setMode] = useState("main");
+
+    const [popup, setPopup] = useState(false);
+    const [qComplete, setQComplete] = useState(false);
+
+    const [QuestionNumber, setQuestionNumber] = useState();
+    const [Question01, setQuestion01] = useState();
+    const [Question02, setQuestion02] = useState();
+    const [Question03, setQuestion03] = useState();
+    const [Question04, setQuestion04] = useState();
+    const [Question05, setQuestion05] = useState();
+    const [TotalWeightAvg, setTotalWeightAvg] = useState();
+    const [TotalWeightRank01, setTotalWeightRank01] = useState();
+    const [TotalWeightRank02, setTotalWeightRank02] = useState();
+    const [TotalWeightRank03, setTotalWeightRank03] = useState();
+    const [TotalWeightRank04, setTotalWeightRank04] = useState();
+    const [TotalWeightRank05, setTotalWeightRank05] = useState();
     console.log(newData);
+    if (!popup & !qComplete) {
+      setTimeout(() => {
+        setPopup(true);
+      }, 15000);
+    }
     useEffect(() => {
       if (count === 1) {
         //해시태그 모음
@@ -495,6 +517,12 @@ const RecommendationResult = withRouter(
           data.push(data[0]);
         }
         setNewData(temp);
+        setTotalWeightAvg(Math.round(data[0].total_weight_avg));
+        setTotalWeightRank01(Math.round(data[0].total_weight));
+        setTotalWeightRank02(Math.round(data[1].total_weight));
+        setTotalWeightRank03(Math.round(data[2].total_weight));
+        setTotalWeightRank04(Math.round(data[3].total_weight));
+        setTotalWeightRank05(Math.round(data[4].total_weight));
         console.log(hashtags);
         return;
       }
@@ -533,6 +561,11 @@ const RecommendationResult = withRouter(
 
     console.log(isClicked);
     console.log(data);
+    console.log(Question01);
+    console.log(Question02);
+    console.log(Question03);
+    console.log(Question04);
+    console.log(Question05);
     if (!data) {
       console.log(data);
     }
@@ -547,6 +580,31 @@ const RecommendationResult = withRouter(
           <title>Result</title>
         </Helmet>
         <Wrapper>
+          {popup && (
+            <QuestionPopup
+              popup={popup}
+              setPopup={setPopup}
+              setQComplete={setQComplete}
+              QuestionNumber={QuestionNumber}
+              setQuestionNumber={setQuestionNumber}
+              Question01={Question01}
+              setQuestion01={setQuestion01}
+              Question02={Question02}
+              setQuestion02={setQuestion02}
+              Question03={Question03}
+              setQuestion03={setQuestion03}
+              Question04={Question04}
+              setQuestion04={setQuestion04}
+              Question05={Question05}
+              setQuestion05={setQuestion05}
+              TotalWeightAvg={TotalWeightAvg}
+              TotalWeightRank01={TotalWeightRank01}
+              TotalWeightRank02={TotalWeightRank02}
+              TotalWeightRank03={TotalWeightRank03}
+              TotalWeightRank04={TotalWeightRank04}
+              TotalWeightRank05={TotalWeightRank05}
+            />
+          )}
           {data && (
             <>
               <>
