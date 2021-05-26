@@ -240,12 +240,12 @@ const RecommendationResult = withRouter(
     const [TotalWeightRank04, setTotalWeightRank04] = useState();
     const [TotalWeightRank05, setTotalWeightRank05] = useState();
     console.log(newData);
-    if (!popup & !qComplete) {
-      setTimeout(() => {
-        setPopup(true);
-      }, 15000);
-    }
     useEffect(() => {
+      if (!popup & !qComplete) {
+        setTimeout(() => {
+          setPopup(true);
+        }, 15000);
+      }
       if (count === 1) {
         //해시태그 모음
         const hashtagsTemp = [];
