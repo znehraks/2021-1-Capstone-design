@@ -61,11 +61,22 @@ const BurgerComponent = styled(Burger)``;
 const MenuComponent = styled(Menu)``;
 const Header = withRouter(({ location }) => {
   const [open, setOpen] = useState(false);
+  const Logout = () => {
+    localStorage.removeItem("userId");
+    window.location.href = "/";
+  };
   return (
     <Wrapper>
       <LogoContainer to="/">
         <LogoImage src={logo}></LogoImage>
       </LogoContainer>
+      {localStorage.getItem("userId") ? (
+        <MenuContainer>
+          <MenuSpan>{localStorage.getItem("userId")}님 안녕하세요!</MenuSpan>
+        </MenuContainer>
+      ) : (
+        <></>
+      )}
       <MenuContainer>
         <MenuSpan to="/AboutUs" selected={location.pathname === "/AboutUs"}>
           프로젝트 및 팀 소개
@@ -92,9 +103,19 @@ const Header = withRouter(({ location }) => {
         </MenuSpan>
       </MenuContainer>
       <MenuContainer>
-        <MenuSpan to="/Auth" selected={location.pathname === "/Auth"}>
-          로그인
-        </MenuSpan>
+        {localStorage.getItem("userId") ? (
+          <MenuSpan
+            onClick={() => {
+              Logout();
+            }}
+          >
+            로그아웃
+          </MenuSpan>
+        ) : (
+          <MenuSpan to="/Auth" selected={location.pathname === "/Auth"}>
+            로그인
+          </MenuSpan>
+        )}
       </MenuContainer>
       <HamburgerContainer>
         <BurgerComponent open={open} setOpen={setOpen} />

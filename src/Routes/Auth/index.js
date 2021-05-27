@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Api } from "../../api";
 import homeEx from "../../components/Styles/images/homeEx.jpg";
 import homeEx2 from "../../components/Styles/images/homeEx2.jpg";
 import useInput from "../../Hooks/useInput";
@@ -66,7 +67,7 @@ const InputBox = styled.input`
     transition-duration: 0.5s;
   }
 `;
-const Button = styled.span`
+const Button = styled(Link)`
   font-size: 1.2vw;
   border: 2px solid black;
   padding: 0.6vw 1vw;
@@ -92,6 +93,23 @@ const Auth = () => {
   const email = useInput("");
   //로그인 성공 시 LocalStorage에 isLoggedIn 이랑
   //webtoken 저장.
+  const Login = (user_id, user_pwd) => {
+    Api.Login(user_id, user_pwd).then((response) => {
+      if (response.data.loginSuccess) {
+        localStorage.setItem("userId", response.data.userId);
+        window.location.href = "/";
+        return;
+      }
+      alert("아이디 또는 비밀번호가 맞지 않습니다.");
+    });
+  };
+
+  const Signup = (user_id, user_pwd, user_email) => {
+    Api.Signup(user_id, user_pwd, user_email).then((response) => {
+      setMode("complete");
+      console.log(response);
+    });
+  };
   return (
     <>
       <Helmet>
@@ -114,7 +132,13 @@ const Auth = () => {
                   {...pwd}
                 ></InputBox>
               </InputItemContainer>
-              <Button>확인</Button>
+              <Button
+                onClick={() => {
+                  Login(id.value, pwd.value);
+                }}
+              >
+                확인
+              </Button>
               <SmallSpan
                 onClick={() => {
                   setMode("registration");
@@ -135,13 +159,23 @@ const Auth = () => {
               </InputItemContainer>
               <InputItemContainer>
                 <InputDesc>비밀번호:</InputDesc>
-                <InputBox placeholder={""} {...pwd}></InputBox>
+                <InputBox
+                  placeholder={""}
+                  type={"password"}
+                  {...pwd}
+                ></InputBox>
               </InputItemContainer>
               <InputItemContainer>
                 <InputDesc>이메일:</InputDesc>
                 <InputBox placeholder={""} type={"email"} {...email}></InputBox>
               </InputItemContainer>
-              <Button>가입하기</Button>
+              <Button
+                onClick={() => {
+                  Signup(id.value, pwd.value, email.value);
+                }}
+              >
+                가입하기
+              </Button>
               <SmallSpan
                 onClick={() => {
                   setMode("login");
@@ -149,6 +183,14 @@ const Auth = () => {
               >
                 이미 회원이신가요?
               </SmallSpan>
+            </InputContainer>
+          </Article>
+        )}
+        {mode === "complete" && (
+          <Article>
+            <InputContainer>
+              <TitleSpan>가입을 축하드립니다.</TitleSpan>
+              <Button to="/">메인으로</Button>
             </InputContainer>
           </Article>
         )}

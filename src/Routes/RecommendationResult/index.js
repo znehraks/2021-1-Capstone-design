@@ -226,6 +226,7 @@ const RecommendationResult = withRouter(
 
     const [popup, setPopup] = useState(false);
     const [qComplete, setQComplete] = useState(false);
+    const [canceled, setCanceled] = useState(false);
 
     const [QuestionNumber, setQuestionNumber] = useState();
     const [Question01, setQuestion01] = useState();
@@ -240,6 +241,47 @@ const RecommendationResult = withRouter(
     const [TotalWeightRank04, setTotalWeightRank04] = useState();
     const [TotalWeightRank05, setTotalWeightRank05] = useState();
     console.log(newData);
+    const SubmitEvaluation = (
+      evaluation_category_no,
+      univ_name,
+      T_set,
+      rank01_score,
+      rank02_score,
+      rank03_score,
+      rank04_score,
+      rank05_score
+    ) => {
+      Api.addEval(
+        evaluation_category_no,
+        univ_name,
+        T_set,
+        rank01_score,
+        rank02_score,
+        rank03_score,
+        rank04_score,
+        rank05_score
+      ).then((response) => {
+        if (response.status === 200) {
+          console.log("DB 설문 저장 성공");
+          console.log(response.data);
+        }
+      });
+    };
+    if (qComplete) {
+      SubmitEvaluation(
+        1,
+        univ_name,
+        "T" +
+          Q3Answer.split("T")[1] +
+          Q4Answer.split("T")[1] +
+          Q5Answer.split("T")[1],
+        Question01.score,
+        Question02.score,
+        Question03.score,
+        Question04.score,
+        Question05.score
+      );
+    }
     useEffect(() => {
       if (count === 0) {
         Api.addDIYRecoHistory(
@@ -271,30 +313,10 @@ const RecommendationResult = withRouter(
           }
         });
       }
-      if (!popup & !qComplete) {
+      if (!popup & !qComplete & !canceled) {
         setTimeout(() => {
           setPopup(true);
         }, 15000);
-      }
-      if (qComplete) {
-        Api.addEval(
-          1,
-          univ_name,
-          "T" +
-            Q3Answer.split("T")[1] +
-            Q4Answer.split("T")[1] +
-            Q5Answer.split("T")[1],
-          Question01.score,
-          Question02.score,
-          Question03.score,
-          Question04.score,
-          Question05.score
-        ).then((response) => {
-          if (response.status === 200) {
-            console.log("DB 설문 저장 성공");
-            console.log(response.data);
-          }
-        });
       }
       if (count === 1) {
         //해시태그 모음
@@ -601,7 +623,7 @@ const RecommendationResult = withRouter(
         } finally {
         }
       });
-    }, [count, isClicked, isHovered, qComplete]);
+    }, [count, isClicked, isHovered]);
     //weightcode 바탕으로
     console.log(w1);
     console.log(w2);
@@ -635,6 +657,7 @@ const RecommendationResult = withRouter(
               popup={popup}
               setPopup={setPopup}
               setQComplete={setQComplete}
+              setCanceled={setCanceled}
               QuestionNumber={QuestionNumber}
               setQuestionNumber={setQuestionNumber}
               Question01={Question01}

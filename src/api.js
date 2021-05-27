@@ -107,4 +107,8 @@ export const Api = {
       rank04_score,
       rank05_score,
     }),
+
+  Login: (user_id, user_pwd) => api.post(`/signin`, { user_id, user_pwd }),
+  Signup: (user_id, user_pwd, user_email) =>
+    api.post(`/signup`, { user_id, user_pwd, user_email }),
 };

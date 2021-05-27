@@ -57,6 +57,7 @@ export default ({
   popup,
   setPopup,
   setQComplete,
+  setCanceled,
   Question01,
   setQuestion01,
   Question02,
@@ -229,6 +230,7 @@ export default ({
           <QuestionDivButton
             onClick={() => {
               setPopup(false);
+              setCanceled(true);
             }}
           >
             취소
