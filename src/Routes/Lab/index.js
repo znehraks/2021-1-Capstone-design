@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Loader from "../../components/Loader";
-import Detail from "./Detail";
 import Back from "../../components/Styles/images/back.png";
 import Magnify from "../../components/Styles/images/magnify.png";
 import useInput from "../../Hooks/useInput";
@@ -27,7 +26,7 @@ const SmallSpan = styled.span`
 `;
 const Article = styled.div`
   width: 80%;
-  height: 70%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -145,7 +144,7 @@ const OptionSpan = styled.span`
   font-size: 1vw;
 `;
 
-const DIY = () => {
+const Lab = () => {
   const [page, setPage] = useState(1);
   const Search = useInput("");
   //히스토리 데이터를 useEffect에서 setHistory에 넣음
@@ -153,100 +152,24 @@ const DIY = () => {
 
   //메인인지, 상세인지 구분하게 하는 hook
   const [detail, setDetail] = useState(false);
-  useEffect(() => {
-    Api.getDiyHistory(localStorage.getItem("userId")).then((response) => {
-      if (response.data) {
-        setHistory(response.data);
-      }
-    });
-  }, []);
   return (
     <>
-      {/* {history && ( */}
-      {!detail ? (
-        <Wrapper>
-          <TitleSpan>나의 DIY 추천 히스토리</TitleSpan>
-          <Article>
-            <SearchContainer>
-              <SearchInput
-                type={"text"}
-                placeholder={"명지대학교"}
-                {...Search}
-              ></SearchInput>
-              <SearchButton></SearchButton>
-              <BackArrow to="/ResultHistory">
-                <img src={Back}></img>
-                <OptionSpan>뒤로가기</OptionSpan>
-              </BackArrow>
-              <MagnifyDiv>
-                <img src={Magnify}></img>
-              </MagnifyDiv>
-            </SearchContainer>
-            <ListContainer>
-              {/*map으로 돌려서 ListItem 만들것임 */}
-              <ListItem>
-                <Item flex={2}>번호</Item>
-                <Item flex={2}>학교명</Item>
-                <Item flex={4}>추천받은지역</Item>
-                <Item flex={2}>일시</Item>
-              </ListItem>
-              {history &&
-                history.map((item) => {
-                  return (
-                    <ListItem
-                      to={{
-                        pathname: `/RecommendationResult/${item.Q1}/${item.univ_lat}/${item.univ_lon}/${item.Q2}/${item.Q3}/${item.Q4}/${item.Q5}/${item.w1}/${item.w2}/${item.w3}/${item.w4}/${item.w5}/1`,
-                      }}
-                    >
-                      <Item flex={2}>{item.diy_reco_history_no}</Item>
-                      <Item flex={2}>{item.Q1}</Item>
-                      <Item flex={4}>{item.Q1}</Item>
-                      <Item flex={2}>{item.updated_at.split("T")[0]}</Item>
-                    </ListItem>
-                  );
-                })}
-            </ListContainer>
-          </Article>
-          <ButtonContainer>
-            <Prev
-              onClick={() => {
-                if (page <= 1) {
-                  alert("첫 번째 페이지 입니다.");
-                  return;
-                }
-                setPage(page - 1);
-              }}
-            >
-              이전
-            </Prev>
-            <Current>{page}</Current>
-            <Next
-              onClick={() => {
-                if (page == 4) {
-                  alert("마지막 페이지 입니다.");
-                  return;
-                }
-                setPage(page + 1);
-              }}
-            >
-              다음
-            </Next>
-          </ButtonContainer>
-        </Wrapper>
-      ) : (
-        <Detail
-          setDetail={setDetail}
-          data={"현재 선택된 리스트아이템 데이터"}
-        />
-      )}
-      {/* )} */}
-      {/* {!history && (
-        <Wrapper>
-          <Loader />
-        </Wrapper>
-      )} */}
+      <Wrapper>
+        <TitleSpan>저기어때. 의 실험실입니다.</TitleSpan>
+        <Article>
+          <SmallSpan>저기어때. 유저에게 자주 선택된 조합은?</SmallSpan>
+        </Article>
+        <Article>
+          <SmallSpan>저기어때. 유저에게 자주 조회된 학교는?</SmallSpan>
+        </Article>
+        <Article>
+          <SmallSpan>저기어때. 의 추천 결과 중 만족도가 높은 조합은?</SmallSpan>
+        </Article>
+        <Article>
+          <SmallSpan>저기어때. 의 총 추천 횟수는?</SmallSpan>
+        </Article>
+      </Wrapper>
     </>
   );
 };
-
-export default DIY;
+export default Lab;

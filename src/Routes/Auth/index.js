@@ -98,6 +98,7 @@ const Auth = () => {
     Api.Login(user_id, user_pwd).then((response) => {
       if (response.data.loginSuccess) {
         localStorage.setItem("userId", response.data.userId);
+        localStorage.setItem("user_no", response.data.user_no);
         window.location.href = "/";
         return;
       }
@@ -195,8 +196,8 @@ const Auth = () => {
               </InputItemContainer>
               <Button
                 onClick={() => {
-                  if (id.value.length < 8) {
-                    alert("아이디는 8자 이상이여야 합니다");
+                  if (id.value.length < 6) {
+                    alert("아이디는 6자 이상이여야 합니다");
                     return;
                   } else if (pwd.value.length < 8) {
                     alert("비밀번호는 8자 이상이여야 합니다.");

@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const PieDiv = styled.div`
   width: ${(props) => (props.mode === "Pie" ? `30vw` : `20vw`)};
-  height: 25vw;
+  height: 30vw;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

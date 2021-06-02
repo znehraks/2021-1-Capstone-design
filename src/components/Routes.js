@@ -11,6 +11,7 @@ import ResultHistory from "../Routes/ResultHistory";
 import DIY from "../Routes/ResultHistory/DIY";
 import Student from "../Routes/ResultHistory/Student";
 import Developer from "../Routes/ResultHistory/Developer";
+import Lab from "../Routes/Lab";
 import Admin from "../Routes/Admin";
 
 const Routes = () => {
@@ -34,6 +35,7 @@ const Routes = () => {
       <Route exact path="/DIYHistory" component={DIY}></Route>
       <Route exact path="/StudentHistory" component={Student}></Route>
       <Route exact path="/DeveloperHistory" component={Developer}></Route>
+      <Route exact path="/Lab" component={Lab}></Route>
       <Route exact path="/Auth" component={Auth}></Route>
       <Route exact path="/12284!232842A244" component={Admin}></Route>
       <Redirect from="*" to="/" />

@@ -299,12 +299,12 @@ const Home = () => {
                 </ContentSmallSpan>
                 <ContentSmallSpan>추천을 받는 방식입니다.</ContentSmallSpan>
               </RightTopContainer>
-              <RightTopContainer to="/RecommendationIntro">
+              <RightTopContainer onClick={() => alert("준비중입니다.")}>
                 <ContentSpan>학우들의 선택</ContentSpan>
                 <ContentSmallSpan>학우들이 추천한 자취지역을</ContentSmallSpan>
                 <ContentSmallSpan>추천 받는 방식입니다.</ContentSmallSpan>
               </RightTopContainer>
-              <RightTopContainer to="/RecommendationIntro">
+              <RightTopContainer onClick={() => alert("준비중입니다.")}>
                 <ContentSpan>제작자's pick</ContentSpan>
                 <ContentSmallSpan>제작자가 선별한 자취지역을</ContentSmallSpan>
                 <ContentSmallSpan>추천 받는 방식입니다.</ContentSmallSpan>

@@ -33,7 +33,7 @@ const LogoImage = styled.img`
 `;
 
 const MenuContainer = styled.div`
-  flex: 1;
+  flex: ${(props) => (props.flex ? `${props.flex}` : `1`)};
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -63,6 +63,7 @@ const Header = withRouter(({ location }) => {
   const [open, setOpen] = useState(false);
   const Logout = () => {
     localStorage.removeItem("userId");
+    localStorage.removeItem("user_no");
     window.location.href = "/";
   };
   return (
@@ -71,15 +72,15 @@ const Header = withRouter(({ location }) => {
         <LogoImage src={logo}></LogoImage>
       </LogoContainer>
       {localStorage.getItem("userId") ? (
-        <MenuContainer>
-          <MenuSpan>{localStorage.getItem("userId")}님 안녕하세요!</MenuSpan>
+        <MenuContainer flex={2}>
+          <MenuSpan>{localStorage.getItem("userId")}님 반가워요!</MenuSpan>
         </MenuContainer>
       ) : (
         <></>
       )}
       <MenuContainer>
         <MenuSpan to="/AboutUs" selected={location.pathname === "/AboutUs"}>
-          프로젝트 및 팀 소개
+          프로젝트소개
         </MenuSpan>
       </MenuContainer>
       <MenuContainer>
@@ -91,7 +92,7 @@ const Header = withRouter(({ location }) => {
             location.pathname === "/RecommendationResult"
           }
         >
-          자취방 추천 받기
+          추천 받기
         </MenuSpan>
       </MenuContainer>
       <MenuContainer>
@@ -99,9 +100,14 @@ const Header = withRouter(({ location }) => {
           to="/ResultHistory"
           selected={location.pathname === "/ResultHistory"}
         >
-          추천 이력 조회
+          추천 히스토리
         </MenuSpan>
       </MenuContainer>
+      {/* <MenuContainer>
+        <MenuSpan to="/Lab" selected={location.pathname === "/Lab"}>
+          실험실
+        </MenuSpan>
+      </MenuContainer> */}
       <MenuContainer>
         {localStorage.getItem("userId") ? (
           <MenuSpan

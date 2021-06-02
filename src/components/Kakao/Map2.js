@@ -7,6 +7,7 @@ const MapContainer = ({
   univ_lat,
   univ_lon,
   residencePositions,
+  setHouse,
 }) => {
   useEffect(() => {
     console.log(univ_lat, univ_lon, residencePositions);
@@ -99,6 +100,7 @@ const MapContainer = ({
 
           // 현재 클릭된 마커의 이미지는 클릭 이미지로 변경합니다
           marker.setImage(overImage);
+          setHouse(i);
           // setIsClicked(data[i]);
           // window.scrollTo(window.innerHeight, window.innerHeight);
         }
@@ -140,8 +142,8 @@ const MapContainer = ({
     <div
       id="myMap2"
       style={{
-        width: "26vw",
-        height: "26vw",
+        width: "30vw",
+        height: "30vw",
       }}
     ></div>
   );

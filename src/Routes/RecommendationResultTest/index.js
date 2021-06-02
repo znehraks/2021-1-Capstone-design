@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { Api } from "../../api";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import PieRoom from "../../components/Visualization/PieRoom";
 import Bar from "../../components/Visualization/Bar";
 import Loader from "../../components/Loader";
@@ -64,20 +64,22 @@ const RightContainer = styled.div`
 
 const DetailArticle = styled.div`
   width: 100%;
-  height: ${(props) => (props.height ? `${props.height}` : `45vw`)};
+  height: ${(props) => (props.height ? `${props.height}` : `48vw`)};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  overflow: hidden;
 `;
 
 const DetailItemContainer = styled.div`
   width: 100%;
-  height: 66%;
+  height: 80%;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  overflow: hidden;
 `;
 const DetailItem = styled.div`
   width: 100%;
@@ -157,6 +159,7 @@ const TitleSpan02 = styled.span`
 const TitleSpan03 = styled.span`
   font-size: 2vw;
   margin-bottom: 2vw;
+  margin-top: 5vw;
 `;
 const SubTitleSpan = styled.span`
   font-size: 0.9vw;
@@ -240,7 +243,56 @@ const QuestionDivButton = styled.span`
   width: 6vw;
   height: 3vw;
 `;
+const DetailItemContainer03 = styled.div`
+  width: auto;
+  height: 66%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  overflow: hidden;
+`;
+const Rotation = keyframes`
+  0%{
+    transform: translateX(-37.5vw)
+  }
+  100%{
+    transform: translateX(60vw)
+  }
+`;
 
+const RotationArticle = styled.div`
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(30vw);
+  animation: ${Rotation} 25s linear infinite;
+  img {
+    width: auto;
+    height: auto;
+  }
+`;
+const RotationDetailBox = styled.div`
+  width: 100%;
+  height: 10vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const PriceSpan = styled.span`
+  font-size: 1vw;
+`;
+const RoomDescSpan = styled.span`
+  font-size: 1vw;
+`;
+const RoomDescSpan02 = styled.span`
+  font-size: 1vw;
+`;
 const RecommendationResult = ({ setDetail }) => {
   // const [data, setData] = useState();
   const univ_name = "한국대학교";
@@ -1525,6 +1577,9 @@ const RecommendationResult = ({ setDetail }) => {
   const [monthlyPay, setMonthlyPay] = useState();
   const [reservDeposit, setReservDeposit] = useState();
   const [price, setPrice] = useState();
+  const [currentAddress, setCurrentAddress] = useState("");
+  const [house, setHouse] = useState();
+
   const [isClicked, setIsClicked] = useState("");
   const [isHovered, setIsHovered] = useState("");
   const [count, setCount] = useState(0);
@@ -1545,11 +1600,11 @@ const RecommendationResult = ({ setDetail }) => {
   const [TotalWeightRank04, setTotalWeightRank04] = useState();
   const [TotalWeightRank05, setTotalWeightRank05] = useState();
   useEffect(() => {
-    if (!popup & !qComplete) {
-      setTimeout(() => {
-        setPopup(true);
-      }, 10000);
-    }
+    // if (!popup & !qComplete) {
+    //   setTimeout(() => {
+    //     setPopup(true);
+    //   }, 10000);
+    // }
     if (count == 1) {
       //해시태그 모음
       const hashtagsTemp = [];
@@ -1741,6 +1796,8 @@ const RecommendationResult = ({ setDetail }) => {
                 <ArticleContentContainer>
                   <LeftContainer>
                     <Map
+                      setHouse={setHouse}
+                      setCurrentAddress={setCurrentAddress}
                       isClicked={isClicked}
                       setIsHovered={setIsHovered}
                       setIsClicked={setIsClicked}
@@ -1789,6 +1846,8 @@ const RecommendationResult = ({ setDetail }) => {
                       setMode={setMode}
                     />
                     <PieDetailItem
+                      house={house}
+                      setHouse={setHouse}
                       isClicked={isClicked}
                       mode={mode}
                       setMode={setMode}
@@ -1803,19 +1862,28 @@ const RecommendationResult = ({ setDetail }) => {
             </>
             {hashtags && isClicked && (
               <DetailArticle>
-                <TitleSpan03>매물과 주변지역 상세 정보</TitleSpan03>
-                <DetailItemContainer>
-                  <DetailItem>
-                    <SubTitleSpan>
-                      선택된 지역과 관련있는 키워드입니다.
-                    </SubTitleSpan>
-                    <Wordcloud hashtags={hashtags} />
-                  </DetailItem>
-                  <DetailItem>
-                    <SubTitleSpan>선택된 지역의 매물 분포입니다.</SubTitleSpan>
-                    <PieRoom isClicked={isClicked} />
-                  </DetailItem>
-                </DetailItemContainer>
+                <TitleSpan03>선택된 지역의 매물 한 눈에 보기</TitleSpan03>
+                <DetailItemContainer03>
+                  <RotationArticle>
+                    {isClicked &&
+                      isClicked.rooms_img_url_01.map((item, index) => {
+                        return (
+                          <RotationDetailBox>
+                            <img src={item} />
+                            <PriceSpan>
+                              {isClicked.rooms_price_title[index]}
+                            </PriceSpan>
+                            <RoomDescSpan>
+                              {isClicked.rooms_desc[index]}
+                            </RoomDescSpan>
+                            <RoomDescSpan02>
+                              {isClicked.rooms_desc2[index]}
+                            </RoomDescSpan02>
+                          </RotationDetailBox>
+                        );
+                      })}
+                  </RotationArticle>
+                </DetailItemContainer03>
               </DetailArticle>
             )}
           </>

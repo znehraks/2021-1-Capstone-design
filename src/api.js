@@ -95,7 +95,8 @@ export const Api = {
     rank02_score,
     rank03_score,
     rank04_score,
-    rank05_score
+    rank05_score,
+    user_no
   ) =>
     api.post(`/add_eval`, {
       evaluation_category_no,
@@ -106,6 +107,7 @@ export const Api = {
       rank03_score,
       rank04_score,
       rank05_score,
+      user_no,
     }),
 
   Login: (user_id, user_pwd) => api.post(`/signin`, { user_id, user_pwd }),

@@ -29,7 +29,7 @@ const Detail = ({ hashtags, mode, setMode }) => {
           }
         }}
       >
-        <SubTitleSpan>선택된 지역의 매물 분포입니다.</SubTitleSpan>
+        <SubTitleSpan>선택된 지역과 관련있는 키워드입니다.</SubTitleSpan>
         <Wordcloud hashtags={hashtags} />
       </DetailItem>
     </>

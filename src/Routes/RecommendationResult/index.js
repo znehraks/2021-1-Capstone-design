@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { Api } from "../../api";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import PieRoom from "../../components/Visualization/PieRoom";
 import Bar from "../../components/Visualization/Bar";
 import Loader from "../../components/Loader";
@@ -63,20 +63,22 @@ const RightContainer = styled.div`
 
 const DetailArticle = styled.div`
   width: 100%;
-  height: ${(props) => (props.height ? `${props.height}` : `45vw`)};
+  height: ${(props) => (props.height ? `${props.height}` : `48vw`)};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  overflow: hidden;
 `;
 
 const DetailItemContainer = styled.div`
   width: 100%;
-  height: 66%;
+  height: 80%;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  overflow: hidden;
 `;
 const DetailItem = styled.div`
   width: 100%;
@@ -156,6 +158,7 @@ const TitleSpan02 = styled.span`
 const TitleSpan03 = styled.span`
   font-size: 2vw;
   margin-bottom: 2vw;
+  margin-top: 5vw;
 `;
 const SubTitleSpan = styled.span`
   font-size: 0.9vw;
@@ -190,6 +193,105 @@ const CheckSpanDiv = styled.div`
   top: 5vw;
   left: 14vw;
 `;
+
+const QuestionDiv = styled.div`
+  width: 100%;
+  height: 45vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid ${(props) => props.theme.headerBgColor};
+`;
+const QuestionTitleSpan = styled.span`
+  font-size: 1.5vw;
+`;
+const QuestionItemBigSpan = styled.span`
+  margin-top: 1vw;
+  font-size: 1vw;
+`;
+
+const QuestionItemSmallSpan = styled.span`
+  margin-top: 0.5vw;
+  font-size: 0.8vw;
+`;
+const QuestionItemInputContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 75%;
+  height: auto;
+  margin: 1vw 0;
+`;
+const QuestionItemCheckbox = styled.div`
+  text-align: center;
+  width: 80%;
+  height: 2vw;
+`;
+const QuestionDivButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+const QuestionDivButton = styled.span`
+  margin-top: 2vw;
+  font-size: 1.5vw;
+  text-align: center;
+  width: 6vw;
+  height: 3vw;
+`;
+const DetailItemContainer03 = styled.div`
+  width: auto;
+  height: 66%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  overflow: hidden;
+`;
+const Rotation = keyframes`
+  0%{
+    transform: translateX(-37.5vw)
+  }
+  100%{
+    transform: translateX(60vw)
+  }
+`;
+
+const RotationArticle = styled.div`
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(30vw);
+  animation: ${Rotation} 25s linear infinite;
+  img {
+    width: auto;
+    height: auto;
+  }
+`;
+const RotationDetailBox = styled.div`
+  width: 100%;
+  height: 10vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const PriceSpan = styled.span`
+  font-size: 1vw;
+`;
+const RoomDescSpan = styled.span`
+  font-size: 1vw;
+`;
+const RoomDescSpan02 = styled.span`
+  font-size: 1vw;
+`;
 const RecommendationResult = withRouter(
   ({
     match: {
@@ -220,6 +322,10 @@ const RecommendationResult = withRouter(
     const [monthlyPay, setMonthlyPay] = useState();
     const [reservDeposit, setReservDeposit] = useState();
     const [price, setPrice] = useState();
+
+    const [currentAddress, setCurrentAddress] = useState("");
+    const [house, setHouse] = useState();
+
     const [isClicked, setIsClicked] = useState("");
     const [isHovered, setIsHovered] = useState("");
     const [count, setCount] = useState(0);
@@ -251,7 +357,8 @@ const RecommendationResult = withRouter(
       rank02_score,
       rank03_score,
       rank04_score,
-      rank05_score
+      rank05_score,
+      user_no
     ) => {
       Api.addEval(
         evaluation_category_no,
@@ -261,7 +368,8 @@ const RecommendationResult = withRouter(
         rank02_score,
         rank03_score,
         rank04_score,
-        rank05_score
+        rank05_score,
+        user_no
       ).then((response) => {
         if (response.status === 200) {
           console.log("DB 설문 저장 성공");
@@ -273,7 +381,9 @@ const RecommendationResult = withRouter(
     useEffect(() => {
       if (count === 0 && Number(history) === 0) {
         Api.addDIYRecoHistory(
-          9999,
+          localStorage.getItem("user_no")
+            ? `${Number(localStorage.getItem("user_no"))}`
+            : `9999`,
           50,
           30,
           20,
@@ -318,7 +428,10 @@ const RecommendationResult = withRouter(
           Question02.score,
           Question03.score,
           Question04.score,
-          Question05.score
+          Question05.score,
+          localStorage.getItem("user_no")
+            ? `${Number(localStorage.getItem("user_no"))}`
+            : `9999`
         );
       }
       if (count === 1) {
@@ -644,6 +757,7 @@ const RecommendationResult = withRouter(
     if (!data) {
       console.log(data);
     }
+    console.log(currentAddress);
     //로딩중 화면 추가
     //시각화 간단히 추가해보기
     //지도에 마크업해주고 이 지역에 사시면 00개의 카페, 00개의 공원을 이용하기 편리하고, 덤으로 맥도날드도 가깝군요! 등등 문구 추천
@@ -702,6 +816,8 @@ const RecommendationResult = withRouter(
                   <ArticleContentContainer>
                     <LeftContainer>
                       <Map
+                        setHouse={setHouse}
+                        setCurrentAddress={setCurrentAddress}
                         setIsHovered={setIsHovered}
                         setIsClicked={setIsClicked}
                         data={data}
@@ -721,7 +837,10 @@ const RecommendationResult = withRouter(
                 </Article>{" "}
                 {isClicked && monthlyDeposit && monthlyPay && reservDeposit && (
                   <DetailArticle>
-                    <TitleSpan02>매물 관련 통계</TitleSpan02>
+                    <TitleSpan02>
+                      {currentAddress ? `${currentAddress}` : ``} 주변 매물 관련
+                      통계
+                    </TitleSpan02>
                     {mode === "main" ? (
                       <SubTitleSpan>
                         차트를 클릭하면 자세한 정보를 볼 수 있습니다.
@@ -749,6 +868,8 @@ const RecommendationResult = withRouter(
                         setMode={setMode}
                       />
                       <PieDetailItem
+                        house={house}
+                        setHouse={setHouse}
                         isClicked={isClicked}
                         mode={mode}
                         setMode={setMode}
@@ -763,21 +884,28 @@ const RecommendationResult = withRouter(
               </>
               {hashtags && isClicked && (
                 <DetailArticle>
-                  <TitleSpan03>매물과 주변지역 상세 정보</TitleSpan03>
-                  <DetailItemContainer>
-                    <DetailItem>
-                      <SubTitleSpan>
-                        선택된 지역과 관련있는 키워드입니다.
-                      </SubTitleSpan>
-                      <Wordcloud hashtags={hashtags} />
-                    </DetailItem>
-                    <DetailItem>
-                      <SubTitleSpan>
-                        선택된 지역의 매물 분포입니다.
-                      </SubTitleSpan>
-                      <PieRoom isClicked={isClicked} />
-                    </DetailItem>
-                  </DetailItemContainer>
+                  <TitleSpan03>선택된 지역의 매물 한 눈에 보기</TitleSpan03>
+                  <DetailItemContainer03>
+                    <RotationArticle>
+                      {isClicked &&
+                        isClicked.rooms_img_url_01.map((item, index) => {
+                          return (
+                            <RotationDetailBox>
+                              <img src={item} />
+                              <PriceSpan>
+                                {isClicked.rooms_price_title[index]}
+                              </PriceSpan>
+                              <RoomDescSpan>
+                                {isClicked.rooms_desc[index]}
+                              </RoomDescSpan>
+                              <RoomDescSpan02>
+                                {isClicked.rooms_desc2[index]}
+                              </RoomDescSpan02>
+                            </RotationDetailBox>
+                          );
+                        })}
+                    </RotationArticle>
+                  </DetailItemContainer03>
                 </DetailArticle>
               )}
             </>

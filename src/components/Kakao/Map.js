@@ -12,12 +12,14 @@ import fifth_h from "../Styles/images/5th_hover.png";
 const { kakao } = window;
 
 const MapContainer = ({
+  setHouse,
   isClicked,
   data,
   setIsClicked,
   setIsHovered,
   univ_lat,
   univ_lon,
+  setCurrentAddress,
 }) => {
   useEffect(() => {
     //지도 넣을 컨테이너
@@ -33,6 +35,14 @@ const MapContainer = ({
 
     //지도 객체 생성
     const map = new kakao.maps.Map(container, options);
+
+    function searchDetailAddrFromCoords(coords, callback) {
+      // 좌표로 법정동 상세 주소 정보를 요청합니다
+      geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+    }
+
+    // 주소-좌표 변환 객체를 생성합니다
+    const geocoder = new kakao.maps.services.Geocoder();
 
     //마커 크기와 옵션
     const imageSize = new kakao.maps.Size(50, 60);
@@ -170,8 +180,17 @@ const MapContainer = ({
             selectedMarker.setImage(selectedMarker.normalImage);
 
           // 현재 클릭된 마커의 이미지는 클릭 이미지로 변경합니다
+
+          searchDetailAddrFromCoords(position.latlng, (res, status) => {
+            if (status === kakao.maps.services.Status.OK) {
+              setCurrentAddress(
+                `${res[0].address.region_1depth_name} ${res[0].address.region_2depth_name} ${res[0].address.region_3depth_name}`
+              );
+            }
+          });
           marker.setImage(overImage);
           setIsClicked(data[i]);
+          setHouse();
           window.scrollTo(window.innerHeight, window.innerHeight);
         }
 

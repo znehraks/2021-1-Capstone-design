@@ -36,7 +36,11 @@ const Article = styled.div`
 `;
 const TitleSpan = styled.span`
   font-size: 3vw;
-  margin-bottom: 5vw;
+  margin-bottom: 2vw;
+`;
+const SmallSpan = styled.span`
+  font-size: 1.2vw;
+  margin-bottom: 3vw;
 `;
 const ContentContainer = styled.div`
   width: 100%;
@@ -92,18 +96,19 @@ const ResultHistory = () => {
         <Article>
           <ContentContainer>
             <TitleSpan>내 추천이력 조회하기</TitleSpan>
+            <SmallSpan>현재 DIY방식의 히스토리 조회만 가능합니다.</SmallSpan>
             <Container>
               <RightTopContainer to="/DIYHistory">
                 <ContentSpan>DIY 방식</ContentSpan>
                 <ContentSmallSpan>DIY 방식으로 추천 받은</ContentSmallSpan>
                 <ContentSmallSpan>이력을 조회합니다.</ContentSmallSpan>
               </RightTopContainer>
-              <RightTopContainer to="/StudentHistory">
+              <RightTopContainer onClick={() => alert("준비중입니다.")}>
                 <ContentSpan>학우들의 선택</ContentSpan>
                 <ContentSmallSpan>학우들의 선택으로 추천 받은</ContentSmallSpan>
                 <ContentSmallSpan>이력을 조회합니다.</ContentSmallSpan>
               </RightTopContainer>
-              <RightTopContainer to="/DeveloperHistory">
+              <RightTopContainer onClick={() => alert("준비중입니다.")}>
                 <ContentSpan>제작자's pick</ContentSpan>
                 <ContentSmallSpan>제작자가 선별로 추천 받은</ContentSmallSpan>
                 <ContentSmallSpan>이력을 조회합니다.</ContentSmallSpan>
