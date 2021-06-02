@@ -74,8 +74,6 @@ export default ({
   TotalWeightRank03,
   TotalWeightRank04,
   TotalWeightRank05,
-  QuestionNumber,
-  setQuestionNumber,
 }) => {
   useEffect(() => {
     setQuestion01();

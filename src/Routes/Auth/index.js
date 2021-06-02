@@ -91,6 +91,7 @@ const Auth = () => {
   const id = useInput("");
   const pwd = useInput("");
   const email = useInput("");
+  const authInput = useInput("");
   //로그인 성공 시 LocalStorage에 isLoggedIn 이랑
   //webtoken 저장.
   const Login = (user_id, user_pwd) => {
@@ -100,14 +101,33 @@ const Auth = () => {
         window.location.href = "/";
         return;
       }
-      alert("아이디 또는 비밀번호가 맞지 않습니다.");
+      alert(response.data.message);
     });
   };
 
   const Signup = (user_id, user_pwd, user_email) => {
-    Api.Signup(user_id, user_pwd, user_email).then((response) => {
-      setMode("complete");
-      console.log(response);
+    let authNum = Math.random().toString().substr(2, 6);
+    Api.Signup(user_id, user_pwd, user_email, authNum).then((response) => {
+      if (response.data.signupSuccess) {
+        setMode("complete");
+        console.log(response);
+        Api.SendEmail(user_email, authNum).then((response) => {
+          console.log("sendEmail");
+        });
+        return;
+      }
+      alert("중복된 아이디 입니다.");
+    });
+  };
+
+  const Validate = (authNum) => {
+    Api.Validate(authNum).then((response) => {
+      if (response.data.validateSuccess) {
+        alert("가입을 축하드립니다");
+        window.location.href = "/";
+        return;
+      }
+      alert(response.data.message);
     });
   };
   return (
@@ -122,12 +142,12 @@ const Auth = () => {
               <TitleSpan>로그인</TitleSpan>
               <InputItemContainer>
                 <InputDesc>아이디: </InputDesc>
-                <InputBox placeholder={""} {...id}></InputBox>
+                <InputBox placeholder={"exampleId"} {...id}></InputBox>
               </InputItemContainer>
               <InputItemContainer>
                 <InputDesc>비밀번호:</InputDesc>
                 <InputBox
-                  placeholder={""}
+                  placeholder={"●●●●●●●●"}
                   type={"password"}
                   {...pwd}
                 ></InputBox>
@@ -155,22 +175,53 @@ const Auth = () => {
               <TitleSpan>회원가입</TitleSpan>
               <InputItemContainer>
                 <InputDesc>아이디: </InputDesc>
-                <InputBox placeholder={""} {...id}></InputBox>
+                <InputBox placeholder={"exampleId"} {...id}></InputBox>
               </InputItemContainer>
               <InputItemContainer>
                 <InputDesc>비밀번호:</InputDesc>
                 <InputBox
-                  placeholder={""}
+                  placeholder={"●●●●●●●●"}
                   type={"password"}
                   {...pwd}
                 ></InputBox>
               </InputItemContainer>
               <InputItemContainer>
                 <InputDesc>이메일:</InputDesc>
-                <InputBox placeholder={""} type={"email"} {...email}></InputBox>
+                <InputBox
+                  placeholder={"example@mju.ac.kr"}
+                  type={"email"}
+                  {...email}
+                ></InputBox>
               </InputItemContainer>
               <Button
                 onClick={() => {
+                  if (id.value.length < 8) {
+                    alert("아이디는 8자 이상이여야 합니다");
+                    return;
+                  } else if (pwd.value.length < 8) {
+                    alert("비밀번호는 8자 이상이여야 합니다.");
+                    return;
+                  } else if (
+                    !pwd.value.includes(
+                      "!",
+                      "@",
+                      "#",
+                      "$",
+                      "%",
+                      "^",
+                      "*",
+                      "(",
+                      ")"
+                    )
+                  ) {
+                    alert(
+                      "비밀번호는 !@#$%^*()등의 특수문자가 반드시 포함되어야 합니다."
+                    );
+                    return;
+                  } else if (email.value.split(".ac.")[1] !== "kr") {
+                    alert("회원가입은 재학중인 학교 이메일이여야 합니다.");
+                    return;
+                  }
                   Signup(id.value, pwd.value, email.value);
                 }}
               >
@@ -189,8 +240,26 @@ const Auth = () => {
         {mode === "complete" && (
           <Article>
             <InputContainer>
-              <TitleSpan>가입을 축하드립니다.</TitleSpan>
-              <Button to="/">메인으로</Button>
+              <TitleSpan>인증을 완료해주세요.</TitleSpan>
+              <SmallSpan>
+                등록하신 메일({email.value})에서 인증번호(6자리)를 확인 후
+              </SmallSpan>
+              <SmallSpan>이곳에 기입해 주시면 회원가입이 완료됩니다.</SmallSpan>
+              <InputItemContainer>
+                <InputBox
+                  {...authInput}
+                  type={"password"}
+                  placeholder={"●●●●●●"}
+                ></InputBox>
+              </InputItemContainer>
+              <Button
+                onClick={() => {
+                  Validate(authInput.value);
+                }}
+              >
+                인증완료
+              </Button>
+              <SmallSpan onClick={() => {}}>인증번호 다시 전송하기</SmallSpan>
             </InputContainer>
           </Article>
         )}

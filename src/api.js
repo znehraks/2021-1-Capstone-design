@@ -109,6 +109,11 @@ export const Api = {
     }),
 
   Login: (user_id, user_pwd) => api.post(`/signin`, { user_id, user_pwd }),
-  Signup: (user_id, user_pwd, user_email) =>
-    api.post(`/signup`, { user_id, user_pwd, user_email }),
+  Signup: (user_id, user_pwd, user_email, authNum) =>
+    api.post(`/signup`, { user_id, user_pwd, user_email, authNum }),
+  SendEmail: (user_email, authNum) =>
+    api.post(`/sendEmail`, { user_email, authNum }),
+  Resend: (user_email, user_id, user_pwd, authNum) =>
+    api.post(`/resend`, { user_email, user_id, user_pwd, authNum }),
+  Validate: (authNum) => api.post(`/validate`, { authNum }),
 };

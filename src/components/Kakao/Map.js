@@ -138,6 +138,8 @@ const MapContainer = ({
         position: position.latlng, //마커의 위치
         image: normalImage,
       });
+
+      marker.normalImage = normalImage;
       // 마커에 mouseover 이벤트를 등록합니다
       kakao.maps.event.addListener(marker, "mouseover", function () {
         // 클릭된 마커가 없고, mouseover된 마커가 클릭된 마커가 아니면
