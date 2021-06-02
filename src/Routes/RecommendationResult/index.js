@@ -206,6 +206,7 @@ const RecommendationResult = withRouter(
         w3,
         w4,
         w5,
+        history,
       },
     },
     setDetail,
@@ -270,7 +271,7 @@ const RecommendationResult = withRouter(
       });
     };
     useEffect(() => {
-      if (count === 0) {
+      if (count === 0 && Number(history) === 0) {
         Api.addDIYRecoHistory(
           9999,
           50,
@@ -300,7 +301,7 @@ const RecommendationResult = withRouter(
           }
         });
       }
-      if (!popup & !qComplete & !canceled) {
+      if (Number(history) === 0 && !popup & !qComplete & !canceled) {
         setTimeout(() => {
           setPopup(true);
         }, 15000);

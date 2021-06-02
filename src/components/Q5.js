@@ -286,7 +286,7 @@ const Q5 = ({
           {Q5Answer ? (
             <Submit
               to={{
-                pathname: `/RecommendationResult/${univ_name}/${univ_lat}/${univ_lon}/${Q2Answer}/${Q3Answer}/${Q4Answer}/${Q5Answer}/${w1}/${w2}/${w3}/${w4}/${w5}`,
+                pathname: `/RecommendationResult/${univ_name}/${univ_lat}/${univ_lon}/${Q2Answer}/${Q3Answer}/${Q4Answer}/${Q5Answer}/${w1}/${w2}/${w3}/${w4}/${w5}/0`,
               }}
             >
               완료

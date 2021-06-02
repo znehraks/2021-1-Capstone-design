@@ -116,4 +116,6 @@ export const Api = {
   Resend: (user_email, user_id, user_pwd, authNum) =>
     api.post(`/resend`, { user_email, user_id, user_pwd, authNum }),
   Validate: (authNum) => api.post(`/validate`, { authNum }),
+
+  getDiyHistory: (user_id) => api.get(`/getDiyHistory/${user_id}`),
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Loader from "../../components/Loader";
@@ -6,6 +6,7 @@ import Detail from "./Detail";
 import Back from "../../components/Styles/images/back.png";
 import Magnify from "../../components/Styles/images/magnify.png";
 import useInput from "../../Hooks/useInput";
+import { Api } from "../../api";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -149,6 +150,13 @@ const DIY = () => {
 
   //메인인지, 상세인지 구분하게 하는 hook
   const [detail, setDetail] = useState(false);
+  useEffect(() => {
+    Api.getDiyHistory(localStorage.getItem("userId")).then((response) => {
+      if (response.data) {
+        setHistory(response.data);
+      }
+    });
+  }, []);
   return (
     <>
       {/* {history && ( */}
@@ -180,52 +188,22 @@ const DIY = () => {
                 <Item flex={1}>나의 만족도</Item>
                 <Item flex={2}>일시</Item>
               </ListItem>
-              <ListItem
-                onClick={() => {
-                  setDetail(true);
-                }}
-              >
-                <Item flex={2}>20210201</Item>
-                <Item flex={2}>명지대학교 인문캠퍼스</Item>
-                <Item flex={4}>서울시 남가좌동 20-1 외 4개 지역</Item>
-                <Item flex={1}>4</Item>
-                <Item flex={2}>2021-05-12</Item>
-              </ListItem>
-              <ListItem>
-                <Item flex={2}>20210201</Item>
-                <Item flex={2}>명지대학교 인문캠퍼스</Item>
-                <Item flex={4}>서울시 남가좌동 20-1 외 4개 지역</Item>
-                <Item flex={1}>4</Item>
-                <Item flex={2}>2021-05-12</Item>
-              </ListItem>
-              <ListItem>
-                <Item flex={2}>20210201</Item>
-                <Item flex={2}>명지대학교 인문캠퍼스</Item>
-                <Item flex={4}>서울시 남가좌동 20-1 외 4개 지역</Item>
-                <Item flex={1}>4</Item>
-                <Item flex={2}>2021-05-12</Item>
-              </ListItem>
-              <ListItem>
-                <Item flex={2}>20210201</Item>
-                <Item flex={2}>명지대학교 인문캠퍼스</Item>
-                <Item flex={4}>서울시 남가좌동 20-1 외 4개 지역</Item>
-                <Item flex={1}>4</Item>
-                <Item flex={2}>2021-05-12</Item>
-              </ListItem>
-              <ListItem>
-                <Item flex={2}>20210201</Item>
-                <Item flex={2}>명지대학교 인문캠퍼스</Item>
-                <Item flex={4}>서울시 남가좌동 20-1 외 4개 지역</Item>
-                <Item flex={1}>4</Item>
-                <Item flex={2}>2021-05-12</Item>
-              </ListItem>
-              <ListItem>
-                <Item flex={2}>20210201</Item>
-                <Item flex={2}>명지대학교 인문캠퍼스</Item>
-                <Item flex={4}>서울시 남가좌동 20-1 외 4개 지역</Item>
-                <Item flex={1}>4</Item>
-                <Item flex={2}>2021-05-12</Item>
-              </ListItem>
+              {history &&
+                history.map((item) => {
+                  return (
+                    <ListItem
+                      to={{
+                        pathname: `/RecommendationResult/${item.Q1}/${item.univ_lat}/${item.univ_lon}/${item.Q2}/${item.Q3}/${item.Q4}/${item.Q5}/${item.w1}/${item.w2}/${item.w3}/${item.w4}/${item.w5}/1`,
+                      }}
+                    >
+                      <Item flex={2}>{item.diy_reco_history_no}</Item>
+                      <Item flex={2}>{item.Q1}</Item>
+                      <Item flex={4}>{item.Q1}</Item>
+                      <Item flex={1}>4</Item>
+                      <Item flex={2}>{item.updated_at.split("T")[0]}</Item>
+                    </ListItem>
+                  );
+                })}
             </ListContainer>
           </Article>
           <ButtonContainer>
