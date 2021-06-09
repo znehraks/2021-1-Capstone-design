@@ -214,9 +214,11 @@ const TitleSpan = styled.span`
   margin-top: 2vw;
   margin-bottom: 1vw;
   @media (max-width: 500px) {
-    font-size: 4vw;
+    font-size: 3.5vw;
     margin-top: 10vh;
     margin-bottom: 5vw;
+    margin-left: 2vw;
+    margin-right: 2vw;
   }
 `;
 const TitleSpan02 = styled.span`
@@ -224,7 +226,7 @@ const TitleSpan02 = styled.span`
   margin-top: 4vw;
   margin-bottom: 1vw;
   @media (max-width: 500px) {
-    font-size: 5vw;
+    font-size: 3.5vw;
   }
 `;
 const TitleSpan03 = styled.span`
@@ -238,15 +240,17 @@ const TitleSpan03 = styled.span`
 const SubTitleSpan = styled.span`
   font-size: 0.9vw;
   @media (max-width: 500px) {
-    margin-bottom: 4vh;
-    font-size: 3vw;
+    margin-bottom: 2vh;
+    font-size: 2.5vw;
+    margin-left: 4vw;
+    margin-right: 4vw;
   }
 `;
 const SubTitleSpanBottom = styled.span`
   font-size: 0.9vw;
   @media (max-width: 500px) {
     margin-bottom: 15vh;
-    font-size: 3vw;
+    font-size: 2.5vw;
   }
 `;
 const CheckSpan = styled.span`
@@ -336,6 +340,9 @@ const DetailItemContainer03 = styled.div`
   justify-content: space-evenly;
   align-items: center;
   overflow: hidden;
+  @media (max-width: 500px) {
+    height: 20%;
+  }
 `;
 const Rotation = keyframes`
   0%{
