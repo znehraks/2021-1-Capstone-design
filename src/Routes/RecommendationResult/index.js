@@ -33,6 +33,15 @@ const Article = styled.div`
   height: 37vw;
   margin-top: 2vw;
 `;
+const CenterArticle = styled.div`
+  width: 100vw;
+  height: 37vw;
+  margin-top: 2vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 const ArticleContentContainer = styled.div`
   width: 90%;
@@ -145,6 +154,12 @@ const OptionSpan = styled.span`
   font-size: 0.5vw;
 `;
 
+const TitleSpanLoader = styled.span`
+  font-size: 2vw;
+  margin-top: 2vw;
+  margin-bottom: 1vw;
+  display: ${(props) => (props.visible ? `flex` : `none`)};
+`;
 const TitleSpan = styled.span`
   font-size: 2vw;
   margin-top: 2vw;
@@ -272,7 +287,7 @@ const RotationArticle = styled.div`
   animation: ${Rotation} 25s linear infinite;
   img {
     width: auto;
-    height: auto;
+    height: 170%;
   }
 `;
 const RotationDetailBox = styled.div`
@@ -348,6 +363,8 @@ const RecommendationResult = withRouter(
     const [TotalWeightRank03, setTotalWeightRank03] = useState();
     const [TotalWeightRank04, setTotalWeightRank04] = useState();
     const [TotalWeightRank05, setTotalWeightRank05] = useState();
+
+    const [visible, setVisible] = useState(false);
     console.log(newData);
     const SubmitEvaluation = (
       evaluation_category_no,
@@ -414,7 +431,9 @@ const RecommendationResult = withRouter(
       if (Number(history) === 0 && !popup & !qComplete & !canceled) {
         setTimeout(() => {
           setPopup(true);
-        }, 15000);
+          setVisible(true);
+          window.scrollTo(0, 0);
+        }, 20000);
       }
       if (qComplete & !submitted) {
         SubmitEvaluation(
@@ -911,9 +930,12 @@ const RecommendationResult = withRouter(
             </>
           )}
           {!data && (
-            <Article>
+            <CenterArticle>
+              <TitleSpanLoader visible={visible}>
+                10초가 넘게 진행되지 않는다면 새로고침을 해주세요.
+              </TitleSpanLoader>
               <Loader />
-            </Article>
+            </CenterArticle>
           )}
         </Wrapper>
       </>

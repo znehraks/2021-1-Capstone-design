@@ -280,7 +280,7 @@ const Home = () => {
               </ContentSpan02>
               <ContentSpan02>나의, 나를 위한, 오직 나에 의한,</ContentSpan02>
               <ContentSpan02>
-                자취지역을 A.I알고리즘으로 추천해 드립니다.
+                자취지역을 자체 개발 알고리즘으로 추천해 드립니다.
               </ContentSpan02>
             </Blank>
             <Blank>
@@ -312,7 +312,7 @@ const Home = () => {
             </Container>
           </ContentContainer>
         </Article>
-        <Article>
+        {/* <Article>
           <ContentContainer>
             <TitleSpan>저기어때.의 이용후기</TitleSpan>
             <ColumnContainer>
@@ -324,7 +324,7 @@ const Home = () => {
               <MediumSpan></MediumSpan>
             </ColumnContainer>
           </ContentContainer>
-        </Article>
+        </Article> */}
       </Wrapper>
     </>
   );
