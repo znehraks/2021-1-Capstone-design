@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { alertIsPresent } from "selenium-webdriver/lib/until";
 import styled from "styled-components";
 import useInput from "../Hooks/useInput";
 import Q2Map from "./Kakao/Q2Map";
@@ -240,6 +241,9 @@ const Q2 = ({
   univ_lon,
 }) => {
   const distance = useInput("");
+  useEffect(() => {
+    setQ2Answer();
+  }, []);
   return (
     <>
       <CurrentSelectedDiv>
@@ -291,25 +295,29 @@ const Q2 = ({
           </Prev>
           <Next
             onClick={() => {
-              if (!Q2Answer && distance.value === "") {
-                alert("거리는 필수 항목입니다.");
-                return;
-              } else {
-                if (
-                  !Q2Answer &&
-                  (distance.value < 500 || distance.value > 5000)
+              if (window.innerWidth <= 500) {
+                if (distance.value === "") {
+                  alert("거리는 필수 항목입니다.");
+                  return;
+                } else if (
+                  Number(distance.value) < 200 ||
+                  Number(distance.value) > 5000 ||
+                  isNaN(Number(distance.value))
                 ) {
                   alert(
                     "거리가 허용범위 밖이거나 올바른 값이 아닙니다. 다시 입력해주세요."
                   );
                   return;
                 } else {
-                  if (!Q2Answer && distance.value) {
-                    setQ2Answer(distance.value);
-                  }
-                  setQNumber(3);
+                  setQ2Answer(distance.value);
+                }
+              } else {
+                if (!Q2Answer) {
+                  alert("거리는 필수 항목입니다.");
+                  return;
                 }
               }
+              setQNumber(3);
             }}
           >
             다음
