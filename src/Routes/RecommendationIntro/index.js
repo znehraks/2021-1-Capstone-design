@@ -110,7 +110,7 @@ const ButtonBox = styled.div`
   justify-content: flex-start;
   align-items: center;
   @media (max-width: 500px) {
-    height: 0%;
+    height: 10vw;
   }
 `;
 
