@@ -15,6 +15,10 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   background: transparent;
+  @media (max-width: 500px) {
+    margin-top: 0vw;
+    height: 90vh;
+  }
 `;
 
 const Article = styled.div`
@@ -24,6 +28,9 @@ const Article = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  @media (max-width: 500px) {
+    height: auto;
+  }
 `;
 
 const OuterBox = styled.div`
@@ -33,6 +40,9 @@ const OuterBox = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 500px) {
+    width: 90%;
+  }
 `;
 const TitleContainer = styled.div`
   width: 100%;
@@ -88,6 +98,9 @@ const RightBottomContainer = styled(Link)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width: 500px) {
+    margin-top: 10vw;
+  }
 `;
 
 const ContentImage = styled.img`
@@ -98,11 +111,17 @@ const ContentImage = styled.img`
 const ContentTitleSpan = styled.span`
   font-size: 2vw;
   margin: 5vw 0;
+  @media (max-width: 500px) {
+    font-size: 5.5vw;
+  }
 `;
 const ContentSpan = styled.span`
   font-size: 1.2vw;
   line-height: 150%;
   margin-bottom: 2vw;
+  @media (max-width: 500px) {
+    font-size: 3vw;
+  }
 `;
 
 const SpanLink = styled(Link)`
@@ -113,6 +132,10 @@ const SpanLink = styled(Link)`
     background: black;
     color: white;
     font-weight: 800;
+  }
+  @media (max-width: 500px) {
+    padding: 2vw 4vw;
+    font-size: 3vw;
   }
 `;
 

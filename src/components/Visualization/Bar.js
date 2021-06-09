@@ -9,6 +9,11 @@ const Div = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 4vw;
+  @media (max-width: 500px) {
+    width: 85vw;
+    height: 50vw;
+    margin-top: 5vw;
+  }
 `;
 
 const BarChart = ({

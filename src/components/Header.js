@@ -17,6 +17,9 @@ const Wrapper = styled.div`
   top: 0;
   left: 0;
   z-index: 2;
+  @media (max-width: 500px) {
+    height: 20vw;
+  }
 `;
 
 const LogoContainer = styled(Link)`
@@ -25,19 +28,37 @@ const LogoContainer = styled(Link)`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  @media (max-width: 500px) {
+    padding-left: 5vw;
+    justify-content: flex-start;
+    width: 20vw;
+  }
 `;
 
 const LogoImage = styled.img`
   width: 6vw;
   height: auto;
+  @media (max-width: 500px) {
+    width: 20vw;
+  }
 `;
 
+const HelloContainer = styled.div`
+  flex: ${(props) => (props.flex ? `${props.flex}` : `1`)};
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
 const MenuContainer = styled.div`
   flex: ${(props) => (props.flex ? `${props.flex}` : `1`)};
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 const HamburgerContainer = styled.div`
   flex: 1;
@@ -53,6 +74,9 @@ const MenuSpan = styled(Link)`
   color: ${(props) => (props.selected ? `black` : `white`)};
   :hover {
     color: black;
+  }
+  @media (max-width: 500px) {
+    font-size: 3vw;
   }
 `;
 
@@ -72,9 +96,9 @@ const Header = withRouter(({ location }) => {
         <LogoImage src={logo}></LogoImage>
       </LogoContainer>
       {localStorage.getItem("userId") ? (
-        <MenuContainer flex={2}>
+        <HelloContainer flex={2}>
           <MenuSpan>{localStorage.getItem("userId")}님 반가워요!</MenuSpan>
-        </MenuContainer>
+        </HelloContainer>
       ) : (
         <></>
       )}

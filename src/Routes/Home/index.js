@@ -39,6 +39,9 @@ const Wrapper = styled.div`
   align-items: center;
   background: #fff;
   padding-top: 6vw;
+  @media (max-width: 500px) {
+    padding-top: 20vw;
+  }
 `;
 const SquareDiv = styled.div`
   position: relative;
@@ -62,6 +65,11 @@ const BlackSquare01 = styled.div`
   height: 90%;
   background: transparent;
   border: 4px solid black;
+  @media (max-width: 500px) {
+    width: 120%;
+    height: 120%;
+    left: -12%;
+  }
 `;
 const BlackSquare02 = styled.div`
   position: absolute;
@@ -71,12 +79,29 @@ const BlackSquare02 = styled.div`
   height: 90%;
   background: transparent;
   border: 4px solid black;
+  @media (max-width: 500px) {
+    width: 120%;
+    height: 120%;
+    top: -10%;
+    left: -8%;
+  }
 `;
 
 const ArrowDiv = styled(Arrow)`
   position: absolute;
   bottom: 0;
   left: 0;
+  @media (max-width: 500px) {
+    display: none;
+  }
+`;
+const MobileArrowDiv = styled(Arrow)`
+  position: absolute;
+  bottom: 0;
+  left: ${(props) => (props.left ? `${props.left}` : `0`)};
+  @media (min-width: 500px) {
+    display: none;
+  }
 `;
 const Article = styled.div`
   width: 100vw;
@@ -86,6 +111,9 @@ const Article = styled.div`
   justify-content: ${(props) => (props.justify ? `flex-start` : `center`)};
   align-items: center;
   background: ${(props) => (props.bgColor ? `${props.bgColor}` : `#fafafa`)};
+  @media (max-width: 500px) {
+    height: 60vh;
+  }
 `;
 
 const Slider = styled(SliderComponent)`
@@ -102,11 +130,16 @@ const TitleContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width: 500px) {
+    height: 50%;
+  }
 `;
 const TitleSpan = styled.span`
   font-size: 3vw;
   margin-bottom: 2vw;
   animation: ${Animation01} 0.5s linear;
+  @media (max-width: 500px) {
+  }
 `;
 const MediumSpan = styled.span`
   font-size: 1.2vw;
@@ -124,6 +157,8 @@ const ContentContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin: 3vw 0;
+  @media (max-width: 500px) {
+  }
 `;
 
 const Container = styled.div`
@@ -168,6 +203,9 @@ const ContentSpan = styled.span`
 const ContentSmallSpan = styled.span`
   margin-top: 1vw;
   font-size: 0.9vw;
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 const VerticalLine = styled.div`
   position: absolute;
@@ -177,10 +215,16 @@ const VerticalLine = styled.div`
   height: 48vw;
   padding: 1vw;
   background: ${(props) => props.theme.headerBgColor};
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 const LeftContainer = styled.div`
   width: 40vw;
   height: 45vw;
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 const ImgContainer = styled.div`
   width: 50%;
@@ -198,6 +242,13 @@ const RightContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  @media (max-width: 500px) {
+    width: 100vw;
+    padding: 0 10vw;
+    height: 70vw;
+    justify-content: center;
+    position: relative;
+  }
 `;
 const HorizontalLine = styled.div`
   width: 25vw;
@@ -207,14 +258,23 @@ const HorizontalLine = styled.div`
 `;
 const TitleSpan02 = styled.span`
   font-size: 2.4vw;
+  @media (max-width: 500px) {
+    font-size: 5vw;
+  }
 `;
 const SubTitleSpan02 = styled.span`
   font-size: 1.5vw;
   margin-bottom: 1vw;
+  @media (max-width: 500px) {
+    font-size: 3vw;
+  }
 `;
 const ContentSpan02 = styled.span`
   font-size: 1.2vw;
   margin-bottom: 0.6vw;
+  @media (max-width: 500px) {
+    font-size: 3vw;
+  }
 `;
 const Blank = styled.div`
   margin: 1vw 0;
@@ -231,6 +291,10 @@ const MoreSpan = styled(Link)`
   :hover {
     color: white;
     background: black;
+  }
+  @media (max-width: 500px) {
+    font-size: 3vw;
+    padding: 1.2vw 1.6vw;
   }
 `;
 
@@ -252,6 +316,7 @@ const Home = () => {
               <BlackSquare02 />
             </SquareDiv>
             <ArrowDiv height={window.innerHeight} />
+            <MobileArrowDiv height={window.innerHeight * 0.5} />
           </ContentContainer>
         </Article>
         <Article justify={"flex-start"}>
@@ -286,6 +351,9 @@ const Home = () => {
             <Blank>
               <MoreSpan to={`/Aboutus`}>더보기</MoreSpan>
             </Blank>
+            {window.innerWidth <= 500 && (
+              <MobileArrowDiv left={"31vw"} height={window.innerHeight * 2} />
+            )}
           </RightContainer>
         </Article>
         <Article>

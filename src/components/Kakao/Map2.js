@@ -8,6 +8,7 @@ const MapContainer = ({
   univ_lon,
   residencePositions,
   setHouse,
+  mobile,
 }) => {
   useEffect(() => {
     console.log(univ_lat, univ_lon, residencePositions);
@@ -142,8 +143,8 @@ const MapContainer = ({
     <div
       id="myMap2"
       style={{
-        width: "30vw",
-        height: "30vw",
+        width: mobile ? "80vw" : "30vw",
+        height: mobile ? "80vw" : "30vw",
       }}
     ></div>
   );

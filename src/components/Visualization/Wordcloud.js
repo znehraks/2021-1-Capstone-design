@@ -3,8 +3,11 @@ import ReactWordCloud from "react-wordcloud";
 import styled from "styled-components";
 import { Resizable } from "re-resizable";
 
-const Wrapper = styled(Resizable)``;
-export default ({ hashtags }) => {
+const Wrapper = styled(Resizable)`
+  @media (max-width: 500px) {
+  }
+`;
+export default ({ hashtags, mobile }) => {
   const [hashtagsDict, setHashtagsDict] = useState([]);
   // const [words, setWords] = useState([]);
   useEffect(() => {
@@ -46,7 +49,12 @@ export default ({ hashtags }) => {
   };
   const minSize = [1200, 1000];
   return (
-    <Wrapper defaultSize={{ width: "30vw", height: "25vw" }}>
+    <Wrapper
+      defaultSize={{
+        width: mobile ? "100vw" : "30vw",
+        height: mobile ? "50vw" : "25vw",
+      }}
+    >
       <ReactWordCloud
         deterministic={true}
         fontWeight={"bold"}
@@ -56,6 +64,7 @@ export default ({ hashtags }) => {
         fontWeight={"bold"}
         options={options}
         words={hashtagsDict}
+        width={mobile && "100vw"}
       />
     </Wrapper>
   );

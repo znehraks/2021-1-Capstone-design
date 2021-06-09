@@ -13,15 +13,26 @@ const Wrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   -ms-overflow-style: none;
+  @media (max-width: 500px) {
+    justify-content: center;
+  }
 `;
 const TitleSpan = styled.span`
   font-size: 2.5vw;
   margin-top: 5vw;
+  @media (max-width: 500px) {
+    font-size: 4.5vw;
+    margin: 4vw 0;
+  }
 `;
 const SubTitleSpan = styled.span`
   font-size: 1vw;
   margin-top: 1vw;
   margin-bottom: 6vw;
+  @media (max-width: 500px) {
+    font-size: 2vw;
+    padding: 0 19vw;
+  }
 `;
 const Article = styled.div`
   width: 70%;
@@ -31,6 +42,10 @@ const Article = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 5vw;
+  @media (max-width: 500px) {
+    width: 100%;
+    height: 30vw;
+  }
 `;
 const InputBox = styled.input`
   width: 50%;
@@ -39,6 +54,11 @@ const InputBox = styled.input`
   border: none;
   border-bottom: 4px solid black;
   background: transparent;
+  @media (max-width: 500px) {
+    width: 60%;
+    height: 8vw;
+    font-size: 4vw;
+  }
 `;
 const HiddenList = styled.div`
   width: 50%;
@@ -60,6 +80,10 @@ const HiddenList = styled.div`
   }
   overflow: scroll;
   /* display: {props=>props.} */
+  @media (max-width: 500px) {
+    width: 60%;
+    height: 20vw;
+  }
 `;
 const HiddenListItem = styled.span`
   margin-top: 0.8vw;
@@ -70,6 +94,9 @@ const HiddenListItem = styled.span`
   :hover {
     color: ${(props) => props.theme.headerBgColor};
     font-weight: 800;
+  }
+  @media (max-width: 500px) {
+    font-size: 3.5vw;
   }
 `;
 const ButtonContainer = styled.div`
@@ -95,6 +122,11 @@ const Next = styled.span`
     color: white;
     background: black;
     font-weight: 800;
+  }
+  @media (max-width: 500px) {
+    width: 18vw;
+    height: 8.5vw;
+    font-size: 5vw;
   }
 `;
 const Q1 = ({

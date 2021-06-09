@@ -24,14 +24,18 @@ const Loader = styled.div`
   text-align: center;
   cursor: pointer;
 `;
-
 const Img = styled.img`
   bottom: ${(props) => (props.bottom ? `-15wv` : `-20vw`)};
+  left: ${(props) => (props.left ? `${props.left}` : ``)};
   width: 8vw;
   position: absolute;
+  @media (max-width: 500px) {
+    bottom: -40vw;
+    width: 20vw;
+  }
 `;
 
-export default ({ height, bottom }) => (
+export default ({ height, bottom, left }) => (
   <Loader
     bottom={bottom}
     onClick={() => {
@@ -41,6 +45,6 @@ export default ({ height, bottom }) => (
       );
     }}
   >
-    <Img src={Arrow} />
+    <Img left={left} src={Arrow} />
   </Loader>
 );

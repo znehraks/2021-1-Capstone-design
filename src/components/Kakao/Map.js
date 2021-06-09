@@ -20,6 +20,7 @@ const MapContainer = ({
   univ_lat,
   univ_lon,
   setCurrentAddress,
+  mobile,
 }) => {
   useEffect(() => {
     //지도 넣을 컨테이너
@@ -45,8 +46,14 @@ const MapContainer = ({
     const geocoder = new kakao.maps.services.Geocoder();
 
     //마커 크기와 옵션
-    const imageSize = new kakao.maps.Size(50, 60);
-    const imageOption = { offset: new kakao.maps.Point(30, 60) };
+    const imageSize = mobile
+      ? new kakao.maps.Size(25, 30)
+      : new kakao.maps.Size(50, 60);
+    const imageOption = {
+      offset: mobile
+        ? new kakao.maps.Point(15, 30)
+        : new kakao.maps.Point(30, 60),
+    };
 
     //마커 정보 담은 객체 생성
     let residencePositions = [];
@@ -168,7 +175,6 @@ const MapContainer = ({
           marker.setImage(normalImage);
         }
       });
-
       // 마커에 click 이벤트를 등록합니다
       kakao.maps.event.addListener(marker, "click", function () {
         // 클릭된 마커가 없고, click 마커가 클릭된 마커가 아니면
@@ -191,7 +197,10 @@ const MapContainer = ({
           marker.setImage(overImage);
           setIsClicked(data[i]);
           setHouse();
-          window.scrollTo(window.innerHeight, window.innerHeight);
+          window.scrollTo(
+            mobile ? window.innerHeight * 0.5 : window.innerHeight,
+            mobile ? window.innerHeight * 0.5 : window.innerHeight
+          );
         }
 
         // 클릭된 마커를 현재 클릭된 마커 객체로 설정합니다
@@ -231,8 +240,8 @@ const MapContainer = ({
     <div
       id="myMap"
       style={{
-        width: "40vw",
-        height: "40vw",
+        width: mobile ? "80vw" : "40vw",
+        height: mobile ? "80vw" : "40vw",
       }}
     ></div>
   );

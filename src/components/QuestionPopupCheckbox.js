@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const QuestionItemCheckbox = styled.div`
   text-align: center;
-  width: 80%;
+  width: 95%;
   height: 1.4vw;
   cursor: pointer;
   color: ${(props) =>
@@ -11,6 +11,9 @@ const QuestionItemCheckbox = styled.div`
   font-weight: ${(props) => (props.checked ? `800` : ``)};
   :hover {
     color: ${(props) => props.theme.headerBgColor};
+  }
+  @media (max-width: 500px) {
+    font-size: 2.5vw;
   }
 `;
 export default ({

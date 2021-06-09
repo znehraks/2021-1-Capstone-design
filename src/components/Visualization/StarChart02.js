@@ -6,11 +6,16 @@ import { ResponsiveRadar } from "@nivo/radar";
 // no chart will be rendered.
 // website examples showcase many properties,
 // you'll often use just a few of them.
-const MyResponsiveRadar = ({ data, isHovered /* see data tab */ }) => {
+const MyResponsiveRadar = ({
+  data,
+  isHovered,
+  isClicked /* see data tab */,
+  mobile,
+}) => {
   return (
     <ResponsiveRadar
       data={data}
-      keys={[`${isHovered.rank}위`, "평균"]}
+      keys={[isHovered ? `${isHovered.rank}위` : `${isClicked.rank}위`, "평균"]}
       indexBy="weight"
       maxValue={35}
       margin={{ top: 100, right: 100, bottom: 40, left: 100 }}
@@ -21,7 +26,7 @@ const MyResponsiveRadar = ({ data, isHovered /* see data tab */ }) => {
       gridShape="linear"
       gridLabelOffset={36}
       enableDots={true}
-      dotSize={4}
+      dotSize={mobile ? 2 : 4}
       dotColor={{ theme: "background" }}
       dotBorderWidth={2}
       dotBorderColor={{ from: "color" }}
@@ -35,7 +40,7 @@ const MyResponsiveRadar = ({ data, isHovered /* see data tab */ }) => {
       motionConfig="wobbly"
       isInteractive={true}
       theme={{
-        fontSize: 20,
+        fontSize: mobile ? 10 : 20,
         fontWeight: 800,
       }}
       legends={[
@@ -44,10 +49,10 @@ const MyResponsiveRadar = ({ data, isHovered /* see data tab */ }) => {
           direction: "column",
           translateX: -50,
           translateY: -40,
-          itemWidth: 80,
-          itemHeight: 20,
+          itemWidth: mobile ? 200 : 80,
+          itemHeight: mobile ? 40 : 20,
           itemTextColor: "#000",
-          symbolSize: 20,
+          symbolSize: mobile ? 10 : 20,
           symbolShape: "circle",
           effects: [
             {

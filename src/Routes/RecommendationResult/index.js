@@ -16,22 +16,11 @@ import RadarArticle from "../../components/Visualization/RadarArticle";
 import Wordcloud from "../../components/Visualization/Wordcloud";
 import QuestionPopup from "../../components/QuestionPopup";
 
-const Wrapper = styled.div`
-  width: 100vw;
-  min-height: 100vh;
-  margin-top: 6vw;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: transparent;
-`;
-
-const Article = styled.div`
-  width: 100%;
-  height: 37vw;
+const TitleSpanLoader = styled.span`
+  font-size: 2vw;
   margin-top: 2vw;
+  margin-bottom: 1vw;
+  display: ${(props) => (props.visible ? `flex` : `none`)};
 `;
 const CenterArticle = styled.div`
   width: 100vw;
@@ -43,6 +32,32 @@ const CenterArticle = styled.div`
   align-items: center;
 `;
 
+const Wrapper = styled.div`
+  width: 100vw;
+  min-height: 100vh;
+  margin-top: 6vw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  @media (max-width: 500px) {
+    margin-top: 10vw;
+  }
+`;
+
+const Article = styled.div`
+  width: 100%;
+  height: 37vw;
+  margin-top: 2vw;
+  @media (max-width: 500px) {
+    height: 50vw;
+    margin-bottom: 20vw;
+    padding-top: 72vh;
+  }
+`;
+
 const ArticleContentContainer = styled.div`
   width: 90%;
   height: 100%;
@@ -50,6 +65,11 @@ const ArticleContentContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  @media (max-width: 500px) {
+    width: 100vw;
+    height: 80vw;
+    flex-direction: column;
+  }
 `;
 
 const LeftContainer = styled.div`
@@ -59,6 +79,11 @@ const LeftContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  @media (max-width: 500px) {
+    width: 100vw;
+    height: 80vw;
+    flex-direction: column;
+  }
 `;
 
 const RightContainer = styled.div`
@@ -68,6 +93,13 @@ const RightContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
+  @media (max-width: 500px) {
+    width: 100vw;
+    height: 80vw;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 200vw;
+  }
 `;
 
 const DetailArticle = styled.div`
@@ -78,6 +110,22 @@ const DetailArticle = styled.div`
   justify-content: flex-start;
   align-items: center;
   overflow: hidden;
+  @media (max-width: 500px) {
+    height: 280vw;
+  }
+`;
+const DetailArticle03 = styled.div`
+  width: 100%;
+  height: ${(props) => (props.height ? `${props.height}` : `48vw`)};
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  @media (max-width: 500px) {
+    margin-top: -10vh;
+    height: 50vh;
+  }
 `;
 
 const DetailItemContainer = styled.div`
@@ -88,6 +136,10 @@ const DetailItemContainer = styled.div`
   justify-content: space-evenly;
   align-items: center;
   overflow: hidden;
+  @media (max-width: 500px) {
+    flex-direction: column;
+    height: 200vh;
+  }
 `;
 const DetailItem = styled.div`
   width: 100%;
@@ -126,6 +178,9 @@ const RightFloatingDiv02 = styled.div`
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 const BackArrow = styled.div`
   width: 3vw;
@@ -154,29 +209,45 @@ const OptionSpan = styled.span`
   font-size: 0.5vw;
 `;
 
-const TitleSpanLoader = styled.span`
-  font-size: 2vw;
-  margin-top: 2vw;
-  margin-bottom: 1vw;
-  display: ${(props) => (props.visible ? `flex` : `none`)};
-`;
 const TitleSpan = styled.span`
   font-size: 2vw;
   margin-top: 2vw;
   margin-bottom: 1vw;
+  @media (max-width: 500px) {
+    font-size: 4vw;
+    margin-top: 10vh;
+    margin-bottom: 5vw;
+  }
 `;
 const TitleSpan02 = styled.span`
   font-size: 2vw;
   margin-top: 4vw;
   margin-bottom: 1vw;
+  @media (max-width: 500px) {
+    font-size: 5vw;
+  }
 `;
 const TitleSpan03 = styled.span`
   font-size: 2vw;
   margin-bottom: 2vw;
   margin-top: 5vw;
+  @media (max-width: 500px) {
+    font-size: 4vw;
+  }
 `;
 const SubTitleSpan = styled.span`
   font-size: 0.9vw;
+  @media (max-width: 500px) {
+    margin-bottom: 4vh;
+    font-size: 3vw;
+  }
+`;
+const SubTitleSpanBottom = styled.span`
+  font-size: 0.9vw;
+  @media (max-width: 500px) {
+    margin-bottom: 15vh;
+    font-size: 3vw;
+  }
 `;
 const CheckSpan = styled.span`
   font-size: 0.8vw;
@@ -271,7 +342,7 @@ const Rotation = keyframes`
     transform: translateX(-37.5vw)
   }
   100%{
-    transform: translateX(60vw)
+    transform: translateX(300vw)
   }
 `;
 
@@ -287,7 +358,14 @@ const RotationArticle = styled.div`
   animation: ${Rotation} 25s linear infinite;
   img {
     width: auto;
-    height: 170%;
+    height: auto;
+  }
+  @media (max-width: 500px) {
+    animation: ${Rotation} 12s linear infinite;
+    img {
+      width: 50vw;
+      max-height: 30vw;
+    }
   }
 `;
 const RotationDetailBox = styled.div`
@@ -297,15 +375,27 @@ const RotationDetailBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width: 500px) {
+    height: 50vw;
+  }
 `;
 const PriceSpan = styled.span`
   font-size: 1vw;
+  @media (max-width: 500px) {
+    font-size: 3vw;
+  }
 `;
 const RoomDescSpan = styled.span`
   font-size: 1vw;
+  @media (max-width: 500px) {
+    font-size: 3vw;
+  }
 `;
 const RoomDescSpan02 = styled.span`
   font-size: 1vw;
+  @media (max-width: 500px) {
+    font-size: 3vw;
+  }
 `;
 const RecommendationResult = withRouter(
   ({
@@ -790,6 +880,7 @@ const RecommendationResult = withRouter(
         <Wrapper>
           {popup && (
             <QuestionPopup
+              mobile={window.innerWidth <= 500}
               popup={popup}
               setPopup={setPopup}
               setQComplete={setQComplete}
@@ -825,16 +916,17 @@ const RecommendationResult = withRouter(
                 </RightFloatingDiv02>
                 <TitleSpan>나의 "{univ_name}"주변 추천 자취지역 Top5</TitleSpan>
                 <SubTitleSpan>
-                  마커에 마우스를 올리시면 해당 지역과 평균을 비교할 수
-                  있습니다.
+                  마커에 마우스(손가락)를(을) 올리시면 해당 지역과 평균을 비교할
+                  수 있습니다.
                 </SubTitleSpan>
-                <SubTitleSpan>
+                <SubTitleSpanBottom>
                   마커를 클릭하면 해당 지역의 상세정보를 확인할 수 있습니다.
-                </SubTitleSpan>
+                </SubTitleSpanBottom>
                 <Article>
                   <ArticleContentContainer>
                     <LeftContainer>
                       <Map
+                        mobile={window.innerWidth <= 500}
                         setHouse={setHouse}
                         setCurrentAddress={setCurrentAddress}
                         setIsHovered={setIsHovered}
@@ -847,6 +939,7 @@ const RecommendationResult = withRouter(
 
                     <RightContainer>
                       <RadarArticle
+                        mobile={window.innerWidth <= 500}
                         data={newData}
                         isHovered={isHovered}
                         isClicked={isClicked}
@@ -882,21 +975,25 @@ const RecommendationResult = withRouter(
                         setMode={setMode}
                       />
                       <WordcloudDetailItem
+                        mobile={window.innerWidth <= 500}
                         hashtags={hashtags}
                         mode={mode}
                         setMode={setMode}
                       />
                       <PieDetailItem
+                        mobile={window.innerWidth <= 500}
                         house={house}
                         setHouse={setHouse}
                         isClicked={isClicked}
                         mode={mode}
                         setMode={setMode}
                       />
-                      <Arrow
-                        bottom={"-10vw"}
-                        height={window.innerHeight + window.innerHeight - 100}
-                      />
+                      {window.innerWidth > 500 && (
+                        <Arrow
+                          bottom={"-10vw"}
+                          height={window.innerHeight + window.innerHeight - 100}
+                        />
+                      )}
                     </DetailItemContainer>
                   </DetailArticle>
                 )}

@@ -11,19 +11,31 @@ const QuestionDiv = styled.div`
   justify-content: center;
   align-items: center;
   border: 4px solid ${(props) => props.theme.headerBgColor};
+  @media (max-width: 500px) {
+    height: 100%;
+  }
 `;
 const QuestionTitleSpan = styled.span`
   font-size: 1.5vw;
+  @media (max-width: 500px) {
+    font-size: 4.5vw;
+  }
 `;
 const QuestionItemBigSpan = styled.span`
   margin-top: 1vw;
   font-size: 1.2vw;
+  @media (max-width: 500px) {
+    font-size: 3.2vw;
+  }
 `;
 
 const QuestionItemSmallSpan = styled.span`
   margin-top: 0.5vw;
   font-size: 0.72vw;
   font-weight: 800;
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 const QuestionItemInputContainer = styled.div`
   display: flex;
@@ -35,6 +47,11 @@ const QuestionItemInputContainer = styled.div`
   margin: 1vw 0;
   padding-bottom: 0.2vw;
   border-bottom: 1px solid black;
+  @media (max-width: 500px) {
+    width: 95%;
+    padding-bottom: 1vw;
+    margin: 4vw 0;
+  }
 `;
 const QuestionDivButtonContainer = styled.div`
   display: flex;
@@ -51,6 +68,10 @@ const QuestionDivButton = styled.span`
   cursor: pointer;
   :hover {
     color: ${(props) => props.theme.headerBgColor};
+  }
+  @media (max-width: 500px) {
+    font-size: 3vw;
+    margin: 3vw;
   }
 `;
 export default ({
@@ -74,6 +95,7 @@ export default ({
   TotalWeightRank03,
   TotalWeightRank04,
   TotalWeightRank05,
+  mobile,
 }) => {
   useEffect(() => {
     setQuestion01();
@@ -100,7 +122,8 @@ export default ({
       modal
       trigger={<></>}
       contentStyle={{
-        width: "40vw",
+        width: mobile ? "80vw" : "40vw",
+        height: mobile ? "70vh" : "",
         background: "white",
         display: "flex",
         flexDirection: "row",

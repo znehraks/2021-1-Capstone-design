@@ -13,6 +13,9 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width: 500px) {
+    width: 50vw;
+  }
 `;
 
 const ItemList = styled.div`
@@ -26,10 +29,15 @@ const ItemList = styled.div`
 const ItemBlank = styled.div`
   margin-bottom: 2vw;
 `;
-const TitleItem = styled.span`
+const TitleItem = styled(Link)`
   font-size: 2vw;
+  cursor: pointer;
+  @media (max-width: 500px) {
+    color: white;
+    font-size: 3vw;
+  }
 `;
-const Item = styled.span`
+const Item = styled(Link)`
   color: #888;
   padding-left: 1vw;
   font-size: 1.5vw;
@@ -40,6 +48,9 @@ const Item = styled.span`
     color: #fff;
     font-style: italic;
     font-weight: 800;
+  }
+  @media (max-width: 500px) {
+    font-size: 2vw;
   }
 `;
 
@@ -54,19 +65,37 @@ const Menu = ({ open, setOpen, ...props }) => {
         aria-hidden={!isHidden}
         {...props}
       >
-        <Wrapper>
-          <ItemList>
-            <TitleItem>자취지역 추천</TitleItem>
-            <Item>-커스텀 자취지역 추천</Item>
-            <Item>-학우들이 인정한 지역 찾기</Item>
-            <Item>-테마별로 찾기</Item>
-            <ItemBlank />
-            <TitleItem>내 추천 이력 보기</TitleItem>
-            <Item>-나의 최애 자취지역</Item>
-            <Item>-찜목록</Item>
-            <Item>-테마별로 찾기</Item>
-          </ItemList>
-        </Wrapper>
+        {window.innerWidth <= 500 ? (
+          <Wrapper>
+            <ItemList>
+              <TitleItem to="/Aboutus">프로젝트소개</TitleItem>
+              <TitleItem to="/Auth">로그인</TitleItem>
+              <TitleItem>자취지역 추천</TitleItem>
+              <Item to="/RecommendationIntro">-커스텀 자취지역 추천</Item>
+              <Item>-학우들이 인정한 지역 찾기</Item>
+              <Item>-테마별로 찾기</Item>
+              <ItemBlank />
+              <TitleItem to="/ResultHistory">내 추천 이력 보기</TitleItem>
+              <Item>-나의 최애 자취지역</Item>
+              <Item>-찜목록</Item>
+              <Item>-테마별로 찾기</Item>
+            </ItemList>
+          </Wrapper>
+        ) : (
+          <Wrapper>
+            <ItemList>
+              <TitleItem>자취지역 추천</TitleItem>
+              <Item>-커스텀 자취지역 추천</Item>
+              <Item>-학우들이 인정한 지역 찾기</Item>
+              <Item>-테마별로 찾기</Item>
+              <ItemBlank />
+              <TitleItem>내 추천 이력 보기</TitleItem>
+              <Item>-나의 최애 자취지역</Item>
+              <Item>-찜목록</Item>
+              <Item>-테마별로 찾기</Item>
+            </ItemList>
+          </Wrapper>
+        )}
       </StyledMenu>
     </>
   );

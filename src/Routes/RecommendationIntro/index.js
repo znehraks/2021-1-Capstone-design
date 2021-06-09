@@ -13,6 +13,9 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   background: ${(props) => props.theme.bgColor};
+  @media (max-width: 500px) {
+    height: 100vh;
+  }
 `;
 
 const Article = styled.div`
@@ -22,6 +25,9 @@ const Article = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  @media (max-width: 500px) {
+    height: 100vh;
+  }
 `;
 
 const StartButton = styled(Link)`
@@ -38,13 +44,23 @@ const StartButton = styled(Link)`
     color: ${(props) => props.theme.headerBgColor};
     border: 1vw solid ${(props) => props.theme.headerBgColor};
   }
+  @media (max-width: 500px) {
+    width: 50vw;
+    height: 50vw;
+  }
 `;
 
 const StartTitleSpan = styled.span`
   font-size: 2vw;
+  @media (max-width: 500px) {
+    font-size: 4vw;
+  }
 `;
 const StartContentSpan = styled.span`
   font-size: 1.2vw;
+  @media (max-width: 500px) {
+    font-size: 3.5vw;
+  }
 `;
 
 const Article02 = styled.div`
@@ -55,6 +71,8 @@ const Article02 = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width: 500px) {
+  }
 `;
 
 const SpanBox = styled.div`
@@ -64,14 +82,24 @@ const SpanBox = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  @media (max-width: 500px) {
+    width: 70vw;
+    height: 45vw;
+  }
 `;
 const TitleSpan = styled.span`
   font-size: 3vw;
   margin-bottom: 3vw;
+  @media (max-width: 500px) {
+    font-size: 4vw;
+  }
 `;
 const ContentSpan = styled.span`
   font-size: 2vw;
   margin-bottom: 1vw;
+  @media (max-width: 500px) {
+    font-size: 3vw;
+  }
 `;
 
 const ButtonBox = styled.div`
@@ -81,6 +109,9 @@ const ButtonBox = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  @media (max-width: 500px) {
+    height: 0%;
+  }
 `;
 
 const Button = styled(Link)`
@@ -91,6 +122,9 @@ const Button = styled(Link)`
     color: white;
     font-weight: 800;
     background: black;
+  }
+  @media (max-width: 500px) {
+    font-size: 4vw;
   }
 `;
 

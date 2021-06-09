@@ -33,6 +33,11 @@ const Article = styled.div`
   width: 100%;
   height: 37vw;
   margin-top: 2vw;
+  @media (max-width: 500px) {
+    height: 50vw;
+    margin-bottom: 20vw;
+    padding-top: 40vh;
+  }
 `;
 
 const ArticleContentContainer = styled.div`
@@ -42,6 +47,11 @@ const ArticleContentContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  @media (max-width: 500px) {
+    width: 100vw;
+    height: 80vw;
+    flex-direction: column;
+  }
 `;
 
 const LeftContainer = styled.div`
@@ -60,6 +70,13 @@ const RightContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
+  @media (max-width: 500px) {
+    width: 100vw;
+    height: 80vw;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50vw;
+  }
 `;
 
 const DetailArticle = styled.div`
@@ -70,6 +87,23 @@ const DetailArticle = styled.div`
   justify-content: flex-start;
   align-items: center;
   overflow: hidden;
+  @media (max-width: 500px) {
+    margin-top: 50vh;
+    height: 280vw;
+  }
+`;
+const DetailArticle03 = styled.div`
+  width: 100%;
+  height: ${(props) => (props.height ? `${props.height}` : `48vw`)};
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  @media (max-width: 500px) {
+    margin-top: -10vh;
+    height: 50vh;
+  }
 `;
 
 const DetailItemContainer = styled.div`
@@ -80,6 +114,10 @@ const DetailItemContainer = styled.div`
   justify-content: space-evenly;
   align-items: center;
   overflow: hidden;
+  @media (max-width: 500px) {
+    flex-direction: column;
+    height: 200vh;
+  }
 `;
 const DetailItem = styled.div`
   width: 100%;
@@ -118,6 +156,9 @@ const RightFloatingDiv02 = styled.div`
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 const BackArrow = styled.div`
   width: 3vw;
@@ -150,19 +191,34 @@ const TitleSpan = styled.span`
   font-size: 2vw;
   margin-top: 2vw;
   margin-bottom: 1vw;
+  @media (max-width: 500px) {
+    font-size: 4vw;
+    margin-top: 10vh;
+    margin-bottom: 5vw;
+  }
 `;
 const TitleSpan02 = styled.span`
   font-size: 2vw;
   margin-top: 4vw;
   margin-bottom: 1vw;
+  @media (max-width: 500px) {
+    font-size: 5vw;
+  }
 `;
 const TitleSpan03 = styled.span`
   font-size: 2vw;
   margin-bottom: 2vw;
   margin-top: 5vw;
+  @media (max-width: 500px) {
+    font-size: 4vw;
+  }
 `;
 const SubTitleSpan = styled.span`
   font-size: 0.9vw;
+  @media (max-width: 500px) {
+    margin-bottom: 5vh;
+    font-size: 3vw;
+  }
 `;
 const CheckSpan = styled.span`
   font-size: 0.8vw;
@@ -257,7 +313,7 @@ const Rotation = keyframes`
     transform: translateX(-37.5vw)
   }
   100%{
-    transform: translateX(60vw)
+    transform: translateX(300vw)
   }
 `;
 
@@ -275,6 +331,13 @@ const RotationArticle = styled.div`
     width: auto;
     height: auto;
   }
+  @media (max-width: 500px) {
+    animation: ${Rotation} 12s linear infinite;
+    img {
+      width: 50vw;
+      max-height: 30vw;
+    }
+  }
 `;
 const RotationDetailBox = styled.div`
   width: 100%;
@@ -283,15 +346,27 @@ const RotationDetailBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width: 500px) {
+    height: 50vw;
+  }
 `;
 const PriceSpan = styled.span`
   font-size: 1vw;
+  @media (max-width: 500px) {
+    font-size: 3vw;
+  }
 `;
 const RoomDescSpan = styled.span`
   font-size: 1vw;
+  @media (max-width: 500px) {
+    font-size: 3vw;
+  }
 `;
 const RoomDescSpan02 = styled.span`
   font-size: 1vw;
+  @media (max-width: 500px) {
+    font-size: 3vw;
+  }
 `;
 const RecommendationResult = ({ setDetail }) => {
   // const [data, setData] = useState();
@@ -1753,6 +1828,7 @@ const RecommendationResult = ({ setDetail }) => {
       <Wrapper>
         {popup && (
           <QuestionPopup
+            mobile={window.innerWidth <= 500}
             popup={popup}
             setPopup={setPopup}
             setQComplete={setQComplete}
@@ -1796,6 +1872,7 @@ const RecommendationResult = ({ setDetail }) => {
                 <ArticleContentContainer>
                   <LeftContainer>
                     <Map
+                      mobile={window.innerWidth <= 500}
                       setHouse={setHouse}
                       setCurrentAddress={setCurrentAddress}
                       isClicked={isClicked}
@@ -1809,6 +1886,7 @@ const RecommendationResult = ({ setDetail }) => {
 
                   <RightContainer>
                     <RadarArticle
+                      mobile={window.innerWidth <= 500}
                       data={newData}
                       isHovered={isHovered}
                       isClicked={isClicked}
@@ -1841,6 +1919,7 @@ const RecommendationResult = ({ setDetail }) => {
                       setMode={setMode}
                     />
                     <WordcloudDetailItem
+                      mobile={window.innerWidth <= 500}
                       hashtags={hashtags}
                       mode={mode}
                       setMode={setMode}
@@ -1852,16 +1931,18 @@ const RecommendationResult = ({ setDetail }) => {
                       mode={mode}
                       setMode={setMode}
                     />
-                    <Arrow
-                      bottom={"-10vw"}
-                      height={window.innerHeight + window.innerHeight - 100}
-                    />
+                    {window.innerWidth > 500 && (
+                      <Arrow
+                        bottom={"-10vw"}
+                        height={window.innerHeight + window.innerHeight - 100}
+                      />
+                    )}
                   </DetailItemContainer>
                 </DetailArticle>
               )}
             </>
             {hashtags && isClicked && (
-              <DetailArticle>
+              <DetailArticle03>
                 <TitleSpan03>선택된 지역의 매물 한 눈에 보기</TitleSpan03>
                 <DetailItemContainer03>
                   <RotationArticle>
@@ -1884,7 +1965,7 @@ const RecommendationResult = ({ setDetail }) => {
                       })}
                   </RotationArticle>
                 </DetailItemContainer03>
-              </DetailArticle>
+              </DetailArticle03>
             )}
           </>
         )}

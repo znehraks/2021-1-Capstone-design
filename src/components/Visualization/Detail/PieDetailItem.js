@@ -17,6 +17,10 @@ const DetailItem = styled.div`
 const SubTitleSpan = styled.span`
   font-size: 0.9vw;
   margin-top: 0.5vw;
+  @media (max-width: 500px) {
+    font-size: 5vw;
+    margin-bottom: 3vw;
+  }
 `;
 
 const DetailBox = styled.div`
@@ -31,13 +35,19 @@ const DetailBox = styled.div`
 const Img = styled.img`
   width: auto;
   height: 26vw;
+  @media (max-width: 500px) {
+    height: 40vw;
+  }
 `;
 
 const Span = styled.span`
   font-size: 1.5vw;
+  @media (max-width: 500px) {
+    font-size: 4vw;
+  }
 `;
 
-const Detail = ({ house, setHouse, isClicked, mode, setMode }) => {
+const Detail = ({ mobile, house, setHouse, isClicked, mode, setMode }) => {
   if (isClicked && house) {
     console.log(isClicked.rooms_desc[house]);
   }
@@ -96,6 +106,7 @@ const Detail = ({ house, setHouse, isClicked, mode, setMode }) => {
 
           {positions && (
             <Map2
+              mobile={mobile}
               setHouse={setHouse}
               isClicked={isClicked}
               univ_lat={isClicked.lat}

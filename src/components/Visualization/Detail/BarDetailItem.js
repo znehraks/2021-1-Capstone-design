@@ -8,17 +8,27 @@ const DetailItem = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: ${(props) => (props.align ? `flex-start` : `center`)};
+  @media (max-width: 500px) {
+    height: 30vw;
+  }
 `;
 
 const SubTitleSpan = styled.span`
   font-size: 1vw;
   margin-top: 0.5vw;
+  @media (max-width: 500px) {
+    font-size: 3vw;
+    margin-bottom: 1vw;
+  }
 `;
 const CheckSpan = styled.span`
   font-size: 0.8vw;
   color: ${(props) => (props.fontColor ? `${props.theme.headerBgColor}` : ``)};
   margin-bottom: 0.5vw;
   cursor: pointer;
+  @media (max-width: 500px) {
+    font-size: 2vw;
+  }
 `;
 
 const BarChartYaxisSpan = styled.span`
@@ -27,6 +37,11 @@ const BarChartYaxisSpan = styled.span`
   left: -13.5vw;
   font-size: 0.3vw;
   font-weight: bold;
+  @media (max-width: 500px) {
+    font-size: 2vw;
+    top: 10vw;
+    left: -36.5vw;
+  }
 `;
 
 const CheckSpanDiv = styled.div`
@@ -39,6 +54,12 @@ const CheckSpanDiv = styled.div`
   position: relative;
   top: 5vw;
   left: 14vw;
+  @media (max-width: 500px) {
+    width: 19vw;
+    left: 35vw;
+    height: 39vw;
+    top: 10vw;
+  }
 `;
 const DetailSpan = styled.span`
   font-size: 1.5vw;
@@ -51,6 +72,9 @@ const GridLine = styled.div`
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid black;
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 const GridColumn = styled.div`
   flex: ${(props) => (props.flex ? `${props.flex}` : `1`)};
@@ -60,6 +84,9 @@ const GridColumn = styled.div`
   margin-bottom: 1vw;
   text-align: center;
   font-size: 1.5vw;
+  @media (max-width: 500px) {
+    font-size: 4vw;
+  }
 `;
 const Detail = ({
   isChecked,

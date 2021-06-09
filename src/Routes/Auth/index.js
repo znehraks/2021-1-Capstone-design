@@ -17,6 +17,9 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   background: transparent;
+  @media (max-width: 500px) {
+    height: 80vh;
+  }
 `;
 
 const Article = styled.div`
@@ -26,10 +29,16 @@ const Article = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width: 500px) {
+    height: 100%;
+  }
 `;
 const TitleSpan = styled.span`
   font-size: 3vw;
   margin-bottom: 3vw;
+  @media (max-width: 500px) {
+    font-size: 8vw;
+  }
 `;
 const InputContainer = styled.div`
   width: 50vw;
@@ -39,6 +48,10 @@ const InputContainer = styled.div`
   justify-content: center;
   align-items: center;
   border: 3px solid black;
+  @media (max-width: 500px) {
+    width: 90vw;
+    height: 80vw;
+  }
 `;
 const InputItemContainer = styled.div`
   width: 60%;
@@ -48,10 +61,17 @@ const InputItemContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  @media (max-width: 500px) {
+    width: 85%;
+    height: 15vw;
+  }
 `;
 const InputDesc = styled.span`
   width: 40%;
   font-size: 1.5vw;
+  @media (max-width: 500px) {
+    font-size: 4vw;
+  }
 `;
 
 const InputBox = styled.input`
@@ -66,6 +86,11 @@ const InputBox = styled.input`
     border-bottom: 3px solid ${(props) => props.theme.headerBgColor};
     transition-duration: 0.5s;
   }
+  @media (max-width: 500px) {
+    font-size: 4vw;
+    height: 8vw;
+    border-bottom: 1px solid black;
+  }
 `;
 const Button = styled(Link)`
   font-size: 1.2vw;
@@ -78,11 +103,17 @@ const Button = styled(Link)`
     background: black;
   }
   cursor: pointer;
+  @media (max-width: 500px) {
+    font-size: 5.5vw;
+  }
 `;
 
 const SmallSpan = styled.span`
   font-size: 1.2vw;
   cursor: pointer;
+  @media (max-width: 500px) {
+    font-size: 2.5vw;
+  }
 `;
 
 const Auth = () => {

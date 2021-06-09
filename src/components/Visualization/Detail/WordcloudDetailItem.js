@@ -14,9 +14,12 @@ const DetailItem = styled.div`
 const SubTitleSpan = styled.span`
   font-size: 1vw;
   margin-top: 0.5vw;
+  @media (max-width: 500px) {
+    font-size: 4vw;
+  }
 `;
 
-const Detail = ({ hashtags, mode, setMode }) => {
+const Detail = ({ hashtags, mode, setMode, mobile }) => {
   return (
     <>
       <DetailItem
@@ -30,7 +33,7 @@ const Detail = ({ hashtags, mode, setMode }) => {
         }}
       >
         <SubTitleSpan>선택된 지역과 관련있는 키워드입니다.</SubTitleSpan>
-        <Wordcloud hashtags={hashtags} />
+        <Wordcloud mobile={mobile} hashtags={hashtags} />
       </DetailItem>
     </>
   );

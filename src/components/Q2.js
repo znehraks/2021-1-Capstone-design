@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import useInput from "../Hooks/useInput";
 import Q2Map from "./Kakao/Q2Map";
 
 const Wrapper = styled.div`
@@ -12,14 +13,31 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  @media (max-width: 500px) {
+    min-height: 100vh;
+    justify-content: center;
+  }
 `;
 const TitleSpan = styled.span`
   font-size: 2.5vw;
   margin-top: 3vw;
+  @media (max-width: 500px) {
+    font-size: 5.5vw;
+  }
 `;
 const SubTitleSpan = styled.span`
   font-size: 1vw;
   margin-top: 0.5vw;
+  @media (max-width: 500px) {
+    display: none;
+  }
+`;
+const SubTitleMobileSpan = styled.span`
+  font-size: 3vw;
+  margin-top: 0.5vw;
+  @media (min-width: 500px) {
+    display: none;
+  }
 `;
 const Article = styled.div`
   width: 80%;
@@ -29,14 +47,21 @@ const Article = styled.div`
   justify-content: center;
   align-items: center;
   margin: 2vw 0;
+  @media (max-width: 500px) {
+    display: none;
+  } ;
 `;
-const InputBox = styled.input`
-  width: 50%;
-  height: 3vw;
-  font-size: 2vw;
-  border: none;
-  border-bottom: 4px solid black;
-  background: transparent;
+const MobileArticle = styled.div`
+  width: 80%;
+  height: 50vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2vw 0;
+  @media (min-width: 500px) {
+    display: none;
+  } ;
 `;
 const HiddenList = styled.div`
   width: 50%;
@@ -71,6 +96,11 @@ const Prev = styled.span`
     background: black;
     font-weight: 800;
   }
+  @media (max-width: 500px) {
+    width: 18vw;
+    height: 8.5vw;
+    font-size: 5vw;
+  }
 `;
 const Next = styled.span`
   width: 6vw;
@@ -87,6 +117,11 @@ const Next = styled.span`
     color: white;
     background: black;
     font-weight: 800;
+  }
+  @media (max-width: 500px) {
+    width: 18vw;
+    height: 8.5vw;
+    font-size: 5vw;
   }
 `;
 const Submit = styled(Link)`
@@ -163,6 +198,10 @@ const CurrentSelectedDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width: 500px) {
+    align-items: flex-start;
+    flex-direction: row;
+  }
 `;
 const CurrentSelectedList = styled.div`
   width: 100%;
@@ -177,6 +216,19 @@ const CurrentSelectedSpan = styled.span`
   font-size: 1vw;
   margin-bottom: 2vw;
 `;
+const InputBox = styled.input`
+  width: 50%;
+  height: 3vw;
+  font-size: 2vw;
+  border: none;
+  border-bottom: 4px solid black;
+  background: transparent;
+  @media (max-width: 500px) {
+    width: 60%;
+    height: 8vw;
+    font-size: 4vw;
+  }
+`;
 const Q2 = ({
   Q1Name,
   Q2Name,
@@ -187,6 +239,7 @@ const Q2 = ({
   univ_lat,
   univ_lon,
 }) => {
+  const distance = useInput("");
   return (
     <>
       <CurrentSelectedDiv>
@@ -206,13 +259,27 @@ const Q2 = ({
         <SubTitleSpan>
           드래그와 휠을 통해 지도를 확대/축소/이동이 가능합니다
         </SubTitleSpan>
+        <SubTitleMobileSpan>
+          학교와의 최대 허용 거리를 입력해주세요.
+        </SubTitleMobileSpan>
+        <SubTitleMobileSpan>
+          ex.1000m까지 허용할 경우, 1000 입력
+        </SubTitleMobileSpan>
         <Article>
           <Q2Map
+            mobile={window.innerWidth <= 500}
             univ_lat={univ_lat}
             univ_lon={univ_lon}
             setQ2Answer={setQ2Answer}
           />
         </Article>
+        <MobileArticle>
+          <InputBox
+            placeholder={"ex.1000"}
+            {...distance}
+            type="text"
+          ></InputBox>
+        </MobileArticle>
         <ButtonContainer>
           <Prev
             onClick={() => {
@@ -224,11 +291,25 @@ const Q2 = ({
           </Prev>
           <Next
             onClick={() => {
-              if (!Q2Answer) {
+              if (!Q2Answer && distance.value === "") {
                 alert("거리는 필수 항목입니다.");
                 return;
+              } else {
+                if (
+                  !Q2Answer &&
+                  (distance.value < 500 || distance.value > 5000)
+                ) {
+                  alert(
+                    "거리가 허용범위 밖이거나 올바른 값이 아닙니다. 다시 입력해주세요."
+                  );
+                  return;
+                } else {
+                  if (!Q2Answer && distance.value) {
+                    setQ2Answer(distance.value);
+                  }
+                  setQNumber(3);
+                }
               }
-              setQNumber(3);
             }}
           >
             다음

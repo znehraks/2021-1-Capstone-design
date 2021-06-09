@@ -27,6 +27,10 @@ const Item = styled.div`
     box-shadow: 4px 4px ${(props) => props.theme.headerBgColor};
     transition-duration: 0.5s;
   }
+  @media (max-width: 500px) {
+    width: 18vw;
+    height: 80%;
+  }
 `;
 const ItemImage = styled.img`
   width: auto;
@@ -39,13 +43,23 @@ const ItemSpanContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width: 500px) {
+    width: 100%;
+    height: 80%;
+  }
 `;
 const ItemTitle = styled.span`
   font-size: 2.4vw;
   margin-bottom: 0.5vw;
+  @media (max-width: 500px) {
+    font-size: 3vw;
+  }
 `;
 const ItemDetail = styled.span`
   font-size: 0.9vw;
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 const QButton = ({
   QNumber,

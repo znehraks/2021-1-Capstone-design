@@ -12,19 +12,31 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  @media (max-width: 500px) {
+    justify-content: center;
+  }
 `;
 const TitleSpan = styled.span`
   font-size: 2.5vw;
   margin-top: 5vw;
+  @media (max-width: 500px) {
+    font-size: 4.5vw;
+  }
 `;
 const SubTitleSpan = styled.span`
   font-size: 1vw;
   margin-top: 1vw;
+  @media (max-width: 500px) {
+    font-size: 3vw;
+  }
 `;
 const OptionSpan = styled.span`
   font-size: 0.8vw;
   margin-top: 1vw;
   margin-bottom: 6vw;
+  @media (max-width: 500px) {
+    font-size: 2vw;
+  }
 `;
 const Article = styled.div`
   width: 70%;
@@ -34,6 +46,10 @@ const Article = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 5vw;
+  @media (max-width: 500px) {
+    width: 100%;
+    height: 25vw;
+  }
 `;
 const InputBox = styled.input`
   width: 50%;
@@ -76,6 +92,11 @@ const Prev = styled.span`
     background: black;
     font-weight: 800;
   }
+  @media (max-width: 500px) {
+    width: 18vw;
+    height: 8.5vw;
+    font-size: 5vw;
+  }
 `;
 const Next = styled.span`
   width: 6vw;
@@ -92,6 +113,11 @@ const Next = styled.span`
     color: white;
     background: black;
     font-weight: 800;
+  }
+  @media (max-width: 500px) {
+    width: 18vw;
+    height: 8.5vw;
+    font-size: 5vw;
   }
 `;
 const Submit = styled(Link)`

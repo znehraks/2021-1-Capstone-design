@@ -7,7 +7,7 @@ export const StyledMenu = styled.nav`
   align-content: center;
   border: none;
   background-color: ${(props) => props.theme.bgColor};
-  transform: ${({ open }) => (open ? "translateX(80vw)" : "translateX(110vw)")};
+  transform: ${({ open }) => (open ? "translateX(80vw)" : "translateX(130vw)")};
   width: 30vw;
   height: 100vh;
   text-align: left;
@@ -32,7 +32,8 @@ export const StyledMenu = styled.nav`
       color: "#343078";
     }
   }
-  @media (max-width: ${(props) => props.theme.mobileMaxWidth}) {
-    height: 110vh;
+  @media (max-width: 500px) {
+    width: 50vw;
+    left: -25vw;
   }
 `;

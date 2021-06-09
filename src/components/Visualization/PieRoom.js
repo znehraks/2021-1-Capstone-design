@@ -9,6 +9,10 @@ const PieDiv = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  @media (max-width: 500px) {
+    width: 69vw;
+    height: 70vw;
+  }
 `;
 
 const PieText = styled.span`

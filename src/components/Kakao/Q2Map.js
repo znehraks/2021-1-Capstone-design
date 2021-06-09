@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 const { kakao } = window;
 
-const MapContainer = ({ univ_lat, univ_lon, setQ2Answer }) => {
+const MapContainer = ({ univ_lat, univ_lon, setQ2Answer, mobile }) => {
   useEffect(() => {
     //지도 넣을 컨테이너
     const container = document.getElementById("myMap");
@@ -128,7 +128,6 @@ const MapContainer = ({ univ_lat, univ_lon, setQ2Answer }) => {
         }
       }
     });
-
     // 지도에 마우스 오른쪽 클릭이벤트를 등록합니다
     // 원을 그리고있는 상태에서 마우스 오른쪽 클릭 이벤트가 발생하면
     // 마우스 오른쪽 클릭한 위치를 기준으로 원과 원의 반경정보를 표시하는 선과 커스텀 오버레이를 표시하고 그리기를 종료합니다
@@ -268,8 +267,8 @@ const MapContainer = ({ univ_lat, univ_lon, setQ2Answer }) => {
     <div
       id="myMap"
       style={{
-        width: "30vw",
-        height: "30vw",
+        width: mobile ? "80vw" : "30vw",
+        height: mobile ? "80vw" : "30vw",
       }}
     ></div>
   );
