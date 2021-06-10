@@ -193,6 +193,9 @@ const CurrentSelectedDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 const CurrentSelectedList = styled.div`
   width: 100%;
@@ -206,6 +209,9 @@ const CurrentSelectedList = styled.div`
 const CurrentSelectedSpan = styled.span`
   font-size: 1vw;
   margin-bottom: 2vw;
+  @media (max-width: 500px) {
+    font-size: 2vw;
+  }
 `;
 const Q3 = ({
   Q1Name,

@@ -91,7 +91,7 @@ const Menu = ({ open, setOpen, ...props }) => {
                     setOpen(false);
                     localStorage.removeItem("user_no");
                     localStorage.removeItem("userId");
-                    location.href = "/";
+                    window.location.href = "/";
                   }}
                   tabIndex={tabIndex}
                 >

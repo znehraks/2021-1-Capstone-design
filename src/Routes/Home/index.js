@@ -68,7 +68,7 @@ const BlackSquare01 = styled.div`
   @media (max-width: 500px) {
     width: 160%;
     height: 130%;
-    top: -15%;
+    top: -17%;
     left: -26%;
   }
 `;
@@ -83,7 +83,7 @@ const BlackSquare02 = styled.div`
   @media (max-width: 500px) {
     width: 160%;
     height: 130%;
-    top: -4%;
+    top: -6%;
     left: -32%;
   }
 `;

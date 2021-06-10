@@ -30,6 +30,20 @@ const Item = styled.div`
   @media (max-width: 500px) {
     width: 18vw;
     height: 80%;
+    transition-duration: none;
+    box-shadow: ${(props) =>
+      props.checked ? `1px 1px ${props.theme.headerBgColor}` : `1px 1px black`};
+    border: ${(props) =>
+      props.checked ? `1px solid ${props.theme.headerBgColor}` : `none`};
+    :hover {
+      color: ${(props) =>
+        props.checked ? ` ${props.theme.headerBgColor}` : `black`};
+      box-shadow: ${(props) =>
+        props.checked
+          ? `1px 1px ${props.theme.headerBgColor}`
+          : `1px 1px black`};
+      transition-duration: none;
+    }
   }
 `;
 const ItemImage = styled.img`
