@@ -38,6 +38,15 @@ const TitleItem = styled(Link)`
     margin-bottom: 2vw;
   }
 `;
+const TitleItemSpan = styled.span`
+  font-size: 2vw;
+  cursor: pointer;
+  @media (max-width: 500px) {
+    color: white;
+    font-size: 5vw;
+    margin-bottom: 2vw;
+  }
+`;
 const Item = styled(Link)`
   color: #888;
   padding-left: 1vw;
@@ -76,13 +85,28 @@ const Menu = ({ open, setOpen, ...props }) => {
               >
                 프로젝트소개
               </TitleItem>
-              <TitleItem
-                onClick={() => setOpen(false)}
-                tabIndex={tabIndex}
-                to="/Auth"
-              >
-                로그인
-              </TitleItem>
+              {localStorage.getItem("user_no") ? (
+                <TitleItemSpan
+                  onClick={() => {
+                    setOpen(false);
+                    localStorage.removeItem("user_no");
+                    localStorage.removeItem("userId");
+                    location.href = "/";
+                  }}
+                  tabIndex={tabIndex}
+                >
+                  로그아웃
+                </TitleItemSpan>
+              ) : (
+                <TitleItem
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                  tabIndex={tabIndex}
+                >
+                  로그인
+                </TitleItem>
+              )}
               <TitleItem>자취지역 추천</TitleItem>
               <Item
                 onClick={() => setOpen(false)}
