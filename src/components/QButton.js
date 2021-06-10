@@ -25,7 +25,7 @@ const Item = styled.div`
   :hover {
     color: ${(props) => props.theme.headerBgColor};
     box-shadow: 4px 4px ${(props) => props.theme.headerBgColor};
-    transition-duration: 0.5s;
+    transition-duration: 0.1s;
   }
   @media (max-width: 500px) {
     width: 18vw;
@@ -42,7 +42,7 @@ const Item = styled.div`
         props.checked
           ? `1px 1px ${props.theme.headerBgColor}`
           : `1px 1px black`};
-      transition-duration: none;
+      transition-duration: 0.01s;
     }
   }
 `;
