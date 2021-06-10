@@ -19,6 +19,7 @@ const SubTitleSpan = styled.span`
   @media (max-width: 500px) {
     font-size: 3vw;
     margin-bottom: 1vw;
+    padding: 0 3vw;
   }
 `;
 const CheckSpan = styled.span`
