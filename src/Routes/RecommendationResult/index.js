@@ -525,7 +525,7 @@ const RecommendationResult = withRouter(
           }
         });
       }
-      if (Number(history) === 0 && !popup & !qComplete & !canceled) {
+      if (count === 0 && Number(history) === 0 && !popup && !qComplete) {
         setTimeout(() => {
           setPopup(true);
           setVisible(true);

@@ -316,7 +316,9 @@ const Home = () => {
               <BlackSquare02 />
             </SquareDiv>
             <ArrowDiv height={window.innerHeight} />
-            <MobileArrowDiv height={window.innerHeight * 0.5} />
+            {window.innerHeight <= 500 && (
+              <MobileArrowDiv height={window.innerHeight * 0.5} />
+            )}
           </ContentContainer>
         </Article>
         <Article justify={"flex-start"}>
