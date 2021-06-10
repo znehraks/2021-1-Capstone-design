@@ -102,6 +102,9 @@ const MapContainer = ({
           // 현재 클릭된 마커의 이미지는 클릭 이미지로 변경합니다
           marker.setImage(overImage);
           setHouse(i);
+          if (mobile) {
+            window.scrollTo(window.innerHeight + 200, window.innerHeight + 200);
+          }
           // setIsClicked(data[i]);
           // window.scrollTo(window.innerHeight, window.innerHeight);
         }

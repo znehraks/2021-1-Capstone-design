@@ -123,7 +123,7 @@ const DetailArticle03 = styled.div`
   align-items: center;
   overflow: hidden;
   @media (max-width: 500px) {
-    margin-top: -10vh;
+    justify-content: center;
     height: 50vh;
   }
 `;
@@ -341,7 +341,7 @@ const DetailItemContainer03 = styled.div`
   align-items: center;
   overflow: hidden;
   @media (max-width: 500px) {
-    height: 20%;
+    height: 90%;
   }
 `;
 const Rotation = keyframes`
@@ -495,6 +495,7 @@ const RecommendationResult = withRouter(
     };
     useEffect(() => {
       if (count === 0 && Number(history) === 0) {
+        window.scrollTo(0, 0);
         Api.addDIYRecoHistory(
           localStorage.getItem("user_no")
             ? `${Number(localStorage.getItem("user_no"))}`
@@ -1007,7 +1008,7 @@ const RecommendationResult = withRouter(
                 )}
               </>
               {hashtags && isClicked && (
-                <DetailArticle>
+                <DetailArticle03>
                   <TitleSpan03>선택된 지역의 매물 한 눈에 보기</TitleSpan03>
                   <DetailItemContainer03>
                     <RotationArticle>
@@ -1030,7 +1031,7 @@ const RecommendationResult = withRouter(
                         })}
                     </RotationArticle>
                   </DetailItemContainer03>
-                </DetailArticle>
+                </DetailArticle03>
               )}
             </>
           )}

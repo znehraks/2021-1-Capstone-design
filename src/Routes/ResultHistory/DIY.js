@@ -16,11 +16,19 @@ const Wrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   margin-top: 6vw;
+  @media (max-width: 500px) {
+    margin-top: 25vw;
+    height: 90vh;
+  }
 `;
 
 const TitleSpan = styled.span`
   margin: 2vw 0;
   font-size: 2vw;
+  @media (max-width: 500px) {
+    font-size: 5vw;
+    margin-bottom: 5vh;
+  }
 `;
 const SmallSpan = styled.span`
   font-size: 1.2vw;
@@ -41,6 +49,9 @@ const SearchContainer = styled.div`
   justify-content: center;
   align-items: Center;
   margin-bottom: 2vw;
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 const SearchInput = styled.input`
   width: 60%;
@@ -78,11 +89,18 @@ const ListItem = styled(Link)`
   :hover {
     color: ${(props) => props.theme.headerBgColor};
   }
+  @media (max-width: 500px) {
+    height: 10vw;
+  }
 `;
 const Item = styled.div`
+  display: ${(props) => (props.mobile ? `none` : ``)};
   flex: ${(props) => (props.flex ? `${props.flex}` : `1`)};
   font-size: 1.2vw;
   text-align: center;
+  @media (max-width: 500px) {
+    font-size: 4vw;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -93,6 +111,9 @@ const ButtonContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   margin-top: 1vw;
+  @media (max-width: 500px) {
+    width: 60%;
+  }
 `;
 const Prev = styled.div`
   font-size: 1.3vw;
@@ -100,15 +121,24 @@ const Prev = styled.div`
   :hover {
     color: ${(props) => props.theme.headerBgColor};
   }
+  @media (max-width: 500px) {
+    font-size: 4vw;
+  }
 `;
 const Current = styled.div`
   font-size: 1.3vw;
+  @media (max-width: 500px) {
+    font-size: 4vw;
+  }
 `;
 const Next = styled.div`
   font-size: 1.3vw;
   cursor: pointer;
   :hover {
     color: ${(props) => props.theme.headerBgColor};
+  }
+  @media (max-width: 500px) {
+    font-size: 4vw;
   }
 `;
 
@@ -143,6 +173,9 @@ const MagnifyDiv = styled.div`
 
 const OptionSpan = styled.span`
   font-size: 1vw;
+  @media (max-width: 500px) {
+    font-size: 3vw;
+  }
 `;
 
 const DIY = () => {
@@ -186,31 +219,43 @@ const DIY = () => {
               {/*map으로 돌려서 ListItem 만들것임 */}
               <ListItem>
                 <Item flex={2}>번호</Item>
-                <Item flex={2}>학교명</Item>
-                <Item flex={4}>추천받은지역</Item>
-                <Item flex={2}>일시</Item>
+                <Item flex={window.innerWidth <= 500 ? 4 : 2}>학교명</Item>
+                <Item mobile={window.innerWidth <= 500} flex={4}>
+                  추천받은지역
+                </Item>
+                <Item mobile={window.innerWidth <= 500} flex={2}>
+                  일시
+                </Item>
               </ListItem>
               {history &&
-                history.map((item) => {
-                  return (
-                    <ListItem
-                      to={{
-                        pathname: `/RecommendationResult/${item.Q1}/${item.univ_lat}/${item.univ_lon}/${item.Q2}/${item.Q3}/${item.Q4}/${item.Q5}/${item.w1}/${item.w2}/${item.w3}/${item.w4}/${item.w5}/1`,
-                      }}
-                    >
-                      <Item flex={2}>{item.diy_reco_history_no}</Item>
-                      <Item flex={2}>{item.Q1}</Item>
-                      <Item flex={4}>{item.Q1}</Item>
-                      <Item flex={2}>{item.updated_at.split("T")[0]}</Item>
-                    </ListItem>
-                  );
+                history.map((item, index) => {
+                  if ((index >= (page - 1) * 8) & (index < page * 8)) {
+                    return (
+                      <ListItem
+                        to={{
+                          pathname: `/RecommendationResult/${item.Q1}/${item.univ_lat}/${item.univ_lon}/${item.Q2}/${item.Q3}/${item.Q4}/${item.Q5}/${item.w1}/${item.w2}/${item.w3}/${item.w4}/${item.w5}/1`,
+                        }}
+                      >
+                        <Item flex={2}>{item.diy_reco_history_no}</Item>
+                        <Item flex={window.innerWidth <= 500 ? 4 : 2}>
+                          {item.Q1}
+                        </Item>
+                        <Item mobile={window.innerWidth <= 500} flex={4}>
+                          {item.Q1}
+                        </Item>
+                        <Item mobile={window.innerWidth <= 500} flex={2}>
+                          {item.updated_at.split("T")[0]}
+                        </Item>
+                      </ListItem>
+                    );
+                  }
                 })}
             </ListContainer>
           </Article>
           <ButtonContainer>
             <Prev
               onClick={() => {
-                if (page <= 1) {
+                if (page < 2) {
                   alert("첫 번째 페이지 입니다.");
                   return;
                 }
@@ -222,7 +267,7 @@ const DIY = () => {
             <Current>{page}</Current>
             <Next
               onClick={() => {
-                if (page == 4) {
+                if (Math.floor(history.length / 8) + 1 === page) {
                   alert("마지막 페이지 입니다.");
                   return;
                 }

@@ -16,6 +16,7 @@ const Animation = keyframes`
 
 const Loader = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   animation: ${Animation} 1.3s linear infinite;
@@ -26,11 +27,15 @@ const Loader = styled.div`
 `;
 
 const Img = styled.img`
-  width: 20vw;
+  width: ${(props) => (props.mobile ? `40vw` : `20vw`)};
 `;
-
+const Span = styled.span`
+  margin-top: 4vw;
+  font-size: 1.5vw;
+`;
 export default () => (
   <Loader>
-    <Img src={logo} />
+    <Img mobile={window.innerWidth <= 500} src={logo} />
+    <Span>결과가 오랫동안 나오지 않으면 새로고침을 해주세요.</Span>
   </Loader>
 );

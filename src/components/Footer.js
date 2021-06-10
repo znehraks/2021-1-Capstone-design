@@ -10,10 +10,16 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   border-top: 1px solid rgba(0, 0, 0, 0.4);
+  @media (max-width: 500px) {
+    height: 10vw;
+  }
 `;
 
 const Span = styled.span`
   font-size: 0.7vw;
+  @media (max-width: 500px) {
+    font-size: 3vw;
+  }
 `;
 
 const Footer = () => {

@@ -31,12 +31,21 @@ const Routes = () => {
         component={RecommendationResult}
       ></Route>
       <Route exact path="/Test" component={RecommendationResultTest}></Route>
-      <Route exact path="/ResultHistory" component={ResultHistory}></Route>
+      {localStorage.getItem("user_no") ? (
+        <Route exact path="/ResultHistory" component={ResultHistory}></Route>
+      ) : (
+        <Route exact path="/" component={Home}></Route>
+      )}
       <Route exact path="/DIYHistory" component={DIY}></Route>
       <Route exact path="/StudentHistory" component={Student}></Route>
       <Route exact path="/DeveloperHistory" component={Developer}></Route>
       <Route exact path="/Lab" component={Lab}></Route>
-      <Route exact path="/Auth" component={Auth}></Route>
+      {localStorage.getItem("user_no") ? (
+        <Route exact path="/" component={Home}></Route>
+      ) : (
+        <Route exact path="/Auth" component={Auth}></Route>
+      )}
+
       <Route exact path="/12284!232842A244" component={Admin}></Route>
       <Redirect from="*" to="/" />
     </Switch>

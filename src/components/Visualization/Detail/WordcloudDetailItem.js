@@ -16,6 +16,7 @@ const SubTitleSpan = styled.span`
   margin-top: 0.5vw;
   @media (max-width: 500px) {
     font-size: 4vw;
+    padding-top: 10vw;
   }
 `;
 

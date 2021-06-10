@@ -26,7 +26,7 @@ const MyResponsiveRadar = ({
       gridShape="linear"
       gridLabelOffset={36}
       enableDots={true}
-      dotSize={mobile ? 2 : 4}
+      dotSize={mobile ? 6 : 4}
       dotColor={{ theme: "background" }}
       dotBorderWidth={2}
       dotBorderColor={{ from: "color" }}
@@ -40,7 +40,7 @@ const MyResponsiveRadar = ({
       motionConfig="wobbly"
       isInteractive={true}
       theme={{
-        fontSize: mobile ? 10 : 20,
+        fontSize: mobile ? 15 : 20,
         fontWeight: 800,
       }}
       legends={[
@@ -52,7 +52,7 @@ const MyResponsiveRadar = ({
           itemWidth: mobile ? 200 : 80,
           itemHeight: mobile ? 40 : 20,
           itemTextColor: "#000",
-          symbolSize: mobile ? 10 : 20,
+          symbolSize: mobile ? 15 : 20,
           symbolShape: "circle",
           effects: [
             {

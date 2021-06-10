@@ -18,8 +18,9 @@ const SubTitleSpan = styled.span`
   font-size: 0.9vw;
   margin-top: 0.5vw;
   @media (max-width: 500px) {
-    font-size: 5vw;
+    font-size: 4vw;
     margin-bottom: 3vw;
+    padding: 0 10vw;
   }
 `;
 

@@ -29,7 +29,7 @@ const MapContainer = ({
     // 지도에 들어가는 옵션
     const options = {
       center: new kakao.maps.LatLng(univ_lat, univ_lon),
-      level: 5,
+      level: mobile ? 6 : 5,
       draggable: true,
       scrollwheel: true,
     };

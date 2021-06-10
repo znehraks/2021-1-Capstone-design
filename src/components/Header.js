@@ -147,11 +147,13 @@ const Header = withRouter(({ location }) => {
           </MenuSpan>
         )}
       </MenuContainer>
-      {window.innerWidth <= 500 && (
+      {window.innerWidth <= 500 ? (
         <HamburgerContainer>
           <BurgerComponent open={open} setOpen={setOpen} />
           <MenuComponent open={open} setOpen={setOpen} />
         </HamburgerContainer>
+      ) : (
+        <MenuContainer />
       )}
     </Wrapper>
   );

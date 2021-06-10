@@ -34,7 +34,8 @@ const TitleItem = styled(Link)`
   cursor: pointer;
   @media (max-width: 500px) {
     color: white;
-    font-size: 3vw;
+    font-size: 5vw;
+    margin-bottom: 2vw;
   }
 `;
 const Item = styled(Link)`
@@ -50,7 +51,7 @@ const Item = styled(Link)`
     font-weight: 800;
   }
   @media (max-width: 500px) {
-    font-size: 2vw;
+    font-size: 3vw;
   }
 `;
 
@@ -68,17 +69,51 @@ const Menu = ({ open, setOpen, ...props }) => {
         {window.innerWidth <= 500 ? (
           <Wrapper>
             <ItemList>
-              <TitleItem to="/Aboutus">프로젝트소개</TitleItem>
-              <TitleItem to="/Auth">로그인</TitleItem>
+              <TitleItem
+                onClick={() => setOpen(false)}
+                tabIndex={tabIndex}
+                to="/Aboutus"
+              >
+                프로젝트소개
+              </TitleItem>
+              <TitleItem
+                onClick={() => setOpen(false)}
+                tabIndex={tabIndex}
+                to="/Auth"
+              >
+                로그인
+              </TitleItem>
               <TitleItem>자취지역 추천</TitleItem>
-              <Item to="/RecommendationIntro">-커스텀 자취지역 추천</Item>
-              <Item>-학우들이 인정한 지역 찾기</Item>
-              <Item>-테마별로 찾기</Item>
+              <Item
+                onClick={() => setOpen(false)}
+                tabIndex={tabIndex}
+                to="/RecommendationIntro"
+              >
+                -DIY 추천
+              </Item>
+              <Item onClick={() => setOpen(false)} tabIndex={tabIndex}>
+                -학우들의 추천
+              </Item>
+              <Item onClick={() => setOpen(false)} tabIndex={tabIndex}>
+                -제작자의 추천
+              </Item>
               <ItemBlank />
-              <TitleItem to="/ResultHistory">내 추천 이력 보기</TitleItem>
-              <Item>-나의 최애 자취지역</Item>
-              <Item>-찜목록</Item>
-              <Item>-테마별로 찾기</Item>
+              <TitleItem
+                onClick={() => setOpen(false)}
+                tabIndex={tabIndex}
+                to="/ResultHistory"
+              >
+                추천 히스토리
+              </TitleItem>
+              <Item onClick={() => setOpen(false)} tabIndex={tabIndex}>
+                -나의 최애지역
+              </Item>
+              <Item onClick={() => setOpen(false)} tabIndex={tabIndex}>
+                -찜목록
+              </Item>
+              <Item onClick={() => setOpen(false)} tabIndex={tabIndex}>
+                -테마별로 찾기
+              </Item>
             </ItemList>
           </Wrapper>
         ) : (

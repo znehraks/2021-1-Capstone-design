@@ -66,9 +66,10 @@ const BlackSquare01 = styled.div`
   background: transparent;
   border: 4px solid black;
   @media (max-width: 500px) {
-    width: 120%;
-    height: 120%;
-    left: -12%;
+    width: 160%;
+    height: 130%;
+    top: -15%;
+    left: -26%;
   }
 `;
 const BlackSquare02 = styled.div`
@@ -80,10 +81,10 @@ const BlackSquare02 = styled.div`
   background: transparent;
   border: 4px solid black;
   @media (max-width: 500px) {
-    width: 120%;
-    height: 120%;
-    top: -10%;
-    left: -8%;
+    width: 160%;
+    height: 130%;
+    top: -4%;
+    left: -32%;
   }
 `;
 
@@ -91,9 +92,6 @@ const ArrowDiv = styled(Arrow)`
   position: absolute;
   bottom: 0;
   left: 0;
-  @media (max-width: 500px) {
-    display: none;
-  }
 `;
 const MobileArrowDiv = styled(Arrow)`
   position: absolute;
@@ -131,6 +129,7 @@ const TitleContainer = styled.div`
   justify-content: center;
   align-items: center;
   @media (max-width: 500px) {
+    width: 80vw;
     height: 50%;
   }
 `;
@@ -139,6 +138,15 @@ const TitleSpan = styled.span`
   margin-bottom: 2vw;
   animation: ${Animation01} 0.5s linear;
   @media (max-width: 500px) {
+    font-size: 5vw;
+  }
+`;
+const TitleSpan05 = styled.span`
+  font-size: 3vw;
+  margin-bottom: 2vw;
+  animation: ${Animation01} 0.5s linear;
+  @media (max-width: 500px) {
+    font-size: 5vw;
   }
 `;
 const MediumSpan = styled.span`
@@ -147,6 +155,9 @@ const MediumSpan = styled.span`
 const SlowTitleSpan = styled.span`
   font-size: 3vw;
   animation: ${Animation02} 1s linear;
+  @media (max-width: 500px) {
+    font-size: 5vw;
+  }
 `;
 
 const ContentContainer = styled.div`
@@ -170,6 +181,9 @@ const Container = styled.div`
   align-items: center;
   margin: 2vw 0.5px;
   animation: ${Animation02} 1s linear;
+  @media (max-width: 500px) {
+    width: 95%;
+  }
 `;
 const ColumnContainer = styled.div`
   width: 50%;
@@ -196,9 +210,16 @@ const RightTopContainer = styled(Link)`
     color: ${(props) => props.theme.headerBgColor};
     border: 3px solid ${(props) => props.theme.headerBgColor};
   }
+  @media (max-width: 500px) {
+    width: 30vw;
+    height: 30vw;
+  }
 `;
 const ContentSpan = styled.span`
   font-size: 2vw;
+  @media (max-width: 500px) {
+    font-size: 4vw;
+  }
 `;
 const ContentSmallSpan = styled.span`
   margin-top: 1vw;
@@ -315,10 +336,14 @@ const Home = () => {
               <BlackSquare01 />
               <BlackSquare02 />
             </SquareDiv>
-            <ArrowDiv height={window.innerHeight} />
-            {window.innerHeight <= 500 && (
-              <MobileArrowDiv height={window.innerHeight * 0.5} />
-            )}
+            <ArrowDiv
+              mobile={window.innerWidth <= 500}
+              height={
+                window.innerWidth <= 500
+                  ? `${window.innerWidth}`
+                  : `${window.innerHeight}`
+              }
+            />
           </ContentContainer>
         </Article>
         <Article justify={"flex-start"}>
@@ -360,7 +385,7 @@ const Home = () => {
         </Article>
         <Article>
           <ContentContainer>
-            <TitleSpan>테마별로 자취지역 찾기</TitleSpan>
+            <TitleSpan05>테마별로 자취지역 찾기</TitleSpan05>
             <Container>
               <RightTopContainer to="/RecommendationIntro">
                 <ContentSpan>DIY 방식</ContentSpan>

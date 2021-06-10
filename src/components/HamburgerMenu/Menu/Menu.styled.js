@@ -20,7 +20,6 @@ export const StyledMenu = styled.nav`
     transition: transform 0.01s ease-in-out;
   } */
   a {
-    font-size: 2.5vw;
     text-transform: uppercase;
     padding: 1vw 1.5vw;
     font-weight: 500;
