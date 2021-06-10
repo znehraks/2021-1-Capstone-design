@@ -364,6 +364,7 @@ const RotationArticle = styled.div`
   transform: translateX(30vw);
   animation: ${Rotation} 25s linear infinite;
   img {
+    max-height: 23vw;
     width: auto;
     height: auto;
   }
