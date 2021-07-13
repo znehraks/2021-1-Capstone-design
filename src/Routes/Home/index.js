@@ -331,7 +331,7 @@ const Home = () => {
             <SquareDiv>
               <TitleContainer>
                 <TitleSpan>오직 나를 위한 맞춤형 자취지역.</TitleSpan>
-                <SlowTitleSpan>저기어때.</SlowTitleSpan>
+                <SlowTitleSpan>유니방시티</SlowTitleSpan>
               </TitleContainer>
               <BlackSquare01 />
               <BlackSquare02 />
@@ -360,7 +360,7 @@ const Home = () => {
             </Blank>
             <Blank>
               <SubTitleSpan02>
-                "저기어때."는 나를 위한 맞춤형 자취지역을 찾아 해매던
+                "유니방시티"는 나를 위한 맞춤형 자취지역을 찾아 해매던
               </SubTitleSpan02>
               <SubTitleSpan02>
                 대학생들이 직접 만든 자취지역 추천 시스템입니다.
